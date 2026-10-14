@@ -1,5 +1,5 @@
 // Service Worker for Zin.Zone Offline App & OTA Updates
-const CACHE_NAME = 'zin-zone-v21-slot-and-boss-tts';
+const CACHE_NAME = 'zin-zone-v22-rapid-word-repeat';
 const STATIC_ASSETS = [
   './data/curriculum.js',
   './data/audio_manifest.js',
