@@ -1,4 +1,4 @@
-[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+﻿[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 $Host.UI.RawUI.WindowTitle = "Zin Zone 一键部署到 GitHub"
 
 Write-Host "=====================================================================" -ForegroundColor Cyan
