@@ -194,11 +194,11 @@
 
         <!-- Header Actions -->
         <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
-          <a href="https://zalo.me/84822262695" target="_blank" class="px-2 sm:px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 border border-slate-700 hover:border-slate-600 text-slate-200 font-bold text-xs flex items-center gap-1 transition shrink-0">
+          <div class="px-2.5 sm:px-3 py-1.5 rounded-xl bg-slate-900 border border-emerald-500/40 text-emerald-400 font-bold text-xs flex items-center gap-1.5 shadow-sm shrink-0" title="Thiết bị chính hãng đã kích hoạt hệ thống Zin Zone">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span class="hidden sm:inline">Hotline: 0822.262.695</span>
-            <span class="sm:hidden text-[11px]">Hotline</span>
-          </a>
+            <span class="hidden sm:inline">Máy Chính Hãng • Đã Kích Hoạt</span>
+            <span class="sm:hidden text-[11px]">Chính Hãng</span>
+          </div>
           <button id="btnInstallApp" onclick="installPwaApp()" class="px-2 sm:px-2.5 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs transition shadow-md flex items-center gap-1 shrink-0">
             <span>📲</span>
             <span class="hidden sm:inline">Cài App</span>
@@ -945,16 +945,16 @@
           <div class="grid grid-cols-2 gap-2 text-left text-[11px] bg-slate-900 p-3 rounded-xl border border-slate-800 mb-4">
             <div>
               <span class="text-slate-500">Hình thức trả:</span>
-              <div class="text-emerald-400 font-bold">💵 Tiền mặt giấy tận tay</div>
+              <div class="text-emerald-400 font-bold">💵 Tiền mặt giấy trao tay</div>
             </div>
             <div>
               <span class="text-slate-500">Địa điểm nhận:</span>
-              <div class="text-slate-200 font-bold">Cổng KCN / Trọ / Quán nước</div>
+              <div class="text-slate-200 font-bold">Cửa hàng nơi mua máy</div>
             </div>
           </div>
 
           <button onclick="requestCashPayout()" class="w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 to-emerald-500 text-slate-950 font-black text-xs hover:opacity-95 transition shadow-lg">
-            Hẹn Gặp Lấy Tiền Mặt 200k Trao Tay
+            Xem Hướng Dẫn Nhận 200k Tại Cửa Hàng
           </button>
         </div>
 
@@ -1344,13 +1344,16 @@
       </div>
 
       <div class="flex flex-col sm:flex-row items-center gap-4 text-xs">
-        <a href="https://zalo.me/84822262695" target="_blank" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-bold transition flex items-center gap-2 shadow-md">
-          <span class="text-base">💬</span>
-          <span>Hotline / Zalo: 0822.262.695</span>
-        </a>
-        <div class="text-slate-400 text-[11px] space-y-0.5">
-          <div>📍 Giao hàng hỏa tốc 15 phút tại cổng KCN & phòng trọ</div>
-          <div>💵 Nhận 200k tiền mặt trao tay khi giới thiệu đồng nghiệp</div>
+        <div class="px-4 py-2.5 rounded-xl bg-slate-800/90 border border-slate-700 text-slate-200 font-bold flex items-center gap-3 shadow-md text-left">
+          <span class="text-2xl">🏪</span>
+          <div>
+            <div class="text-white text-xs font-bold">Phân Phối Độc Quyền Qua Hệ Thống Cửa Hàng Ủy Quyền</div>
+            <div class="text-[10px] text-slate-400 mt-0.5">Bảo hành phần cứng & đổi máy vui lòng liên hệ cửa hàng nơi mua máy</div>
+          </div>
+        </div>
+        <div class="text-slate-400 text-[11px] space-y-0.5 text-center md:text-left">
+          <div>📍 Phân phối trực tiếp tại các cửa hàng điện thoại khu vực KCN</div>
+          <div>💵 Nhận 200k tiền mặt tại cửa hàng khi giới thiệu đồng nghiệp mua máy</div>
           <div class="text-emerald-400 font-medium">🛡️ Cam kết 100% Free-to-Play, không nạp thẻ cờ bạc</div>
         </div>
       </div>
@@ -3573,7 +3576,7 @@
     }
 
     function shareToZalo() {
-      const text = encodeURIComponent(`Đồng nghiệp ơi, tao vừa mua máy Zin Zone nguyên zin 100% có sẵn bí kíp học tiếng Trung làm tổ trưởng! Liên hệ Zalo anh chủ 0822.262.695 (Mã giảm 100k: ${refParam}): https://zin.zone?ref=${refParam}`);
+      const text = encodeURIComponent(`Đồng nghiệp ơi, tao vừa mua máy Zin Zone nguyên zin 100% có sẵn bí kíp học tiếng Trung làm tổ trưởng! Hãy ra ngay cửa hàng điện thoại ủy quyền gần nhất đọc mã [${refParam}] để được giảm 100k và tặng khóa học nhé: https://zin.zone?ref=${refParam}`);
       window.open(`https://zalo.me/share?url=https%3A%2F%2Fzin.zone%3Fref%3D${refParam}&text=${text}`, '_blank');
     }
 
@@ -3883,8 +3886,25 @@
       }
     }
 
-    const ZALO_OWNER_PHONE = '0822262695';
-    const ZALO_OWNER_LINK = 'https://zalo.me/84822262695';
+    function openStoreNoticeModal(title, htmlContent) {
+      const modal = document.getElementById('storeNoticeModal');
+      const titleEl = document.getElementById('storeNoticeTitle');
+      const contentEl = document.getElementById('storeNoticeContent');
+      if (modal && titleEl && contentEl) {
+        titleEl.textContent = title;
+        contentEl.innerHTML = htmlContent;
+        modal.classList.remove('hidden');
+        modal.style.display = 'flex';
+      }
+    }
+
+    function closeStoreNoticeModal() {
+      const modal = document.getElementById('storeNoticeModal');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.style.display = 'none';
+      }
+    }
 
     function submitJobViaAdmin() {
       if (!currentSelectedJob) return;
@@ -3892,11 +3912,13 @@
       const phone = document.getElementById('inputApplicantPhone').value.trim() || 'Chưa cung cấp SĐT';
       const progress = document.getElementById('selectApplicantProgress').value;
       
-      const msg = `Chào Anh Chủ Zin Zone! Em là ${name} (SĐT/Zalo: ${phone}). Em đã mua máy Zin (Mã máy: ${refParam}) và ${progress}. Em muốn nộp hồ sơ ưu tiên vào vị trí: [${currentSelectedJob.title}] tại [${currentSelectedJob.company} - ${currentSelectedJob.location}]. Nhờ Anh kết nối hỗ trợ phỏng vấn ưu tiên giúp em ạ!`;
-      
-      const zaloUrl = `${ZALO_OWNER_LINK}?text=${encodeURIComponent(msg)}`;
-      window.open(zaloUrl, '_blank');
-      showToast('Đang kết nối tới Zalo 0822.262.695 để gửi hồ sơ...', 'success');
+      const pitch = `Họ tên: ${name} | SĐT: ${phone} | Trình độ: ${progress}\nỨng tuyển: ${currentSelectedJob.title} - ${currentSelectedJob.company}\nKhẩu quyết tiếng Trung: ${currentSelectedJob.pitchZh}`;
+      copyToClipboard(pitch, 'Đã sao chép hồ sơ ứng tuyển!');
+      openStoreNoticeModal(
+        'Hồ Sơ Ứng Tuyển Đã Sẵn Sàng',
+        `<p class="font-bold text-amber-400">Hồ sơ ứng tuyển của <strong>${name}</strong> đã được sao chép vào bộ nhớ tạm!</p>` +
+        `<p class="mt-2">👉 Bạn hãy chuyển sang tab <strong>"Tự Liên Hệ Trực Tiếp HR"</strong> để dán tin nhắn gửi trực tiếp tới đầu mối tuyển dụng <strong>${currentSelectedJob.company}</strong> mà không cần qua bất kỳ trung gian nào.</p>`
+      );
       closeJobModal();
     }
 
@@ -3907,28 +3929,31 @@
     }
 
     function orderHotPhone(modelName) {
-      const msg = `Chào Anh Chủ Zin Zone! Em muốn chốt lấy chiếc máy có sẵn: [${modelName}]. Mã giới thiệu của em là: [${refParam}]. Anh giao hỏa tốc 15 phút tại cổng KCN / phòng trọ cho em nhé!`;
-      const zaloUrl = `${ZALO_OWNER_LINK}?text=${encodeURIComponent(msg)}`;
-      window.open(zaloUrl, '_blank');
-      showToast(`Đang kết nối Zalo 0822.262.695 đặt máy ${modelName}...`, 'success');
+      openStoreNoticeModal(
+        `Đặt Mua Máy: ${modelName}`,
+        `<p class="font-bold text-amber-400">Dòng máy [${modelName}] nguyên zin 100% được phân phối độc quyền tại hệ thống cửa hàng điện thoại đối tác của Zin Zone.</p>` +
+        `<p class="mt-2">👉 <strong>Cách nhận máy:</strong> Quý khách vui lòng <strong>liên hệ trực tiếp chủ cửa hàng điện thoại nơi bạn đã mua máy</strong> (hoặc cửa hàng điện thoại gần nhất) để nhận máy chính hãng có sẵn bản quyền 21 ngày thăng chức.</p>` +
+        `<p class="mt-2 text-slate-400">🛡️ Máy được bảo hành phần cứng và hỗ trợ kỹ thuật tại chỗ bởi chính cửa hàng.</p>`
+      );
     }
 
     function requestCustomSourcing() {
       const model = document.getElementById('inputCustomModel').value.trim() || 'Dòng máy yêu cầu';
-      const msg = `Chào Anh Chủ Zin Zone! Em đang tìm dòng máy nguyên zin 100%: [${model}]. Em muốn cọc 100.000đ để nhờ anh săn máy chuẩn zin giúp em trong 24h - 48h ạ!`;
-      const zaloUrl = `${ZALO_OWNER_LINK}?text=${encodeURIComponent(msg)}`;
-      window.open(zaloUrl, '_blank');
-      showToast('Đang kết nối Zalo 0822.262.695 để đặt săn máy...', 'success');
+      openStoreNoticeModal(
+        `Đặt Săn Máy Zin: ${model}`,
+        `<p class="font-bold text-amber-400">Dịch vụ săn máy [${model}] nguyên zin 100% kiểm định 32 bước được thực hiện qua các cửa hàng điện thoại đối tác.</p>` +
+        `<p class="mt-2">👉 <strong>Cách đặt cọc:</strong> Quý khách hãy mang yêu cầu này đến trực tiếp <strong>chủ cửa hàng điện thoại của bạn</strong> để đặt cọc và nhận cam kết máy chuẩn zin.</p>` +
+        `<p class="mt-2 text-slate-400">🛡️ Cam kết: Nếu máy tìm được không nguyên zin, cửa hàng hoàn cọc gấp đôi tại chỗ!</p>`
+      );
     }
 
     function requestCashPayout() {
-      const info = prompt('Nhập Tên + Số điện thoại/Zalo + Tên KCN hoặc phòng trọ của bạn để hẹn gặp nhận tiền mặt 200.000đ:');
-      if (info) {
-        const msg = `Chào Anh Chủ Zin Zone! Em là ${info}. Bạn bè em (Mã giới thiệu: ${refParam}) vừa nhận máy Zin thành công. Em muốn hẹn gặp anh để nhận 200.000đ tiền mặt trao tay ạ!`;
-        const zaloUrl = `${ZALO_OWNER_LINK}?text=${encodeURIComponent(msg)}`;
-        window.open(zaloUrl, '_blank');
-        showToast('Đang kết nối Zalo 0822.262.695 hẹn nhận tiền mặt...', 'success');
-      }
+      openStoreNoticeModal(
+        'Nhận 200.000đ Tiền Mặt',
+        `<p class="font-bold text-emerald-400">Chính sách thưởng 200.000đ tiền mặt trao tay được chi trả trực tiếp tại cửa hàng điện thoại nơi bạn đã mua máy.</p>` +
+        `<p class="mt-2">👉 <strong>Cách nhận tiền:</strong> Khi bạn bè của bạn đến cửa hàng mua máy và đọc mã giới thiệu <strong class="text-amber-400">[${refParam || 'ZIN-ZONE'}]</strong> của bạn, chủ cửa hàng sẽ gửi tặng bạn <strong>200.000đ tiền mặt</strong> ngay tại chỗ!</p>` +
+        `<p class="mt-2 text-slate-400">💵 Tiền tươi trao tay, bạn bè của bạn cũng được giảm ngay 100.000đ khi mua máy.</p>`
+      );
     }
 
     // --- Init on DOM Load ---
@@ -3997,7 +4022,7 @@
     // --- PWA Service Worker Registration & Offline Cache ---
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=20261014_v22').then((reg) => {
+        navigator.serviceWorker.register('./sw.js?v=20261014_v23').then((reg) => {
           console.log('[Zin Zone] ServiceWorker registered with scope:', reg.scope);
           reg.update();
         }).catch((err) => {
@@ -4464,7 +4489,7 @@
         <p><strong>2. Quyền riêng tư & Phần cứng:</strong> Tính năng nhận diện giọng nói (Microphone) chỉ hoạt động trực tiếp trên trình duyệt khi người dùng chủ động nhấn nút luyện phát âm hoặc "Nói Để Trảm Boss". Hệ thống KHÔNG ghi âm ngầm, KHÔNG lưu trữ tệp âm thanh trên máy chủ bên ngoài.</p>
         <p><strong>3. Xác thực thiết bị:</strong> Số sê-ri máy chỉ dùng để đối soát bảo hành và tặng kèm bộ học liệu bản quyền chính hãng, không thu thập danh bạ, tin nhắn hay thông tin tài khoản ngân hàng của người dùng.</p>
         <p><strong>4. Quyền của chủ thể dữ liệu:</strong> Bạn có quyền tự do đặt lại tiến độ học tập hoặc xóa toàn bộ bộ nhớ ứng dụng bất cứ lúc nào thông qua nút "Đặt lại tiến độ" trên giao diện.</p>
-        <p><strong>5. Thông tin liên hệ phụ trách dữ liệu:</strong> Hotline/Zalo: 0822.262.695. Email hỗ trợ: support@zin.zone.</p>
+        <p><strong>5. Thông tin phụ trách dữ liệu:</strong> Bản quyền hệ thống Zin Zone OS. Email kỹ thuật: support@zin.zone. Mọi nhu cầu hỗ trợ thiết bị và bảo hành phần cứng vui lòng liên hệ trực tiếp cửa hàng điện thoại ủy quyền nơi quý khách mua máy.</p>
       </div>
 
       <div class="pt-2 text-center">
@@ -4501,6 +4526,22 @@
           Xác Nhận & Đóng
         </button>
       </div>
+    </div>
+  </div>
+
+  <!-- Modal: Hướng Dẫn Liên Hệ Cửa Hàng Điện Thoại Ủy Quyền -->
+  <div id="storeNoticeModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden items-center justify-center p-4" style="display: none;" onclick="if(event.target === this) closeStoreNoticeModal();">
+    <div class="bg-slate-900 border border-amber-500/40 rounded-3xl max-w-md w-full p-6 shadow-2xl relative text-center">
+      <button onclick="closeStoreNoticeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">✕</button>
+      <div class="w-14 h-14 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/40 flex items-center justify-center text-2xl mx-auto mb-3">
+        🏪
+      </div>
+      <h3 id="storeNoticeTitle" class="text-lg font-black text-white">Cửa Hàng Điện Thoại Ủy Quyền</h3>
+      <div id="storeNoticeContent" class="text-xs text-slate-300 mt-3 leading-relaxed text-left bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+      </div>
+      <button onclick="closeStoreNoticeModal()" class="mt-5 w-full py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs transition shadow-lg">
+        Tôi Đã Hiểu (Đến Cửa Hàng Gần Nhất)
+      </button>
     </div>
   </div>
 </body>
