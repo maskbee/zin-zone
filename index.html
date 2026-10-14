@@ -153,7 +153,7 @@
       <div class="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 py-2 sm:py-3 flex items-center justify-between gap-1.5 sm:gap-4 w-full">
         
         <!-- Brand & Domain Identity -->
-        <div class="flex items-center gap-2 sm:gap-3 cursor-pointer shrink-0" onclick="switchMainTab('check')">
+        <div class="flex items-center gap-2 sm:gap-3 cursor-pointer shrink-0" onclick="switchMainTab('learn')">
           <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-amber-500 via-emerald-500 to-cyan-500 p-[1.5px] shadow-lg shadow-amber-500/20 shrink-0">
             <div class="w-full h-full bg-slate-950 rounded-[9px] sm:rounded-[10px] flex items-center justify-center font-black text-base sm:text-lg text-amber-400">
               Z
@@ -170,17 +170,13 @@
 
         <!-- Navigation Tabs (Desktop) -->
         <nav class="hidden md:flex items-center gap-1.5 bg-slate-950 p-1 rounded-xl border border-slate-800">
-          <button onclick="switchMainTab('check')" id="navTab-check" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-amber-500 text-slate-950 shadow">
-            <span>📱</span>
-            <span>Kiểm Tra Máy Zin</span>
+          <button onclick="switchMainTab('learn')" id="navTab-learn" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 bg-amber-500 text-slate-950 shadow">
+            <span>🎓</span>
+            <span>Tu Tiên Thần Ngữ (21 Ngày)</span>
           </button>
           <button onclick="switchMainTab('hot')" id="navTab-hot" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800">
             <span class="text-amber-400">🔥</span>
             <span>5 Máy Hot & Đặt Hàng</span>
-          </button>
-          <button onclick="switchMainTab('learn')" id="navTab-learn" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800">
-            <span>🎓</span>
-            <span>Tu Tiên Thần Ngữ (21 Ngày)</span>
           </button>
           <button onclick="switchMainTab('share')" id="navTab-share" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800">
             <span class="animate-bounce">💵</span>
@@ -285,173 +281,39 @@
   </div>
 
   <!-- ========================================================================= -->
-  <!-- TAB 1: ZIN CHECK - BÁO CÁO KIỂM ĐỊNH MÁY ZIN 100% & BẢO HÀNH CHÍNH HÃNG -->
+  <!-- TAB: ZIN HỌC - GIÁO TRÌNH 21 NGÀY THĂNG CHỨC (BẢN TÀ ĐẠO NHÀ MÁY)    -->
   <!-- ========================================================================= -->
-  <section id="section-check" class="tab-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-1">
+  <section id="section-learn" class="tab-section max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-6 w-full flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6">
     
     <!-- PWA Installation Banner (Prominent Gameified 1-Click Install Card) -->
-    <div id="pwaInstallBanner" class="mb-8 p-5 sm:p-6 rounded-3xl bg-gradient-to-r from-amber-500/20 via-slate-900 to-emerald-500/20 border-2 border-amber-500/50 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-5 relative overflow-hidden">
+    <div id="pwaInstallBanner" class="col-span-1 lg:col-span-12 p-4 sm:p-5 rounded-3xl bg-gradient-to-r from-amber-500/20 via-slate-900 to-emerald-500/20 border-2 border-amber-500/50 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-4 relative overflow-hidden">
       <!-- Glow ambient background -->
       <div class="absolute -right-16 -top-16 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
       <div class="flex items-center gap-4 z-10 w-full sm:w-auto">
         <div class="relative shrink-0">
-          <img src="icons/icon-192.png?v=6" alt="Zin Zone App Icon" class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl shadow-2xl border-2 border-amber-400/80 object-cover transform hover:scale-105 transition">
-          <span class="absolute -top-1.5 -right-1.5 w-4 h-4 bg-emerald-500 border-2 border-slate-950 rounded-full animate-ping"></span>
-          <span class="absolute -top-1.5 -right-1.5 w-4 h-4 bg-emerald-500 border-2 border-slate-950 rounded-full"></span>
+          <img src="icons/icon-192.png?v=6" alt="Zin Zone App Icon" class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl shadow-2xl border-2 border-amber-400/80 object-cover transform hover:scale-105 transition">
+          <span class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-emerald-500 border-2 border-slate-950 rounded-full animate-ping"></span>
+          <span class="absolute -top-1 -right-1 w-3.5 h-3.5 bg-emerald-500 border-2 border-slate-950 rounded-full"></span>
         </div>
         <div>
           <div class="flex items-center gap-2">
-            <h3 class="text-base sm:text-lg font-black text-white">Cài App Zin Zone Lên Màn Hình</h3>
+            <h3 class="text-sm sm:text-base font-black text-white">Cài App Zin Zone Lên Màn Hình</h3>
             <span class="px-2 py-0.5 rounded text-[10px] font-black bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950">VIP</span>
           </div>
-          <p class="text-xs text-slate-300 mt-1 max-w-xl">
-            Biểu tượng Cyber Z Vàng Titan 3D siêu nét • Mở toàn màn hình không có thanh địa chỉ • Học mượt mà ngay cả khi mất sóng trong nhà xưởng!
+          <p class="text-xs text-slate-300 mt-0.5 max-w-xl">
+            Biểu tượng Cyber Z Vàng Titan 3D • Mở toàn màn hình không có thanh địa chỉ • Học mượt mà ngay cả khi mất sóng trong nhà xưởng!
           </p>
         </div>
       </div>
 
       <div class="flex items-center gap-2 w-full md:w-auto z-10 shrink-0">
-        <button onclick="installPwaApp()" class="w-full md:w-auto px-6 py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-400 to-emerald-400 hover:opacity-95 text-slate-950 font-black text-xs transition shadow-xl shadow-amber-500/20 flex items-center justify-center gap-2 animate-bounce">
-          <span class="text-base">📲</span>
-          <span>Bấm Cài Đặt App Ngay</span>
+        <button onclick="installPwaApp()" class="w-full md:w-auto px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 via-amber-400 to-emerald-400 hover:opacity-95 text-slate-950 font-black text-xs transition shadow-xl shadow-amber-500/20 flex items-center justify-center gap-2">
+          <span class="text-sm">📲</span>
+          <span>Bấm Cài Đặt App</span>
         </button>
       </div>
     </div>
-
-    <!-- Hero Banner for Zin Check -->
-    <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-slate-950 to-amber-950/30 border border-amber-500/30 p-6 sm:p-8 shadow-2xl mb-8">
-      <div class="max-w-3xl">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30 mb-3">
-          <span>🛡️</span>
-          <span>CAM KẾT NGUYÊN ZIN 100% HOÀN TIỀN NẾU PHÁT HIỆN SỬA CHỮA</span>
-        </div>
-        <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight leading-tight">
-          Tra Cứu Máy Chuẩn Zin & Kích Hoạt Bản Quyền Thăng Chức
-        </h2>
-        <p class="mt-2 text-sm text-slate-300 leading-relaxed">
-          Mỗi chiếc điện thoại xuất kho từ <strong class="text-amber-400">zin.zone</strong> đều trải qua 32 bước kiểm định nghiêm ngặt, cam kết linh kiện nguyên bản và được kích hoạt sẵn <strong class="text-emerald-400">Bí Kíp 21 Ngày Thăng Chức Nhà Máy Hoa Kiều</strong> đặc quyền theo máy.
-        </p>
-
-        <!-- One-Click Hardware Diagnostics Trigger & Progress Box -->
-        <div class="mt-6 flex flex-col sm:flex-row items-center gap-4 max-w-xl">
-          <button onclick="startHardwareScan()" id="btnStartScan" class="w-full sm:w-auto px-8 py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-400 to-amber-600 hover:brightness-110 text-slate-950 font-black text-sm transition shadow-xl shadow-amber-500/25 flex items-center justify-center gap-2.5 cursor-pointer transform active:scale-95">
-            <span class="text-base animate-pulse">⚡</span>
-            <span id="btnStartScanText">Bắt Đầu Kiểm Định & Xác Thực Máy Zin</span>
-          </button>
-          <div class="text-[11px] text-slate-400 flex items-center gap-1.5">
-            <span class="text-emerald-400">●</span> Nhận diện phần cứng tự động không cần nhập mã
-          </div>
-        </div>
-
-        <!-- Interactive Diagnostic Progress Bar -->
-        <div id="scanProgressBox" class="hidden mt-5 bg-slate-950/90 border border-amber-500/30 rounded-2xl p-5 max-w-xl transition-all shadow-inner">
-          <div class="flex items-center justify-between text-xs mb-2">
-            <span id="scanStatusText" class="font-bold text-amber-300 flex items-center gap-2">
-              <span class="inline-block animate-spin">⚙️</span> Đang kết nối cảm biến phần cứng thiết bị...
-            </span>
-            <span id="scanPercentText" class="font-mono font-black text-amber-400 text-sm">0%</span>
-          </div>
-          <div class="w-full h-3 bg-slate-800 rounded-full overflow-hidden p-0.5 border border-slate-700">
-            <div id="scanProgressBar" class="h-full bg-gradient-to-r from-amber-500 via-emerald-400 to-emerald-500 rounded-full transition-all duration-300" style="width: 0%; min-width: 6px;"></div>
-          </div>
-          <div id="scanStepLog" class="text-[11px] text-slate-400 font-mono mt-2.5 flex items-center gap-1.5">
-            <span>[1/4]</span> Quét vi mạch bo mạch chủ & chip bảo mật...
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Live Inspection Report Card (Báo Cáo Kiểm Định Máy) -->
-    <div id="zinReportCard" class="bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
-      <!-- Watermark Background -->
-      <div class="absolute -right-10 -bottom-10 text-9xl font-black text-slate-800/30 select-none pointer-events-none">
-        ZIN
-      </div>
-
-      <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-800 pb-5 mb-6">
-        <div>
-          <div class="flex items-center gap-2">
-            <span class="text-xl font-black text-white" id="reportModel">Samsung Galaxy A14 5G - Bản Zin Zone Thăng Chức</span>
-            <span class="px-2.5 py-0.5 rounded-full text-[11px] font-black bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">100% NGUYÊN ZIN</span>
-          </div>
-          <p class="text-xs text-slate-400 mt-1">Mã Serial: <span id="reportSerial" class="font-mono text-amber-400 font-bold">ZZ-A14-8899-VN</span> • Ngày kích hoạt: Hôm nay</p>
-        </div>
-
-        <div class="flex items-center gap-2">
-          <button onclick="shareInspectionCert()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-bold text-xs flex items-center gap-2 shadow-lg shadow-emerald-900/30 transition">
-            <span>📸</span>
-            <span>Chia Sẻ Báo Cáo Kiểm Định</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- 32-Step Quality Metrics Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        <!-- Metric 1 -->
-        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4">
-          <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
-            <span>Màn Hình Hiển Thị</span>
-            <span class="text-emerald-400 font-black">✓ PASS</span>
-          </div>
-          <div class="text-base font-bold text-white">Màn Zin Kính Zin 100%</div>
-          <p class="text-[11px] text-slate-500 mt-0.5">Không ám ố, không ép kính, cảm ứng mượt</p>
-        </div>
-        <!-- Metric 2 -->
-        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4">
-          <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
-            <span>Tình Trạng Pin</span>
-            <span class="text-emerald-400 font-black">✓ 98% CHUẨN</span>
-          </div>
-          <div class="text-base font-bold text-white">Pin Chuẩn Nhà Máy</div>
-          <p class="text-[11px] text-slate-500 mt-0.5">Thời lượng dùng cả ngày trên chuyền cày ca</p>
-        </div>
-        <!-- Metric 3 -->
-        <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4">
-          <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
-            <span>Bo Mạch Chủ (Mainboard)</span>
-            <span class="text-emerald-400 font-black">✓ PASS</span>
-          </div>
-          <div class="text-base font-bold text-white">Nguyên Bản Chưa Hàn Sửa</div>
-          <p class="text-[11px] text-slate-500 mt-0.5">Đã test áp suất & tải nhiệt 48 giờ liên tục</p>
-        </div>
-        <!-- Metric 4 -->
-        <div class="bg-slate-950 border border-amber-500/30 rounded-2xl p-4 bg-amber-950/10">
-          <div class="flex items-center justify-between text-xs text-amber-400 mb-1">
-            <span>Bản Quyền Thăng Chức</span>
-            <span class="text-amber-400 font-black">⭐ ĐẶC QUYỀN MÁY ZIN</span>
-          </div>
-          <div class="text-base font-bold text-amber-300">21 Ngày Thăng Chức Tổ Trưởng</div>
-          <p class="text-[11px] text-amber-400/80 mt-0.5">Trị giá 1.500.000đ được kích hoạt theo máy</p>
-        </div>
-      </div>
-
-      <!-- Warranty Status & Instant Launch Button -->
-      <div class="bg-gradient-to-r from-slate-950 to-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 font-bold text-lg">
-            🛡️
-          </div>
-          <div>
-            <div class="text-xs font-bold text-white">Chính Sách Bảo Hành Zin Zone: 12 Tháng 1 Đổi 1 Toàn Quốc</div>
-            <div class="text-[11px] text-slate-400">Hỗ trợ kỹ thuật 24/7 • Đổi máy ngay trong 30 ngày đầu nếu có bất kỳ lỗi phần cứng</div>
-          </div>
-        </div>
-
-        <button onclick="switchMainTab('learn')" class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-black text-xs transition shadow-lg flex items-center justify-center gap-2">
-          <span>🚀</span>
-          <span>Mở Giáo Trình Thăng Chức (21 Ngày)</span>
-        </button>
-      </div>
-    </div>
-
-  </section>
-
-
-  <!-- ========================================================================= -->
-  <!-- TAB 2: ZIN HỌC - GIÁO TRÌNH 21 NGÀY THĂNG CHỨC (BẢN TÀ ĐẠO NHÀ MÁY)    -->
-  <!-- ========================================================================= -->
-  <section id="section-learn" class="tab-section hidden max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-6 w-full flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6">
     
     <!-- Left / Center Column: Daily Learning Material (8 Cols) -->
     <div class="lg:col-span-8 flex flex-col gap-6">
@@ -1362,17 +1224,13 @@
 
   <!-- Mobile Bottom Floating Navigation Bar -->
   <div class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-slate-950/95 backdrop-blur border-t border-slate-800 px-2 py-2 flex items-center justify-around text-xs safe-bottom">
-    <button onclick="switchMainTab('check')" id="mNav-check" class="flex flex-col items-center text-amber-400 font-bold">
-      <span class="text-base">📱</span>
-      <span class="text-[10px]">Máy Zin</span>
+    <button onclick="switchMainTab('learn')" id="mNav-learn" class="flex flex-col items-center text-amber-400 font-bold">
+      <span class="text-base">🎓</span>
+      <span class="text-[10px]">Tu Tiên 21N</span>
     </button>
     <button onclick="switchMainTab('hot')" id="mNav-hot" class="flex flex-col items-center text-slate-400 hover:text-white">
       <span class="text-base">🔥</span>
       <span class="text-[10px]">5 Máy Hot</span>
-    </button>
-    <button onclick="switchMainTab('learn')" id="mNav-learn" class="flex flex-col items-center text-slate-400 hover:text-white">
-      <span class="text-base">🎓</span>
-      <span class="text-[10px]">Tu Tiên 21N</span>
     </button>
     <button onclick="switchMainTab('share')" id="mNav-share" class="flex flex-col items-center text-emerald-400 font-black animate-pulse">
       <span class="text-base">💵</span>
@@ -1408,7 +1266,7 @@
     // Parse URL params for referral code & device serial (Hoisted to top for global safety)
     const urlParams = new URLSearchParams(window.location.search);
     const refParam = urlParams.get('ref') || 'ZIN-8899';
-    const snParam = urlParams.get('sn') || 'ZZ-A14-8899';
+    const snParam = urlParams.get('sn') || '';
 
     // --- VIP GIFT LICENSE & DEVICE GATEKEEPER SYSTEM (BẢN QUYỀN QUÀ TẶNG KÈM MÁY CHÍNH HÃNG) ---
     const VALID_MASTER_KEYS = [
@@ -1553,7 +1411,7 @@
     } catch (e) {
       progressData = {};
     }
-    let currentTab = 'check';
+    let currentTab = 'learn';
 
     // =========================================================================
     // RETRO ARCADE SOUND ENGINE (WEB AUDIO API - 0 EXTERNAL DEPENDENCIES)
@@ -2847,7 +2705,7 @@
       if (activeSec) activeSec.classList.remove('hidden');
 
       // Desktop Nav update
-      const tabs = ['check', 'hot', 'learn', 'share', 'jobs'];
+      const tabs = ['learn', 'hot', 'share', 'jobs'];
       tabs.forEach(t => {
         const btn = document.getElementById(`navTab-${t}`);
         if (btn) {
@@ -3718,134 +3576,7 @@
       showToast('Đang tạo ảnh thẻ chia sẻ... Hãy lưu hoặc chụp màn hình để gửi đồng nghiệp!', 'success');
     }
 
-    let isScanningHardware = false;
 
-    function startHardwareScan() {
-      if (isScanningHardware) return;
-      isScanningHardware = true;
-
-      try {
-        const progressBox = document.getElementById('scanProgressBox');
-        const progressBar = document.getElementById('scanProgressBar');
-        const statusText = document.getElementById('scanStatusText');
-        const percentText = document.getElementById('scanPercentText');
-        const stepLog = document.getElementById('scanStepLog');
-        const btnText = document.getElementById('btnStartScanText');
-
-        if (progressBox) progressBox.classList.remove('hidden');
-        if (btnText) btnText.textContent = 'Đang Quét Phần Cứng...';
-
-        // Safe sound execution
-        if (typeof soundFX !== 'undefined' && soundFX) {
-          try {
-            if (typeof soundFX.playAttack === 'function') soundFX.playAttack();
-            else if (typeof soundFX.playHit === 'function') soundFX.playHit();
-          } catch (e) {}
-        }
-
-        // Set initial progress immediately
-        if (progressBar) progressBar.style.width = '20%';
-        if (percentText) percentText.textContent = '20%';
-        if (statusText) statusText.innerHTML = '⚙️ Đang kết nối cảm biến phần cứng...';
-        if (stepLog) stepLog.innerHTML = '<span class="text-amber-400 font-bold">[1/4] Khởi tạo phân tích vi mạch bo mạch chủ...</span>';
-
-        // Detect Platform / Device Brand from UserAgent
-        const ua = navigator.userAgent;
-        let detectedDevice = 'Samsung Galaxy - Chuẩn Zin';
-        if (/iPhone|iPad|iPod/i.test(ua)) {
-          detectedDevice = 'Apple iPhone - Bản Zin Zone Thăng Chức';
-        } else if (/POCO/i.test(ua)) {
-          detectedDevice = 'POCO 5G - Bản Zin Zone Thăng Chức';
-        } else if (/Redmi|Xiaomi/i.test(ua)) {
-          detectedDevice = 'Xiaomi / Redmi - Bản Zin Zone Thăng Chức';
-        } else if (/OPPO/i.test(ua)) {
-          detectedDevice = 'OPPO Series - Bản Zin Zone Thăng Chức';
-        } else if (/vivo/i.test(ua)) {
-          detectedDevice = 'vivo Series - Bản Zin Zone Thăng Chức';
-        } else if (/Android/i.test(ua)) {
-          detectedDevice = 'Thiết Bị Android - Bản Zin Zone Thăng Chức';
-        } else {
-          detectedDevice = 'Thiết Bị Zin Zone - Bản Thăng Chức Tổ Trưởng';
-        }
-
-        const steps = [
-          { pct: 45, status: '⚙️ Đang phân tích chữ ký vi mạch bo mạch chủ...', log: '[1/4] Bo mạch chủ (Mainboard): Nguyên bản, chưa hàn sửa ✓' },
-          { pct: 70, status: '🔬 Kiểm định cảm biến áp suất buồng khí & keo zin...', log: '[2/4] Keo chống nước & áp suất: Đạt chuẩn xuất xưởng 100% ✓' },
-          { pct: 90, status: '📱 Đối chiếu mã linh kiện màn hình & cảm biến pin...', log: '[3/4] Màn hình & Pin: Màn Zin Kính Zin, Pin chuẩn nhà máy ✓' },
-          { pct: 100, status: '✅ Hoàn tất: Thiết bị đạt chuẩn 100% Nguyên Zin chính hãng!', log: '[4/4] Bản quyền Thăng chức: Đã kích hoạt đặc quyền Zin Zone ✓' }
-        ];
-
-        let stepIndex = 0;
-        const scanTimer = setInterval(() => {
-          try {
-            if (stepIndex < steps.length) {
-              const s = steps[stepIndex];
-              if (progressBar) progressBar.style.width = s.pct + '%';
-              if (percentText) percentText.textContent = s.pct + '%';
-              if (statusText) statusText.innerHTML = s.status;
-              if (stepLog) stepLog.innerHTML = `<span class="text-emerald-400 font-bold">${s.log}</span>`;
-              stepIndex++;
-            } else {
-              clearInterval(scanTimer);
-              isScanningHardware = false;
-              if (btnText) btnText.textContent = '✅ Đã Xác Thực Chính Hãng (Kiểm Định Lại)';
-
-              // Update report card
-              const modelEl = document.getElementById('reportModel');
-              if (modelEl) modelEl.textContent = detectedDevice;
-              
-              const serialEl = document.getElementById('reportSerial');
-              if (serialEl) serialEl.textContent = 'ZZ-AUTHENTIC-ZIN-' + Math.floor(1000 + Math.random() * 9000);
-
-              // Update state and rewards
-              try {
-                const st = getPlayerState();
-                st.isVipDevice = true;
-                savePlayerState(st);
-                addCp(500);
-              } catch (e) {}
-
-              try {
-                if (typeof soundFX !== 'undefined' && soundFX && typeof soundFX.playSuccess === 'function') {
-                  soundFX.playSuccess();
-                }
-              } catch (e) {}
-
-              try {
-                if (typeof particleEngine !== 'undefined' && particleEngine) {
-                  particleEngine.burst(window.innerWidth / 2, window.innerHeight / 2, 70);
-                }
-              } catch (e) {}
-
-              showToast('🎉 XÁC NHẬN HOÀN TẤT: Thiết bị chính hãng 100% Nguyên Zin!', 'success');
-              showToast('👑 ĐÃ KÍCH HOẠT ĐẶC QUYỀN MÁY ZIN: Nhận BUFF +50% CP theo máy!', 'success');
-
-              // Smooth scroll to card
-              setTimeout(() => {
-                const card = document.getElementById('zinReportCard');
-                if (card) card.scrollIntoView({ behavior: 'smooth' });
-              }, 400);
-            }
-          } catch (stepErr) {
-            console.error('Scan timer step error:', stepErr);
-            clearInterval(scanTimer);
-            isScanningHardware = false;
-          }
-        }, 400);
-
-      } catch (err) {
-        console.error('Scan initialization error:', err);
-        isScanningHardware = false;
-      }
-    }
-
-    function checkImeiReport() {
-      startHardwareScan();
-    }
-
-    function shareInspectionCert() {
-      showToast('Đã sao chép link báo cáo kiểm định máy nguyên zin 100%!', 'success');
-    }
 
     // --- VIP Jobs Recruitment System & Modal Handlers ---
     const JOBS_DATA = [
@@ -4104,7 +3835,6 @@
 
       document.getElementById('displayRefCode').textContent = refParam;
       document.getElementById('displayRefUrl').textContent = `https://zin.zone?ref=${refParam}`;
-      document.getElementById('reportSerial').textContent = snParam;
 
       const savedRepeat = safeStorage.getItem('zin_audio_repeat_mode');
       const repeatSelect = document.getElementById('audioRepeatMode');
