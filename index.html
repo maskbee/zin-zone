@@ -3079,8 +3079,8 @@
     }
 
     // "Tam Đoạn Ma Âm" - 3-Beat Echo Repeat Mode for Vocabulary Word Cards
-    // Beat 1 (0.9x standard) -> 350ms pause -> Beat 2 (0.8x tone clarify) -> 350ms pause -> Beat 3 (1.0x confident shadow)
-    function speakWordTriple(text, cardEl = null) {
+    // Beat 1 (0.9x standard) -> 175ms pause -> Beat 2 (0.8x tone clarify) -> 175ms pause -> Beat 3 (1.0x confident shadow)
+    function speakWordTriple(text, cardEl = null, wordId = null) {
       if (!text) return;
       const cleanText = extractPronunciationText(text);
       if (!cleanText) return;
@@ -3127,11 +3127,11 @@
           if (myLoopId !== currentLoopId) return;
           step++;
           if (step < 3) {
-            loopTimeout = setTimeout(playStep, 350); // 350ms breathing / shadowing interval
+            loopTimeout = setTimeout(playStep, 175); // 175ms (shortened to half of original 350ms)
           } else {
             playStep();
           }
-        });
+        }, wordId);
       }
 
       playStep();
@@ -3412,7 +3412,7 @@
         const item = document.createElement('div');
         item.className = 'cursor-pointer active:scale-[0.98] transition select-none bg-slate-950 border border-slate-800/80 hover:border-amber-500/50 hover:bg-slate-900/80 rounded-2xl p-3 sm:p-3.5 flex items-start justify-between gap-3 shadow-sm group';
         item.onclick = () => {
-          speakWordTriple(w.zh, item);
+          speakWordTriple(w.zh, item, w.id);
         };
         item.innerHTML = `
           <div class="flex-1 min-w-0">
