@@ -1,5 +1,5 @@
 // Service Worker for Zin.Zone Offline App & OTA Updates
-const CACHE_NAME = 'zin-zone-v26-clean-install-button';
+const CACHE_NAME = 'zin-zone-v27-native-app-auto-unlock';
 const STATIC_ASSETS = [
   './data/curriculum.js',
   './data/audio_manifest.js',

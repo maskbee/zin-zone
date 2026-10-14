@@ -186,6 +186,7 @@ if (!isInstalled) {
 // 7. Launch App on phone
 console.log('[*] 正在手机上启动 Zin Zone 并展示正品界面...');
 try {
+  adbCmd('shell am force-stop zone.zin.app');
   adbCmd('shell am start -n zone.zin.app/.MainActivity');
 } catch (e) {}
 try {

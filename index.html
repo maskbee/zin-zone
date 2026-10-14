@@ -1249,7 +1249,10 @@
       'ZZ-VIP-2026-ADMIN',
       'ZZ-IPHONE-VIP-2026',
       'ZZ-MASTER-PC',
-      'ZZ-MASTER-DEV'
+      'ZZ-MASTER-DEV',
+      'ZZ-OFFICIAL-APP',
+      'ZZ-ANDROID-APP-AUTHENTIC',
+      'ZZ-APP-ZINZONE-VIP'
     ];
 
     function isValidLicenseToken(token) {
@@ -1257,15 +1260,49 @@
       const clean = token.trim().toUpperCase();
       if (VALID_MASTER_KEYS.includes(clean)) return true;
       if (/^ZZ-IPHONE-[A-Z0-9_\-]+$/i.test(clean)) return true;
-      if (/^ZZ-[A-Z0-9_\-]+-[A-F0-9]{6,16}$/i.test(clean)) return true;
+      if (/^ZZ-APP-[A-Z0-9_\-]+$/i.test(clean)) return true;
+      if (/^ZZ-[A-Z0-9_\-]+-[A-F0-9]{4,16}$/i.test(clean)) return true;
       if (/^ZZ-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/i.test(clean)) return true;
       return false;
+    }
+
+    function formatDeviceDisplayName(token) {
+      if (!token) return 'Máy Chính Hãng';
+      const clean = token.toUpperCase();
+      if (clean.includes('22127RK46C') || clean.includes('REDMIK60PRO') || clean.includes('REDMI-K60')) return 'Redmi K60 Pro';
+      if (clean.includes('23013PC75G') || clean.includes('POCOF5PRO') || clean.includes('POCO-F5')) return 'POCO F5 Pro';
+      if (clean.includes('IPHONE')) return 'iPhone VIP';
+      return 'Máy Chính Hãng';
     }
 
     function checkDeviceLicense() {
       const modal = document.getElementById('gatekeeperModal');
       const params = new URLSearchParams(window.location.search);
       const tokenFromUrl = params.get('token') || params.get('license') || params.get('activate');
+
+      // 0. Official Native APK / Bundled App Container Auto-Activation
+      // When running inside the official Zin Zone Android App (zone.zin.app), auto-activate
+      const isNativeApp = navigator.userAgent.indexOf('ZinZoneApp') !== -1 ||
+                          params.get('mode') === 'app' ||
+                          params.get('mode') === 'native_app';
+      if (isNativeApp) {
+        let appToken = safeStorage.getItem('zin_device_license');
+        if (!appToken || !isValidLicenseToken(appToken)) {
+          let modelTag = 'OFFICIAL-APP';
+          const uaMatch = navigator.userAgent.match(/Android[^;]+;\s*([^;)]+)/i);
+          if (uaMatch && uaMatch[1]) {
+            modelTag = uaMatch[1].replace(/[^a-zA-Z0-9]/g, '').substring(0, 16).toUpperCase() || 'OFFICIAL-APP';
+          }
+          appToken = `ZZ-APP-${modelTag}-2026`;
+          safeStorage.setItem('zin_device_license', appToken);
+        }
+        if (modal) {
+          modal.style.display = 'none';
+        }
+        document.body.style.overflow = '';
+        updateLicenseBadge(appToken);
+        return true;
+      }
 
       // 1. URL Token parameter auto-activation
       if (tokenFromUrl && isValidLicenseToken(tokenFromUrl)) {
@@ -1366,10 +1403,11 @@
     function updateLicenseBadge(token) {
       const badge = document.getElementById('headerBadgeLicense');
       if (badge) {
+        const name = formatDeviceDisplayName(token);
         badge.innerHTML = `
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span class="hidden sm:inline">Máy Chính Hãng • Đã Kích Hoạt</span>
-          <span class="sm:hidden text-[11px]">Đã Kích Hoạt</span>
+          <span class="hidden sm:inline">${name} • Đã Kích Hoạt</span>
+          <span class="sm:hidden text-[11px]">${name} • Đã Kích Hoạt</span>
         `;
       }
     }
@@ -3856,12 +3894,18 @@
       if (window.location.hash === '#learn') switchMainTab('learn');
       else if (window.location.hash === '#share') switchMainTab('share');
       else if (window.location.hash === '#jobs') switchMainTab('jobs');
+
+      // Hide Cài App header button if already inside official App or standalone PWA
+      if (typeof isAppStandalone === 'function' && isAppStandalone()) {
+        const btnInstall = document.getElementById('btnInstallApp');
+        if (btnInstall) btnInstall.style.display = 'none';
+      }
     });
 
     // --- PWA Service Worker Registration & Offline Cache ---
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=20261014_v23').then((reg) => {
+        navigator.serviceWorker.register('./sw.js?v=20261014_v27').then((reg) => {
           console.log('[Zin Zone] ServiceWorker registered with scope:', reg.scope);
           reg.update();
         }).catch((err) => {
