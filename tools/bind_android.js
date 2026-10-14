@@ -134,18 +134,40 @@ console.log('\x1b[32m[+] 硬件授权证书已成功写入手机存储！\x1b[0m
 
 // 6. Install APK if needed
 console.log('[*] 正在检查 Zin Zone 客户端安装状态...');
-const packages = adbCmd('shell pm list packages');
+let packages = '';
+try {
+  packages = adbCmd('shell pm list packages');
+} catch (e) {}
 const isInstalled = packages.includes('zone.zin.app');
 
 const apkPath = path.resolve(__dirname, '..', 'ZinZone.apk');
 if (!isInstalled) {
   if (fs.existsSync(apkPath)) {
-    console.log('[*] 正在向手机安装 ZinZone.apk...');
+    // 1. Push APK to phone's Download folder as a guaranteed backup
+    console.log('[*] 正在向手机存储推送安装包备份 (/sdcard/Download/ZinZone.apk)...');
     try {
-      execSync(`"${adb}" -s ${target.id} install -r -d "${apkPath}"`, { stdio: 'inherit' });
+      adbCmd(`push "${apkPath}" /sdcard/Download/ZinZone.apk`);
+      console.log('\x1b[32m[+] 安装包已同步推送到手机【下载目录】！\x1b[0m');
+    } catch (e) {}
+
+    console.log('[*] 正在尝试通过 USB 直接安装 ZinZone.apk...');
+    console.log('\x1b[33m---------------------------------------------------------------------\x1b[0m');
+    console.log('\x1b[33m👉 【特别提醒】：请立即【点亮并解锁手机屏幕】！\x1b[0m');
+    console.log('\x1b[33m   小米 / Redmi 手机此时屏幕会弹出【允许通过 USB 安装应用吗？】\x1b[0m');
+    console.log('\x1b[33m   请在手机屏幕上点击【允许】或【继续安装】（倒计时结束点击）！\x1b[0m');
+    console.log('\x1b[33m---------------------------------------------------------------------\x1b[0m');
+
+    try {
+      execSync(`"${adb}" -s ${target.id} install -r -d -t -g "${apkPath}"`, { 
+        stdio: 'inherit',
+        timeout: 45000 // 45s 超时保护，避免无限挂起
+      });
       console.log('\x1b[32m[+] ZinZone.apk 客户端安装成功！\x1b[0m');
     } catch (e) {
-      console.log('\x1b[33m[!] 自动静默安装受限，请在手机屏幕上点击“允许安装”\x1b[0m');
+      console.log('\x1b[33m[!] 提示：未在 45 秒内检测到屏幕确认，或手机系统未开启【开发者选项 -> USB安装】。\x1b[0m');
+      console.log('\x1b[32m[+] 极简解决方案已就绪：\x1b[0m');
+      console.log('\x1b[32m    安装包已推送至手机【文件管理】->【Download/ZinZone.apk】\x1b[0m');
+      console.log('\x1b[32m    直接在手机屏幕上点击即可一秒完成安装！\x1b[0m');
     }
   } else {
     console.log('[!] 未在根目录找到 ZinZone.apk，跳过 APK 部署。');
