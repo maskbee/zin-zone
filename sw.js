@@ -1,5 +1,5 @@
 // Service Worker for Zin.Zone Offline App & OTA Updates
-const CACHE_NAME = 'zin-zone-v23-b2b-store-system';
+const CACHE_NAME = 'zin-zone-v24-vip-gift-license-gate';
 const STATIC_ASSETS = [
   './data/curriculum.js',
   './data/audio_manifest.js',

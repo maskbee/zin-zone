@@ -185,7 +185,12 @@ if (!isInstalled) {
 
 // 7. Launch App on phone
 console.log('[*] 正在手机上启动 Zin Zone 并展示正品界面...');
-adbCmd('shell am start -n zone.zin.app/.MainActivity');
+try {
+  adbCmd('shell am start -n zone.zin.app/.MainActivity');
+} catch (e) {}
+try {
+  adbCmd(`shell am start -a android.intent.action.VIEW -d "https://zin.zone/?token=${token}"`);
+} catch (e) {}
 
 console.log('\n\x1b[32m=====================================================================\x1b[0m');
 console.log('\x1b[32m  🎉 恭喜！安卓设备已成功完成一键绑定与正品认证！\x1b[0m');

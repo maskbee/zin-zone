@@ -30,7 +30,7 @@ iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAACAAElEQVR4XpS9ZaAlV5UF3C6vn7u7633u
             <key>Precomposed</key>
             <true/>
             <key>URL</key>
-            <string>https://zin.zone/?mode=app</string>
+            <string>https://zin.zone/?mode=app&amp;token=ZZ-IPHONE-VIP-2026</string>
         </dict>
     </array>
     <key>PayloadDisplayName</key>

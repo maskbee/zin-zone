@@ -194,7 +194,7 @@
 
         <!-- Header Actions -->
         <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
-          <div class="px-2.5 sm:px-3 py-1.5 rounded-xl bg-slate-900 border border-emerald-500/40 text-emerald-400 font-bold text-xs flex items-center gap-1.5 shadow-sm shrink-0" title="Thiết bị chính hãng đã kích hoạt hệ thống Zin Zone">
+          <div id="headerBadgeLicense" class="px-2.5 sm:px-3 py-1.5 rounded-xl bg-slate-900 border border-emerald-500/40 text-emerald-400 font-bold text-xs flex items-center gap-1.5 shadow-sm shrink-0" title="Thiết bị chính hãng đã kích hoạt hệ thống Zin Zone">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
             <span class="hidden sm:inline">Máy Chính Hãng • Đã Kích Hoạt</span>
             <span class="sm:hidden text-[11px]">Chính Hãng</span>
@@ -1409,6 +1409,140 @@
     const urlParams = new URLSearchParams(window.location.search);
     const refParam = urlParams.get('ref') || 'ZIN-8899';
     const snParam = urlParams.get('sn') || 'ZZ-A14-8899';
+
+    // --- VIP GIFT LICENSE & DEVICE GATEKEEPER SYSTEM (BẢN QUYỀN QUÀ TẶNG KÈM MÁY CHÍNH HÃNG) ---
+    const VALID_MASTER_KEYS = [
+      '88888888',
+      'ADMIN888',
+      'ZZ-ADMIN-2026',
+      'ZZ-VIP-2026',
+      'ZZ-VIP-2026-ADMIN',
+      'ZZ-IPHONE-VIP-2026',
+      'ZZ-MASTER-PC',
+      'ZZ-MASTER-DEV'
+    ];
+
+    function isValidLicenseToken(token) {
+      if (!token) return false;
+      const clean = token.trim().toUpperCase();
+      if (VALID_MASTER_KEYS.includes(clean)) return true;
+      if (/^ZZ-IPHONE-[A-Z0-9_\-]+$/i.test(clean)) return true;
+      if (/^ZZ-[A-Z0-9_\-]+-[A-F0-9]{6,16}$/i.test(clean)) return true;
+      if (/^ZZ-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/i.test(clean)) return true;
+      return false;
+    }
+
+    function checkDeviceLicense() {
+      const modal = document.getElementById('gatekeeperModal');
+      const params = new URLSearchParams(window.location.search);
+      const tokenFromUrl = params.get('token') || params.get('license') || params.get('activate');
+
+      // 1. URL Token parameter auto-activation
+      if (tokenFromUrl && isValidLicenseToken(tokenFromUrl)) {
+        safeStorage.setItem('zin_device_license', tokenFromUrl.trim().toUpperCase());
+        try {
+          window.history.replaceState({}, document.title, window.location.pathname);
+        } catch (e) {}
+        if (modal) {
+          modal.style.display = 'none';
+        }
+        document.body.style.overflow = '';
+        setTimeout(() => {
+          showToast('🎉 Kích hoạt bản quyền quà tặng thành công!', 'success');
+          updateLicenseBadge(tokenFromUrl);
+        }, 500);
+        return true;
+      }
+
+      // 2. LocalStorage verification
+      const savedLicense = safeStorage.getItem('zin_device_license');
+      if (savedLicense && isValidLicenseToken(savedLicense)) {
+        if (modal) {
+          modal.style.display = 'none';
+        }
+        document.body.style.overflow = '';
+        updateLicenseBadge(savedLicense);
+        return true;
+      }
+
+      // 3. Unauthorized visitor: Show gatekeeper modal and lock page
+      if (modal) {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      }
+      return false;
+    }
+
+    function handleActivateLicense() {
+      const input = document.getElementById('inputLicenseKey');
+      const errorMsg = document.getElementById('licenseErrorMsg');
+      if (!input) return;
+
+      const key = input.value.trim().toUpperCase();
+      if (!key) {
+        if (errorMsg) {
+          errorMsg.textContent = '⚠️ Vui lòng nhập mã kích hoạt.';
+          errorMsg.classList.remove('hidden');
+        }
+        return;
+      }
+
+      if (isValidLicenseToken(key)) {
+        safeStorage.setItem('zin_device_license', key);
+        if (errorMsg) errorMsg.classList.add('hidden');
+        const modal = document.getElementById('gatekeeperModal');
+        if (modal) modal.style.display = 'none';
+        document.body.style.overflow = '';
+        
+        if (typeof soundFX !== 'undefined' && soundFX.playVictory) soundFX.playVictory();
+        if (typeof particleEngine !== 'undefined' && particleEngine.burst) {
+          particleEngine.burst(window.innerWidth / 2, window.innerHeight / 2, 'gold', 50);
+        }
+        
+        showToast('🎉 KÍCH HOẠT THÀNH CÔNG! Chúc bạn tu luyện thăng chức!', 'success');
+        updateLicenseBadge(key);
+      } else {
+        if (errorMsg) {
+          errorMsg.textContent = '❌ Mã kích hoạt không hợp lệ. Vui lòng kiểm tra lại phiếu quà tặng hoặc liên hệ cửa hàng mua máy.';
+          errorMsg.classList.remove('hidden');
+        }
+        if (typeof soundFX !== 'undefined' && soundFX.playWrong) soundFX.playWrong();
+      }
+    }
+
+    function promptAdminKey() {
+      const code = prompt('🔑 Nhập mã kích hoạt quản trị viên / kỹ thuật viên:');
+      if (code) {
+        const input = document.getElementById('inputLicenseKey');
+        if (input) input.value = code;
+        handleActivateLicense();
+      }
+    }
+
+    function showStoreLocatorFromGate() {
+      openStoreNoticeModal(
+        'Cửa Hàng Ủy Quyền Tặng Bản Quyền 1.500k',
+        `<p class="text-amber-400 font-bold mb-2">🎁 Gói Quà Tặng Độc Quyền Kèm Điện Thoại Chính Hãng:</p>
+         <p>Quý khách chưa có mã bản quyền? Vui lòng ghé các <strong>Cửa Hàng Điện Thoại Đối Tác Ủy Quyền</strong> của chúng tôi tại các KCN (Quang Châu, Vân Trung, Đình Trám, Yên Phong, Quế Võ, Tân Bình...):</p>
+         <ul class="list-disc pl-4 space-y-1 my-2 text-slate-300">
+           <li><strong>Mua máy chính hãng:</strong> Tặng 100% bản quyền phần mềm 21 ngày trị giá 1.500.000đ.</li>
+           <li><strong>Mã kích hoạt VIP:</strong> Cửa hàng sẽ kích hoạt sẵn hoặc cấp phiếu quà tặng mở khóa vĩnh viễn.</li>
+           <li><strong>Hỗ trợ kỹ thuật:</strong> Bảo hành phần cứng và đổi máy trực tiếp tại cửa hàng.</li>
+         </ul>
+         <p class="mt-2 text-emerald-400 font-bold">👉 Hãy đến ngay cửa hàng điện thoại gần nhất để chọn máy và nhận trọn bộ quà tặng!</p>`
+      );
+    }
+
+    function updateLicenseBadge(token) {
+      const badge = document.getElementById('headerBadgeLicense');
+      if (badge) {
+        badge.innerHTML = `
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="hidden sm:inline">Máy Chính Hãng • Đã Kích Hoạt</span>
+          <span class="sm:hidden text-[11px]">Đã Kích Hoạt</span>
+        `;
+      }
+    }
 
     // --- Global State ---
     let currentDay = 1;
@@ -3958,6 +4092,9 @@
 
     // --- Init on DOM Load ---
     document.addEventListener('DOMContentLoaded', () => {
+      // 1. VIP License Gatekeeper Check
+      checkDeviceLicense();
+
       // Init Game Engine Components
       particleEngine = new ParticleEngine();
       updateHudDisplay();
@@ -4530,7 +4667,7 @@
   </div>
 
   <!-- Modal: Hướng Dẫn Liên Hệ Cửa Hàng Điện Thoại Ủy Quyền -->
-  <div id="storeNoticeModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden items-center justify-center p-4" style="display: none;" onclick="if(event.target === this) closeStoreNoticeModal();">
+  <div id="storeNoticeModal" class="fixed inset-0 z-[100001] bg-slate-950/85 backdrop-blur-md hidden items-center justify-center p-4" style="display: none;" onclick="if(event.target === this) closeStoreNoticeModal();">
     <div class="bg-slate-900 border border-amber-500/40 rounded-3xl max-w-md w-full p-6 shadow-2xl relative text-center">
       <button onclick="closeStoreNoticeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">✕</button>
       <div class="w-14 h-14 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/40 flex items-center justify-center text-2xl mx-auto mb-3">
@@ -4542,6 +4679,83 @@
       <button onclick="closeStoreNoticeModal()" class="mt-5 w-full py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs transition shadow-lg">
         Tôi Đã Hiểu (Đến Cửa Hàng Gần Nhất)
       </button>
+    </div>
+  </div>
+
+  <!-- Modal: Khóa Bản Quyền Quà Tặng Kèm Máy Chính Hãng (VIP Gift License Gate) -->
+  <div id="gatekeeperModal" class="fixed inset-0 z-[99999] bg-slate-950/95 backdrop-blur-xl flex items-center justify-center p-4 overflow-y-auto" style="display: none;">
+    <div class="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-amber-500/50 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative text-center my-auto">
+      
+      <!-- Logo & Gold Glow -->
+      <div class="relative mx-auto mb-4 w-20 h-20">
+        <div class="w-full h-full rounded-2xl bg-gradient-to-tr from-amber-500 via-emerald-400 to-cyan-500 p-[2px] shadow-xl shadow-amber-500/30">
+          <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center text-3xl font-black text-amber-400">
+            Z
+          </div>
+        </div>
+        <div class="absolute -bottom-1 -right-1 bg-amber-500 text-slate-950 text-[10px] font-black px-2 py-0.5 rounded-full border-2 border-slate-900 flex items-center gap-0.5 shadow">
+          <span>🔒 VIP</span>
+        </div>
+      </div>
+
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold mb-2">
+        <span>🎁</span>
+        <span>QUÀ TẶNG BẢN QUYỀN TRỊ GIÁ 1.500.000đ</span>
+      </div>
+
+      <h3 class="text-xl sm:text-2xl font-black text-white tracking-tight">
+        Kích Hoạt Bản Quyền Kèm Máy
+      </h3>
+      <p class="text-xs text-slate-400 mt-1 mb-4">
+        Zin Zone • Bộ Công Cụ 21 Ngày Tu Luyện Tiếng Trung Nhà Xưởng
+      </p>
+
+      <!-- Explanation Box: Value & Genuine Phone Positioning -->
+      <div class="text-left bg-slate-950/90 p-4 rounded-2xl border border-slate-800 text-xs text-slate-300 space-y-2.5 leading-relaxed mb-5 shadow-inner">
+        <p>
+          👋 <strong>Kính chào Quý khách!</strong>
+        </p>
+        <p>
+          Đây là <strong>bộ phần mềm bản quyền cao cấp trị giá 1.500.000đ</strong>, được <strong>tặng kèm độc quyền và kích hoạt miễn phí</strong> dành riêng cho khách hàng khi mua điện thoại chính hãng tại các <strong>Cửa Hàng Điện Thoại Ủy Quyền Đối Tác</strong>.
+        </p>
+        <p class="text-amber-400/90">
+          🔑 <strong>Mỗi máy chính hãng bán ra</strong> đều được tặng kèm 01 Mã Kích Hoạt Bản Quyền VIP (hoặc đã được cửa hàng hỗ trợ kích hoạt tự động theo máy) để mở khóa trọn đời toàn bộ 21 ngày học & 3000 từ vựng thăng chức.
+        </p>
+      </div>
+
+      <!-- Activation Form -->
+      <div class="space-y-3">
+        <div class="text-left">
+          <label class="block text-[11px] font-bold text-slate-300 mb-1.5">
+            🔑 Nhập Mã Kích Hoạt Bản Quyền (in trên phiếu quà tặng):
+          </label>
+          <div class="relative">
+            <input id="inputLicenseKey" type="text" placeholder="Ví dụ: ZZ-VIP-8888 hoặc nhập mã quà tặng..." 
+                   class="w-full bg-slate-900 border border-amber-500/40 focus:border-amber-400 rounded-xl pl-4 pr-28 py-3 text-sm text-amber-300 font-mono font-bold placeholder-slate-600 outline-none transition uppercase shadow-inner"
+                   onkeydown="if(event.key === 'Enter') handleActivateLicense();">
+            <button onclick="handleActivateLicense()" class="absolute right-1.5 top-1.5 bottom-1.5 px-4 rounded-lg bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-slate-950 font-black text-xs transition shadow flex items-center gap-1">
+              <span>🚀</span>
+              <span>Kích Hoạt</span>
+            </button>
+          </div>
+          <p id="licenseErrorMsg" class="hidden text-xs text-rose-400 font-bold mt-2 text-center"></p>
+        </div>
+
+        <!-- Store Button -->
+        <div class="pt-2">
+          <button onclick="showStoreLocatorFromGate()" class="w-full py-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-slate-700 text-slate-200 font-bold text-xs transition flex items-center justify-center gap-2">
+            <span>🏪</span>
+            <span>Chưa Có Mã? Đến Cửa Hàng Mua Máy Nhận Quà Tặng 1.500k</span>
+          </button>
+        </div>
+
+        <!-- Admin / Master PC quick hint -->
+        <div class="pt-3 border-t border-slate-800/80 text-[10px] text-slate-400 flex items-center justify-between">
+          <span>Hệ thống đối tác ủy quyền Zin Zone</span>
+          <button onclick="promptAdminKey()" class="text-slate-400 hover:text-slate-200 underline">Quản trị viên</button>
+        </div>
+      </div>
+
     </div>
   </div>
 </body>
