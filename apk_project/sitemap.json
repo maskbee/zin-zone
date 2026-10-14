@@ -1,0 +1,37 @@
+{
+    "global": {
+        "webviewParameter": {
+            "titleNView": false,
+            "statusbar": {
+                "style": "light",
+                "background": "#090d16"
+            },
+            "appendCss": "",
+            "appendJs": ""
+        },
+        "easyConfig": {}
+    },
+    "pages": [
+        {
+            "webviewId": "__UNI__ZINZONE",
+            "matchUrls": [
+                {
+                    "href": "https://zin.zone"
+                },
+                {
+                    "href": "https://zin.zone/"
+                },
+                {
+                    "href": "https://zin.zone/*"
+                }
+            ],
+            "webviewParameter": {
+                "titleNView": false,
+                "statusbar": {
+                    "style": "light",
+                    "background": "#090d16"
+                }
+            }
+        }
+    ]
+}

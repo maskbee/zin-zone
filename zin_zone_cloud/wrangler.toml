@@ -1,0 +1,8 @@
+name = "zin-zone-api"
+main = "worker.js"
+compatibility_date = "2025-06-01"
+workers_dev = true
+
+routes = [
+  { pattern = "zin.zone/*", zone_name = "zin.zone" }
+]

@@ -1,0 +1,13 @@
+# Node & Dependencies
+node_modules/
+package-lock.json
+
+# Temporary build & scratch caches
+temp/
+__pycache__/
+*.pyc
+*.log
+.DS_Store
+Thumbs.db
+test_audio.mp3
+test_sentence.mp3

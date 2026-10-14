@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>PayloadContent</key>
+    <array>
+        <dict>
+            <key>FullScreen</key>
+            <true/>
+            <key>IsRemovable</key>
+            <true/>
+            <key>Label</key>
+            <string>Zin Zone - Tiếng Trung 21 Ngày</string>
+            <key>PayloadDescription</key>
+            <string>Ứng dụng học tiếng Trung thăng chức độc quyền Zin Zone</string>
+            <key>PayloadDisplayName</key>
+            <string>Zin Zone WebClip</string>
+            <key>PayloadIdentifier</key>
+            <string>zone.zin.webclip.IPHONE_1791540343</string>
+            <key>PayloadType</key>
+            <string>com.apple.webClip.managed</string>
+            <key>PayloadUUID</key>
+            <string>IPHONE_1791540343-UUID-1234</string>
+            <key>PayloadVersion</key>
+            <integer>1</integer>
+            <key>Precomposed</key>
+            <true/>
+            <key>URL</key>
+            <string>https://zin.zone/app?token=IPHONE_1791540343.84b7dedebe93c86923342697</string>
+        </dict>
+    </array>
+    <key>PayloadDisplayName</key>
+    <string>Zin Zone - Điện Thoại Thăng Chức</string>
+    <key>PayloadIdentifier</key>
+    <string>zone.zin.profile.IPHONE_1791540343</string>
+    <key>PayloadOrganization</key>
+    <string>Zin Zone</string>
+    <key>PayloadRemovalDisallowed</key>
+    <false/>
+    <key>PayloadType</key>
+    <string>Configuration</string>
+    <key>PayloadUUID</key>
+    <string>IPHONE_1791540343-MAIN-UUID</string>
+    <key>PayloadVersion</key>
+    <integer>1</integer>
+</dict>
+</plist>

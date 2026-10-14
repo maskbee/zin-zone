@@ -1,0 +1,18 @@
+
+ ⛅️ wrangler 3.114.17 (update available 4.149.0)
+------------------------------------------------
+
+[33m▲ [43;33m[[43;30mWARNING[43;33m][0m [1mThe version of Wrangler you are using is now out-of-date.[0m
+
+  Please update to the latest version to prevent critical errors.
+  Run `npm install --save-dev wrangler@4` to update to the latest version.
+  After installation, run Wrangler with `npx wrangler`.
+
+
+Total Upload: 10.74 KiB / gzip: 4.00 KiB
+No bindings found.
+Uploaded zin-zone-api (2.22 sec)
+Deployed zin-zone-api triggers (1.34 sec)
+  https://zin-zone-api.bdarron759.workers.dev
+  zin.zone/* (zone name: zin.zone)
+Current Version ID: de4e83a4-a708-45aa-8d8d-219293679f0e

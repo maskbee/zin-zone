@@ -1,0 +1,8 @@
+{
+  "domain": "zin.zone",
+  "token": "POCO_23013PC75G_762afa49.ad471661910e69603b7f2bea",
+  "hw_id": "POCO_23013PC75G_762afa49",
+  "activated_at": 1791712160,
+  "hot_update_url": "https://zin.zone/api/curriculum/latest?token=POCO_23013PC75G_762afa49.ad471661910e69603b7f2bea&platform=android",
+  "verify_url": "https://zin.zone/api/verify?token=POCO_23013PC75G_762afa49.ad471661910e69603b7f2bea&platform=android"
+}

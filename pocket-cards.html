@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thẻ Bỏ Túi & Thẻ Đeo Ngực Nhà Máy | 邪修汉语 21 Ngày</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800;900&family=Noto+Sans+SC:wght@700;900&display=swap" rel="stylesheet">
+  <script src="data/curriculum.js"></script>
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    }
+    .font-han {
+      font-family: 'Noto Sans SC', sans-serif;
+    }
+    
+    /* Standard Factory ID Badge Sizing */
+    .badge-card {
+      width: 86mm;
+      height: 54mm;
+      box-sizing: border-box;
+      page-break-inside: avoid;
+    }
+
+    /* Print styles */
+    @page {
+      size: A4 portrait;
+      margin: 8mm;
+    }
+
+    @media print {
+      body {
+        background-color: white !important;
+        color: black !important;
+      }
+      .no-print {
+        display: none !important;
+      }
+      .print-page {
+        page-break-after: always;
+      }
+      .badge-card {
+        border: 1.5px dashed #4b5563 !important;
+        box-shadow: none !important;
+        background: white !important;
+        color: black !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-900 min-h-screen py-6 px-4">
+
+  <!-- Floating Print Control Toolbar (Screen only) -->
+  <div class="no-print max-w-5xl mx-auto mb-6 bg-slate-900 text-white rounded-2xl p-4 shadow-xl border border-slate-800 flex flex-wrap items-center justify-between gap-4 sticky top-4 z-50">
+    <div class="flex items-center gap-3">
+      <a href="index.html" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold transition flex items-center gap-1.5">
+        <span>←</span>
+        <span>Quay Lại Ứng Dụng</span>
+      </a>
+      <div>
+        <h1 class="text-sm font-black text-amber-400 flex items-center gap-2">
+          <span>🖨️ BẢN IN THẺ BỎ TÚI & THẺ CÀI ÁO CÔNG NHÂN</span>
+        </h1>
+        <p class="text-[11px] text-slate-400">Khổ chuẩn 86x54mm nhét vừa mặt sau thẻ nhân viên • Hotline Zalo: <a href="https://zalo.me/84822262695" target="_blank" class="text-cyan-400 underline font-bold">0822.262.695</a></p>
+      </div>
+    </div>
+
+    <!-- Filter & Actions -->
+    <div class="flex flex-wrap items-center gap-3">
+      <div class="flex items-center gap-2 text-xs">
+        <label class="text-slate-300 font-semibold">Chọn ngày in:</label>
+        <select id="selectDayFilter" class="bg-slate-800 border border-slate-700 text-white rounded-xl px-2.5 py-1.5 text-xs font-bold outline-none focus:ring-2 focus:ring-amber-500">
+          <option value="all">Toàn bộ 21 Ngày (105 Thẻ)</option>
+          <option value="phase1">Tuần 1: Sinh tồn (Day 1 - 7)</option>
+          <option value="phase2">Tuần 2: Chủ động (Day 8 - 14)</option>
+          <option value="phase3">Tuần 3: Thăng chức (Day 15 - 21)</option>
+          <!-- Daily options populated dynamically -->
+        </select>
+      </div>
+
+      <div class="flex items-center gap-2 text-xs">
+        <label class="text-slate-300 font-semibold">Hiện mẹo 18+:</label>
+        <input type="checkbox" id="checkSpicy" checked class="w-4 h-4 accent-amber-500 rounded">
+      </div>
+
+      <button onclick="window.print()" class="px-5 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs shadow-lg transition flex items-center gap-2">
+        <span>🖨️ In Ra Giấy / Xuất PDF</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Instruction banner for workers (Screen only) -->
+  <div class="no-print max-w-5xl mx-auto mb-6 bg-amber-50 border border-amber-200 rounded-xl p-4 text-xs text-amber-900 leading-relaxed flex items-start gap-3">
+    <span class="text-2xl">✂️</span>
+    <div>
+      <h3 class="font-bold text-amber-950 text-sm mb-0.5">Hướng dẫn in và sử dụng thẻ tại nhà xưởng:</h3>
+      <p>1. Chọn ngày bạn muốn học (hoặc in cả tuần) rồi bấm <strong>"In Ra Giấy / Xuất PDF"</strong> (Khổ A4, tỷ lệ 100%).</p>
+      <p>2. Dùng kéo cắt theo các đường nét đứt <strong>[ ✂️ - - - ]</strong>.</p>
+      <p>3. Nhét chiếc thẻ vừa cắt vào ngay <strong>sau thẻ nhân viên / thẻ chấm công</strong>. Khi đứng trước máy hoặc gặp sếp, chỉ cần liếc mắt nhìn vào thẻ là bắn tiếng Trung trôi chảy!</p>
+    </div>
+  </div>
+
+  <!-- Cards Container (Printed Layout) -->
+  <main id="printContainer" class="max-w-[210mm] mx-auto flex flex-wrap justify-between gap-y-4 gap-x-2">
+    <!-- Populated dynamically -->
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const data = window.CURRICULUM_DATA;
+      if (!data) return;
+
+      const selectDay = document.getElementById('selectDayFilter');
+      const checkSpicy = document.getElementById('checkSpicy');
+
+      // Populate daily options
+      data.days.forEach(d => {
+        const opt = document.createElement('option');
+        opt.value = d.day;
+        opt.textContent = `Ngày ${d.day}: ${d.titleVi} (${d.titleZh})`;
+        selectDay.appendChild(opt);
+      });
+
+      function renderCards() {
+        const container = document.getElementById('printContainer');
+        container.innerHTML = '';
+
+        const filterVal = selectDay.value;
+        const showSpicy = checkSpicy.checked;
+
+        let filteredDays = [];
+        if (filterVal === 'all') {
+          filteredDays = data.days;
+        } else if (filterVal === 'phase1') {
+          filteredDays = data.days.filter(d => d.phase === 1);
+        } else if (filterVal === 'phase2') {
+          filteredDays = data.days.filter(d => d.phase === 2);
+        } else if (filterVal === 'phase3') {
+          filteredDays = data.days.filter(d => d.phase === 3);
+        } else {
+          const dayNum = parseInt(filterVal);
+          filteredDays = data.days.filter(d => d.day === dayNum);
+        }
+
+        filteredDays.forEach(day => {
+          day.sentences.forEach((s, idx) => {
+            const card = document.createElement('div');
+            card.className = 'badge-card bg-white border-2 border-dashed border-slate-400 rounded-xl p-2.5 flex flex-col justify-between shadow-sm relative overflow-hidden';
+            
+            // Header: Day & ID
+            const phaseTag = day.phase === 1 ? 'Sinh Tồn' : (day.phase === 2 ? 'Chủ Động' : 'Thăng Chức');
+            
+            card.innerHTML = `
+              <!-- Card Top Header -->
+              <div class="flex items-center justify-between text-[10px] text-slate-500 border-b border-slate-200 pb-1 mb-1">
+                <span class="font-extrabold uppercase text-red-700">Day ${day.day} • ${phaseTag}</span>
+                <span class="font-bold">#${idx + 1} • ${s.hanViet}</span>
+                <span class="text-[9px] text-slate-400 font-mono">Zin.Zone • Zalo: 0822.262.695</span>
+              </div>
+
+              <!-- Main Content: Big Hanzi & Phonetics -->
+              <div class="text-center my-auto">
+                <div class="font-han font-black text-2xl text-slate-950 tracking-wider">
+                  ${s.zh}
+                </div>
+                <div class="text-xs font-mono text-slate-600 mt-0.5">
+                  ${s.pinyin}
+                </div>
+                <div class="inline-block mt-1 px-2 py-0.5 rounded bg-slate-900 text-white font-black text-xs tracking-wide">
+                  🗣️ ${s.viBoi}
+                </div>
+                <div class="text-[11px] font-bold text-slate-800 mt-1">
+                  💡 ${s.viMeaning}
+                </div>
+              </div>
+
+              <!-- Card Bottom: Spicy Hook & Tactic -->
+              <div class="border-t border-slate-200 pt-1 text-[9.5px] leading-tight text-slate-600">
+                ${showSpicy ? `
+                  <div class="truncate text-red-700 font-medium">
+                    🔥 <strong>Mẹo 18+:</strong> ${s.spicyHook.substring(0, 52)}...
+                  </div>
+                ` : ''}
+                <div class="truncate text-slate-600 font-semibold mt-0.5">
+                  🎯 <strong>Khi dùng:</strong> ${s.bossTactic.substring(0, 48)}...
+                </div>
+              </div>
+            `;
+
+            container.appendChild(card);
+          });
+        });
+      }
+
+      selectDay.onchange = renderCards;
+      checkSpicy.onchange = renderCards;
+
+      renderCards();
+    });
+  </script>
+</body>
+</html>

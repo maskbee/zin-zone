@@ -1,0 +1,398 @@
+[
+  {
+    "id": "slot_frame_1_0",
+    "text": "我想请假",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_1_1",
+    "text": "我想加班",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_1_2",
+    "text": "我想喝水",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_1_3",
+    "text": "我想上厕所",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_1_4",
+    "text": "我想换班",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_1_5",
+    "text": "我想当组长",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_1_6",
+    "text": "我想多学点",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_1_7",
+    "text": "我想重做",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_2_0",
+    "text": "有没有物料？",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_2_1",
+    "text": "有没有螺丝？",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_2_2",
+    "text": "有没有手套？",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_2_3",
+    "text": "有没有胶水？",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_2_4",
+    "text": "有没有扳手？",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_2_5",
+    "text": "有没有纸箱？",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_2_6",
+    "text": "有没有奖金？",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_2_7",
+    "text": "有没有样品？",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_3_0",
+    "text": "这个多少个？",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_3_1",
+    "text": "这个多少箱？",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_3_2",
+    "text": "这个多少公斤？",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_3_3",
+    "text": "这个多少米？",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_3_4",
+    "text": "这个多少双？",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_3_5",
+    "text": "这个多少包？",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_3_6",
+    "text": "这个多少钱？",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_4_0",
+    "text": "因为机器坏了，所以需要维修",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_4_1",
+    "text": "因为没有物料，所以我去仓库领",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_4_2",
+    "text": "因为身体不舒服，所以我想请假",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_4_3",
+    "text": "因为零件卡住了，所以还要半小时",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_4_4",
+    "text": "因为大家很努力，所以今天超产了",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_5_0",
+    "text": "请帮我看看这个",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_5_1",
+    "text": "请帮我叫维修工",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_5_2",
+    "text": "请帮我搬过去",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_5_3",
+    "text": "请帮我拿一下扳手",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_5_4",
+    "text": "请帮我签字",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "slot_frame_5_5",
+    "text": "请帮我检查一下",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "crisis_boss_1",
+    "text": "快点搞！下班前完不成扣钱！",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "crisis_ans_1_0",
+    "text": "好好，马上搞定！放心！",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "crisis_ans_1_1",
+    "text": "我不知道，去问别人吧。",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "crisis_ans_1_2",
+    "text": "我不干了，太累了。",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "crisis_boss_2",
+    "text": "搞什么鬼？！这批货怎么全是不良品？！",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "crisis_ans_2_0",
+    "text": "对不起主管，物料卡住了，我马上改！",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "crisis_ans_2_1",
+    "text": "不是我的错，是上个班次的！",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "crisis_ans_2_2",
+    "text": "坏了就扔掉呗。",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "crisis_boss_3",
+    "text": "行不行啊？不行我就换别人做了！",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "crisis_ans_3_0",
+    "text": "行！绝对没问题，交给我！",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "crisis_ans_3_1",
+    "text": "随便你换谁。",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "crisis_ans_3_2",
+    "text": "我太难了，做不了。",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "crisis_boss_4",
+    "text": "听懂了没有？！重复一遍！",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "crisis_ans_4_0",
+    "text": "听懂了！先停机断电，再找维修！",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "crisis_ans_4_1",
+    "text": "声音太小没听清。",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "crisis_ans_4_2",
+    "text": "我不懂中文。",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "crisis_boss_5",
+    "text": "二号线缺人，你现在过去支援！",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "crisis_ans_5_0",
+    "text": "好的老大！我交接完马上过去！",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "crisis_ans_5_1",
+    "text": "我不去，我这边没做完。",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "crisis_ans_5_2",
+    "text": "加钱我就去。",
+    "type": "sentences",
+    "exists": false
+  },
+  {
+    "id": "rune_1",
+    "text": "休",
+    "type": "words",
+    "exists": false
+  },
+  {
+    "id": "rune_2",
+    "text": "明",
+    "type": "words",
+    "exists": false
+  },
+  {
+    "id": "rune_3",
+    "text": "好",
+    "type": "words",
+    "exists": false
+  },
+  {
+    "id": "rune_4",
+    "text": "搞",
+    "type": "words",
+    "exists": false
+  },
+  {
+    "id": "cognate_1",
+    "text": "态度",
+    "type": "words",
+    "exists": false
+  },
+  {
+    "id": "cognate_2",
+    "text": "准备",
+    "type": "words",
+    "exists": false
+  },
+  {
+    "id": "cognate_3",
+    "text": "安全",
+    "type": "words",
+    "exists": false
+  },
+  {
+    "id": "cognate_4",
+    "text": "注意",
+    "type": "words",
+    "exists": false
+  },
+  {
+    "id": "cognate_5",
+    "text": "工厂",
+    "type": "words",
+    "exists": false
+  },
+  {
+    "id": "cognate_6",
+    "text": "产品",
+    "type": "words",
+    "exists": false
+  },
+  {
+    "id": "cognate_7",
+    "text": "组长",
+    "type": "words",
+    "exists": false
+  },
+  {
+    "id": "cognate_8",
+    "text": "总监",
+    "type": "words",
+    "exists": false
+  }
+]
