@@ -1,7 +1,9 @@
-// tools/bind_android.js - Zin Zone Android Device Provisioner & Authentic Binding Engine
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
+
+// Ensure working directory is project root
+process.chdir(path.resolve(__dirname, '..'));
 
 console.log('\x1b[36m=====================================================================\x1b[0m');
 console.log('\x1b[33m     💎 ZIN ZONE - 安卓设备一键专属绑定与正品激活工具 💎\x1b[0m');
