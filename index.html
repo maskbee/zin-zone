@@ -3084,7 +3084,7 @@
     }
 
     // "Tam Đoạn Ma Âm" - 3-Beat Echo Repeat Mode for Vocabulary Word Cards
-    // Beat 1 (0.9x standard) -> 100ms pause -> Beat 2 (0.8x tone clarify) -> 100ms pause -> Beat 3 (1.0x confident shadow)
+    // Beat 1 (0.9x standard) -> 50ms pause -> Beat 2 (0.8x tone clarify) -> 50ms pause -> Beat 3 (1.0x confident shadow)
     function speakWordTriple(text, cardEl = null, wordId = null) {
       if (!text) return;
       const cleanText = extractPronunciationText(text);
@@ -3132,7 +3132,7 @@
           if (myLoopId !== currentLoopId) return;
           step++;
           if (step < 3) {
-            loopTimeout = setTimeout(playStep, 100); // 100ms interval between repetitions
+            loopTimeout = setTimeout(playStep, 50); // 50ms interval between repetitions
           } else {
             playStep();
           }
@@ -3905,7 +3905,7 @@
     // --- PWA Service Worker Registration & Offline Cache ---
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=20261015_v28').then((reg) => {
+        navigator.serviceWorker.register('./sw.js?v=20261015_v29').then((reg) => {
           console.log('[Zin Zone] ServiceWorker registered with scope:', reg.scope);
           reg.update();
         }).catch((err) => {

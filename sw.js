@@ -1,5 +1,5 @@
 // Service Worker for Zin.Zone Offline App & OTA Updates
-const CACHE_NAME = 'zin-zone-v28-word-repeat-100ms';
+const CACHE_NAME = 'zin-zone-v29-word-repeat-50ms';
 const STATIC_ASSETS = [
   './data/curriculum.js',
   './data/audio_manifest.js',
