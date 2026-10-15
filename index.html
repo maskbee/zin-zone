@@ -6,15 +6,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>ZIN.ZONE | Thần Ngữ Tu Chân Ký & Thăng Chức Công Xưởng</title>
   
+  <!-- Critical Instant Dark Viewport Shield - Eliminates White Screen on iOS & All Devices -->
+  <style>
+    :root, html, body {
+      background-color: #070b14 !important;
+      background: #070b14 !important;
+      color: #f8fafc;
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      -webkit-tap-highlight-color: transparent;
+    }
+  </style>
+
   <!-- PWA & Apple WebClip App Meta Tags -->
-  <link rel="manifest" href="manifest.json?v=20261012">
-  <meta name="theme-color" content="#020617">
+  <link rel="manifest" href="manifest.json?v=20261015">
+  <meta name="theme-color" content="#070b14">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="Zin Zone">
-  <link rel="apple-touch-icon" href="icons/icon-180.png?v=20261012">
-  <link rel="icon" type="image/png" href="icons/icon-192.png?v=20261012">
-  <link rel="mask-icon" href="icons/icon-192.png?v=20261012" color="#f59e0b">
+  <link rel="apple-touch-icon" href="icons/icon-180.png?v=20261015">
+  <link rel="icon" type="image/png" href="icons/icon-192.png?v=20261015">
+  <link rel="mask-icon" href="icons/icon-192.png?v=20261015" color="#f59e0b">
+  <link rel="apple-touch-startup-image" href="icons/icon-512.png">
 
   <!-- Tailwind CSS -->
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
@@ -129,6 +143,51 @@
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-amber-500 selection:text-black overflow-x-hidden w-full max-w-full pb-16 md:pb-0">
+
+  <!-- Instant Native-Feel iOS & Web App Splash Screen (0ms white-screen elimination) -->
+  <div id="iosAppSplash" style="position:fixed; inset:0; z-index:999998; background:linear-gradient(180deg, #070b14 0%, #0e172a 50%, #060913 100%); display:flex; flex-direction:column; align-items:center; justify-content:space-between; padding:max(48px, env(safe-area-inset-top, 48px)) 20px max(30px, env(safe-area-inset-bottom, 30px)); font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; pointer-events:auto; transition:opacity 0.4s ease-out;">
+    
+    <!-- Top VIP Badge -->
+    <div style="background:#1c1408; border:1px solid #f59e0b; border-radius:9999px; padding:6px 16px; box-shadow:0 0 15px rgba(245,158,11,0.25);">
+      <span style="color:#fbbf24; font-size:11px; font-weight:800; letter-spacing:0.5px;">✨ BẢN QUYỀN CHÍNH HÃNG KÈM MÁY • 1.500.000đ</span>
+    </div>
+
+    <!-- Center Hero -->
+    <div style="display:flex; flex-direction:column; align-items:center; text-align:center; width:100%; max-width:340px;">
+      <!-- 3D Glowing App Icon Frame -->
+      <div style="width:104px; height:104px; border-radius:26px; background:#0f172a; border:2px solid #38bdf8; display:flex; align-items:center; justify-content:center; box-shadow:0 0 30px rgba(56,189,248,0.35); margin-bottom:18px;">
+        <img src="icons/icon-180.png" alt="Zin Zone" style="width:88px; height:88px; border-radius:20px; object-fit:contain;">
+      </div>
+
+      <!-- App Title -->
+      <div style="color:#fbbf24; font-size:30px; font-weight:900; letter-spacing:4px; line-height:1.2;">ZIN ZONE</div>
+      
+      <!-- Slogan -->
+      <div style="color:#38bdf8; font-size:13px; font-weight:800; margin-top:6px; letter-spacing:1px;">⚡ TU TIÊN THẦN NGỮ • 21 NGÀY THĂNG CHỨC</div>
+      
+      <!-- Subtitle -->
+      <div style="color:#94a3b8; font-size:11.5px; margin-top:6px; max-width:280px; line-height:1.4;">Hán Ngữ Giao Tiếp & Quản Lý Nhà Xưởng Dành Cho Người Đi Làm</div>
+
+      <!-- Tech Progress Bar -->
+      <div style="width:180px; height:4px; background:#1e293b; border-radius:9999px; margin-top:28px; overflow:hidden; position:relative;">
+        <div id="iosSplashProgressBar" style="height:100%; width:20%; background:linear-gradient(90deg, #f59e0b, #fbbf24); border-radius:9999px; transition:width 0.4s ease;"></div>
+      </div>
+      <div style="color:#64748b; font-size:11px; margin-top:10px; font-family:monospace;">Đang khởi động hệ thống tu tiên...</div>
+    </div>
+
+    <!-- Bottom Footer -->
+    <div style="text-align:center; border-top:1px solid rgba(51,65,85,0.4); width:100%; max-width:320px; padding-top:12px;">
+      <div style="color:#64748b; font-size:11px;">Đồng hành cùng công nhân & kỹ thuật viên KCN</div>
+      <div style="color:#475569; font-size:10px; font-weight:700; margin-top:3px; letter-spacing:0.5px;">ZIN ZONE FACTORY ENGINE • v2.2.0 VIP</div>
+    </div>
+
+  </div>
+  <script>
+    if (navigator.userAgent.indexOf('ZinZoneApp') !== -1) {
+      var _s = document.getElementById('iosAppSplash');
+      if (_s) _s.remove();
+    }
+  </script>
 
   <!-- Interactive Particle Canvas for Coins & Stars Burst -->
   <canvas id="particleCanvas" class="fixed inset-0 pointer-events-none z-[9999]"></canvas>
@@ -3900,12 +3959,33 @@
         const btnInstall = document.getElementById('btnInstallApp');
         if (btnInstall) btnInstall.style.display = 'none';
       }
+
+      // Smooth dismiss of instant splash screen
+      if (typeof dismissIosSplash === 'function') {
+        dismissIosSplash();
+      }
     });
+
+    function dismissIosSplash() {
+      const splash = document.getElementById('iosAppSplash');
+      const bar = document.getElementById('iosSplashProgressBar');
+      if (!splash || splash.dataset.dismissed) return;
+      splash.dataset.dismissed = 'true';
+      if (bar) bar.style.width = '100%';
+      setTimeout(() => {
+        splash.style.opacity = '0';
+        setTimeout(() => {
+          if (splash && splash.parentNode) splash.parentNode.removeChild(splash);
+        }, 400);
+      }, 180);
+    }
+    // Safety fallback in case DOMContentLoaded or an external script takes too long
+    setTimeout(dismissIosSplash, 2000);
 
     // --- PWA Service Worker Registration & Offline Cache ---
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=20261015_v29').then((reg) => {
+        navigator.serviceWorker.register('./sw.js?v=20261015_v30').then((reg) => {
           console.log('[Zin Zone] ServiceWorker registered with scope:', reg.scope);
           reg.update();
         }).catch((err) => {

@@ -1,21 +1,35 @@
 // Service Worker for Zin.Zone Offline App & OTA Updates
-const CACHE_NAME = 'zin-zone-v29-word-repeat-50ms';
+const CACHE_NAME = 'zin-zone-v30-ios-instant-launch';
 const STATIC_ASSETS = [
+  './',
+  './index.html',
   './data/curriculum.js',
   './data/audio_manifest.js',
   './pocket-cards.html',
   './manifest.json',
   './icon-192.png',
   './icon-512.png',
+  './icons/icon-180.png',
   './icons/icon-192.png',
   './icons/icon-512.png'
 ];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
+    caches.open(CACHE_NAME).then(async (cache) => {
       console.log('[Zin Zone SW] Pre-caching offline curriculum & assets...');
-      return cache.addAll(STATIC_ASSETS);
+      try {
+        await cache.addAll(STATIC_ASSETS);
+      } catch (err) {
+        console.warn('[Zin Zone SW] Partial cache failure, retrying individually:', err);
+        for (const asset of STATIC_ASSETS) {
+          try {
+            await cache.add(asset);
+          } catch (e) {
+            console.error('[Zin Zone SW] Failed to cache asset:', asset, e);
+          }
+        }
+      }
     }).then(() => self.skipWaiting())
   );
 });
@@ -30,31 +44,22 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// network-first: fresh HTML / manifest / icons so PWA icon and page updates take effect immediately
-async function networkFirst(request) {
-  const cache = await caches.open(CACHE_NAME);
-  try {
-    const networkResponse = await fetch(request);
-    if (networkResponse && networkResponse.status === 200) {
-      cache.put(request, networkResponse.clone());
-    }
-    return networkResponse;
-  } catch (err) {
-    const cachedResponse = await cache.match(request);
-    return cachedResponse || Response.error();
-  }
-}
-
-// stale-while-revalidate: serve cached immediately, update in background (static assets)
+// Fast stale-while-revalidate with ignoreSearch for instant 0ms launch & background update
 async function staleWhileRevalidate(request) {
   const cache = await caches.open(CACHE_NAME);
-  const cachedResponse = await cache.match(request);
+  // Match with ignoreSearch: true so requests like ?mode=app&token=... hit the cached index.html immediately!
+  let cachedResponse = await cache.match(request, { ignoreSearch: true });
+  if (!cachedResponse && request.mode === 'navigate') {
+    cachedResponse = (await cache.match('./index.html')) || (await cache.match('./'));
+  }
+
   const fetchPromise = fetch(request).then((networkResponse) => {
     if (networkResponse && networkResponse.status === 200) {
       cache.put(request, networkResponse.clone());
     }
     return networkResponse;
   }).catch(() => cachedResponse);
+
   return cachedResponse || fetchPromise;
 }
 
@@ -71,12 +76,6 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  const isNavigate = event.request.mode === 'navigate';
-  const isLiveDoc = url.pathname === '/' || url.pathname === '/index.html' ||
-                    url.pathname.endsWith('/manifest.json') ||
-                    url.pathname.startsWith('/icons/');
-
-  event.respondWith(
-    isNavigate || isLiveDoc ? networkFirst(event.request) : staleWhileRevalidate(event.request)
-  );
+  // Handle all requests with staleWhileRevalidate for instant 0-second launch
+  event.respondWith(staleWhileRevalidate(event.request));
 });
