@@ -1,5 +1,5 @@
 // Service Worker for Zin.Zone Offline App & OTA Updates
-const CACHE_NAME = 'zin-zone-v30-ios-instant-launch';
+const CACHE_NAME = 'zin-zone-v31-apple-splash-logo';
 const STATIC_ASSETS = [
   './',
   './index.html',
@@ -11,7 +11,16 @@ const STATIC_ASSETS = [
   './icon-512.png',
   './icons/icon-180.png',
   './icons/icon-192.png',
-  './icons/icon-512.png'
+  './icons/icon-512.png',
+  './icons/apple-splash-generic.png',
+  './icons/apple-splash-1170-2532.png',
+  './icons/apple-splash-1290-2796.png',
+  './icons/apple-splash-1284-2778.png',
+  './icons/apple-splash-828-1792.png',
+  './icons/apple-splash-1125-2436.png',
+  './icons/apple-splash-1242-2688.png',
+  './icons/apple-splash-750-1334.png',
+  './icons/apple-splash-1080-2340.png'
 ];
 
 self.addEventListener('install', (event) => {
