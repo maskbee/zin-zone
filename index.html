@@ -260,11 +260,44 @@
   <script defer src="data/audio_manifest.js?v=20261015_v31"></script>
   <style>
     body {
-      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, -webkit-system-font, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
       -webkit-touch-callout: none;
       -webkit-user-select: none;
       user-select: none;
       -webkit-tap-highlight-color: transparent;
+      text-rendering: optimizeLegibility;
+    }
+    /* iOS Safari Clean Custom Select Dropdowns */
+    select {
+      -webkit-appearance: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23f59e0b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 0.55rem center;
+      background-size: 0.85em 0.85em;
+      padding-right: 1.8rem !important;
+    }
+    /* iOS Input Focus Zoom Prevention (<16px causes Safari page zoom distortion) */
+    @media screen and (max-width: 767px) {
+      input[type="text"], input[type="search"], textarea, select {
+        font-size: 16px !important;
+      }
+    }
+    /* Zero-lag instant touch feedback on iOS */
+    button, a, [role="button"], .cursor-pointer {
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+    /* iOS WebKit Backdrop Blur Hardware Support */
+    .backdrop-blur-xl {
+      -webkit-backdrop-filter: blur(24px);
+      backdrop-filter: blur(24px);
+    }
+    .backdrop-blur-md {
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
     }
     input, textarea {
       -webkit-user-select: auto;
@@ -1555,13 +1588,13 @@
         </div>
       </div>
 
-      <!-- 5 Core Sentences -->
-      <div>
-        <div class="flex items-center justify-between mb-4">
-          <h3 class="text-lg font-black text-white flex items-center gap-2">
+            <!-- 5 Core Sentences (Encapsulated in Rounded 2XL Card) -->
+      <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-lg">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+          <h3 class="text-base sm:text-lg font-black text-white flex items-center gap-2">
             <span class="w-2.5 h-6 rounded bg-red-600 inline-block"></span>
             <span>5 Câu Khẩu Quyết Cốt Lõi</span>
-            <span class="text-xs font-normal text-slate-400">(Bấm loa để nghe, bấm thẻ xem mẹo 18+)</span>
+            <span class="text-xs font-normal text-slate-400 hidden sm:inline">(Bấm loa để nghe, bấm thẻ xem mẹo 18+)</span>
           </h3>
           <span class="text-xs text-amber-400 font-semibold bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">🔥 Siêu Trọng Điểm</span>
         </div>
@@ -1714,20 +1747,20 @@
           <!-- Unique Referral Link Box -->
           <div class="mt-6 bg-slate-950 border border-emerald-500/50 rounded-2xl p-4 max-w-xl">
             <div class="text-xs text-slate-400 font-semibold mb-1">Mã Giới Thiệu Của Bạn (Đọc mã này khi bạn bè mua):</div>
-            <div class="flex items-center justify-between gap-2">
+            <div class="flex flex-wrap items-center justify-between gap-2.5">
               <span id="displayRefCode" class="font-mono text-xl sm:text-2xl font-black text-amber-400 tracking-wider">ZIN-8899</span>
-              <div class="flex items-center gap-2">
-                <button onclick="copyReferralLink()" class="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition flex items-center gap-1.5 shadow">
+              <div class="flex items-center gap-2 flex-wrap">
+                <button onclick="copyReferralLink()" class="px-3 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition flex items-center gap-1.5 shadow">
                   <span>📋</span>
                   <span>Sao Chép Link</span>
                 </button>
-                <button onclick="shareToZalo()" class="px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition flex items-center gap-1.5 shadow">
+                <button onclick="shareToZalo()" class="px-3 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition flex items-center gap-1.5 shadow">
                   <span>💬</span>
                   <span>Gửi Zalo</span>
                 </button>
               </div>
             </div>
-            <div class="text-[11px] text-slate-500 mt-2">Link giới thiệu: <span id="displayRefUrl" class="text-slate-300">https://zin.zone?ref=ZIN-8899</span></div>
+            <div class="text-[11px] text-slate-500 mt-2 break-all">Link giới thiệu: <span id="displayRefUrl" class="text-slate-300 font-mono">https://zin.zone?ref=ZIN-8899</span></div>
           </div>
         </div>
 
@@ -1861,34 +1894,37 @@
   <!-- ========================================================================= -->
   <section id="section-jobs" class="tab-section hidden max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 py-5 sm:py-8 w-full flex-1">
     
-    <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
-      <div>
-        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30 mb-2">
-          <span>💼</span>
-          <span>KÊNH ĐẶC QUYỀN NỘI BỘ DÀNH CHO KHÁCH HÀNG ZIN.ZONE</span>
+    <!-- Hero Jobs Banner (Rounded 3XL Card) -->
+    <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-indigo-950/40 to-slate-950 border border-indigo-500/30 p-5 sm:p-8 shadow-2xl mb-8">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5">
+        <div>
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-500/10 text-amber-400 border border-amber-500/30 mb-2">
+            <span>💼</span>
+            <span>KÊNH ĐẶC QUYỀN NỘI BỘ DÀNH CHO KHÁCH HÀNG ZIN.ZONE</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight">
+            Việc Làm Tổ Trưởng & Quản Lý Nhà Máy Hoa Kiều
+          </h2>
+          <p class="text-xs text-slate-400 mt-1">Cập nhật trực tiếp từ phòng nhân sự Foxconn, Luxshare, Goertek, Compal...</p>
         </div>
-        <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight">
-          Việc Làm Tổ Trưởng & Quản Lý Nhà Máy Hoa Kiều
-        </h2>
-        <p class="text-xs text-slate-400 mt-1">Cập nhật trực tiếp từ phòng nhân sự Foxconn, Luxshare, Goertek, Compal...</p>
+
+        <div class="flex items-center gap-2 text-xs shrink-0">
+          <span class="text-slate-400 whitespace-nowrap">Khu vực:</span>
+          <select id="jobRegionSelect" onchange="filterJobsByRegion()" class="bg-slate-950 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none cursor-pointer max-w-[240px] sm:max-w-none">
+            <option value="all">Tất cả khu vực (Bắc Ninh, Bắc Giang, Bình Dương)</option>
+            <option value="bg">Bắc Giang (Vân Trung, Quang Châu, Đình Trám)</option>
+            <option value="bn">Bắc Ninh (Quế Võ, VSIP, Yên Phong)</option>
+            <option value="bd">Bình Dương / Đồng Nai (VSIP 1, VSIP 2)</option>
+          </select>
+        </div>
       </div>
 
-      <div class="flex items-center gap-2 text-xs">
-        <span class="text-slate-400">Khu vực:</span>
-        <select id="jobRegionSelect" onchange="filterJobsByRegion()" class="bg-slate-900 border border-slate-700 text-white rounded-xl px-3 py-1.5 text-xs outline-none cursor-pointer">
-          <option value="all">Tất cả khu vực (Bắc Ninh, Bắc Giang, Bình Dương)</option>
-          <option value="bg">Bắc Giang (Vân Trung, Quang Châu, Đình Trám)</option>
-          <option value="bn">Bắc Ninh (Quế Võ, VSIP, Yên Phong)</option>
-          <option value="bd">Bình Dương / Đồng Nai (VSIP 1, VSIP 2)</option>
-        </select>
-      </div>
-    </div>
-
-    <!-- Exclusive Banner -->
-    <div class="mb-6 p-4 rounded-2xl bg-gradient-to-r from-amber-950/40 via-slate-900 to-emerald-950/30 border border-amber-500/30 flex items-center gap-3">
-      <span class="text-2xl">🎯</span>
-      <div class="text-xs text-slate-300">
-        <strong class="text-amber-400">Bí Quyết Ứng Tuyển Thành Công:</strong> Toàn bộ các vị trí dưới đây đều ưu tiên ứng viên biết giao tiếp tiếng Trung cơ bản. Bạn chỉ cần hoàn thành 21 ngày học trên chiếc máy này là đã đủ trình độ nhận mức lương <span class="text-emerald-400 font-bold">14.000.000đ - 23.000.000đ</span>!
+      <!-- Exclusive Insider Tip Capsule -->
+      <div class="p-4 rounded-2xl bg-gradient-to-r from-amber-950/40 via-slate-950 to-emerald-950/30 border border-amber-500/30 flex items-center gap-3">
+        <span class="text-2xl shrink-0">🎯</span>
+        <div class="text-xs text-slate-300 leading-relaxed">
+          <strong class="text-amber-400">Bí Quyết Ứng Tuyển Thành Công:</strong> Toàn bộ các vị trí dưới đây đều ưu tiên ứng viên biết giao tiếp tiếng Trung cơ bản. Bạn chỉ cần hoàn thành 21 ngày học trên chiếc máy này là đã đủ trình độ nhận mức lương <span class="text-emerald-400 font-bold whitespace-nowrap">14.000.000đ - 23.000.000đ</span>!
+        </div>
       </div>
     </div>
 
@@ -1897,7 +1933,7 @@
 
     <!-- Job Application Modal -->
     <div id="jobModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden items-center justify-center p-4" style="display: none;" onclick="if(event.target === this) closeJobModal();">
-      <div class="bg-slate-900 border border-amber-500/40 rounded-3xl max-w-lg w-full p-6 shadow-2xl relative max-h-[85dvh] max-h-[85vh] overflow-y-auto">
+      <div class="bg-slate-900 border border-amber-500/40 rounded-3xl max-w-lg w-full p-6 shadow-2xl relative max-h-[85dvh] max-h-[calc(100dvh-2.5rem)] overflow-y-auto">
         <button onclick="closeJobModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">✕</button>
         
         <div class="flex items-center gap-2 mb-2">
@@ -4714,11 +4750,11 @@
           <div class="p-3.5 sm:p-5 flex flex-col gap-3">
             <!-- Header bar: sentence index & actions (guarantees zero squeezed text on 360px-430px screens) -->
             <div class="flex items-center justify-between gap-2 border-b border-slate-800/60 pb-2.5">
-              <div class="flex items-center gap-2">
+              <div class="flex items-center gap-2 min-w-0">
                 <span class="w-6 h-6 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center font-black text-xs text-slate-300 shrink-0">
                   ${idx + 1}
                 </span>
-                <span class="text-xs font-bold text-amber-400">Khẩu Quyết #${idx + 1}</span>
+                <span class="text-xs font-bold text-amber-400 truncate">Khẩu Quyết #${idx + 1}</span>
               </div>
 
               <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
@@ -5629,7 +5665,7 @@
 
   <!-- Modal: Step-by-Step Install Guide (For iOS Safari or Android fallback) -->
   <div id="modalInstallGuide" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md hidden items-center justify-center p-4" style="display: none;" onclick="if(event.target === this) closeInstallGuide();">
-    <div class="bg-slate-900 border-2 border-amber-500/40 rounded-3xl max-w-md w-full p-6 shadow-2xl relative text-center max-h-[85dvh] max-h-[85vh] overflow-y-auto">
+    <div class="bg-slate-900 border-2 border-amber-500/40 rounded-3xl max-w-md w-full p-6 shadow-2xl relative text-center max-h-[85dvh] max-h-[calc(100dvh-2.5rem)] overflow-y-auto">
       <button onclick="closeInstallGuide()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">✕</button>
 
       <img src="icons/icon-192.png?v=6" alt="Zin Zone App" class="w-20 h-20 rounded-2xl mx-auto shadow-2xl border-2 border-amber-400/80 object-cover mb-4">
@@ -5729,7 +5765,7 @@
 
   <!-- Modal: Daily Mystery Chest (Gacha Opening) -->
   <div id="modalMysteryChest" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden items-center justify-center p-4" style="display: none;" onclick="if(event.target === this) closeMysteryChestModal();">
-    <div class="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-amber-500/50 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative text-center max-h-[85dvh] max-h-[85vh] overflow-y-auto">
+    <div class="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-amber-500/50 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative text-center max-h-[85dvh] max-h-[calc(100dvh-2.5rem)] overflow-y-auto">
       <button onclick="closeMysteryChestModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">✕</button>
 
       <!-- Ambient Glow Behind Chest -->
@@ -5787,7 +5823,7 @@
 
   <!-- Modal: Faction Wars (Đại Chiến 3 Đại Quân Đoàn KCN) -->
   <div id="modalFactionWars" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden items-center justify-center p-4" style="display: none;" onclick="if(event.target === this) closeFactionModal();">
-    <div class="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-cyan-500/40 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[85dvh] max-h-[85vh] overflow-y-auto">
+    <div class="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-cyan-500/40 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[85dvh] max-h-[calc(100dvh-2.5rem)] overflow-y-auto">
       <button onclick="closeFactionModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">✕</button>
 
       <div class="text-center mb-6">
@@ -5863,7 +5899,7 @@
 
   <!-- Modal: Player Profile & Inventory (Hồ Sơ Nhân Vật & Túi Đồ) -->
   <div id="modalPlayerProfile" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden items-center justify-center p-4" style="display: none;" onclick="if(event.target === this) closePlayerProfileModal();">
-    <div class="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-amber-500/40 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[85dvh] max-h-[85vh] overflow-y-auto">
+    <div class="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-amber-500/40 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[85dvh] max-h-[calc(100dvh-2.5rem)] overflow-y-auto">
       <button onclick="closePlayerProfileModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">✕</button>
 
       <!-- Player Header Card -->
@@ -5949,7 +5985,7 @@
 
   <!-- Modal: Privacy Policy (Nghị định 13/2023/NĐ-CP) -->
   <div id="modalPrivacyPolicy" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden items-center justify-center p-4" style="display: none;" onclick="if(event.target === this) closePrivacyModal();">
-    <div class="bg-gradient-to-b from-slate-900 to-slate-950 border border-slate-700 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[85dvh] max-h-[85vh] flex flex-col">
+    <div class="bg-gradient-to-b from-slate-900 to-slate-950 border border-slate-700 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[85dvh] max-h-[calc(100dvh-2.5rem)] flex flex-col">
       <button onclick="closePrivacyModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">✕</button>
       
       <div class="flex items-center gap-2 mb-3">
@@ -5978,7 +6014,7 @@
 
   <!-- Modal: Terms of Service (Nghị định 72/2013/NĐ-CP & 27/2018/NĐ-CP) -->
   <div id="modalTermsOfService" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden items-center justify-center p-4" style="display: none;" onclick="if(event.target === this) closeTermsModal();">
-    <div class="bg-gradient-to-b from-slate-900 to-slate-950 border border-slate-700 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[85dvh] max-h-[85vh] flex flex-col">
+    <div class="bg-gradient-to-b from-slate-900 to-slate-950 border border-slate-700 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[85dvh] max-h-[calc(100dvh-2.5rem)] flex flex-col">
       <button onclick="closeTermsModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">✕</button>
       
       <div class="flex items-center gap-2 mb-3">
@@ -6023,7 +6059,7 @@
 
   <!-- Modal: Khóa Bản Quyền Quà Tặng Kèm Máy Chính Hãng (VIP Gift License Gate) -->
   <div id="gatekeeperModal" class="fixed inset-0 z-[99999] bg-slate-950/95 backdrop-blur-xl flex items-center justify-center p-4 overflow-y-auto" style="display: none;">
-    <div class="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-amber-500/50 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative text-center my-auto">
+    <div class="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-amber-500/50 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative text-center m-auto">
       
       <!-- Logo & Gold Glow -->
       <div class="relative mx-auto mb-4 w-20 h-20">
@@ -6100,7 +6136,7 @@
 
   <!-- Modal: Kết Quả Tra Cứu Bản Quyền Điện Tử & Tải Tài Liệu VIP (100% Digital Lean Verification) -->
   <div id="modalDeviceVerificationResult" class="fixed inset-0 z-[100002] bg-slate-950/90 backdrop-blur-md hidden items-center justify-center p-4 overflow-y-auto" style="display: none;" onclick="if(event.target === this) closeDeviceVerificationModal();">
-    <div class="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-emerald-500/50 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative text-center my-auto">
+    <div class="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-emerald-500/50 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative text-center m-auto">
       <button onclick="closeDeviceVerificationModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">✕</button>
 
       <div class="w-16 h-16 rounded-2xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center text-3xl mx-auto mb-3 shadow-lg">
@@ -6170,7 +6206,7 @@
 
   <!-- Modal: Hợp Tác Đại Lý Ủy Quyền B2B (Dành Cho Chủ Quán Điện Thoại KCN) -->
   <div id="modalDealerPartner" class="fixed inset-0 z-[100002] bg-slate-950/90 backdrop-blur-md hidden items-center justify-center p-4 overflow-y-auto" style="display: none;" onclick="if(event.target === this) closeDealerPartnerModal();">
-    <div class="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-amber-500/50 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative text-left my-auto">
+    <div class="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-amber-500/50 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative text-left m-auto">
       <button onclick="closeDealerPartnerModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">✕</button>
 
       <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-400 text-xs font-black mb-3">
@@ -6240,7 +6276,7 @@
 
   <!-- Modal: Dopamine Onboarding Splash Flow (4-Screen Dark-Gold Awakening) -->
   <div id="modalOnboardingFlow" class="fixed inset-0 z-[100005] bg-slate-950/95 backdrop-blur-xl hidden items-center justify-center p-3 sm:p-4 overflow-y-auto" style="display: none;">
-    <div class="bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 border-2 border-amber-500/40 rounded-3xl max-w-lg w-full p-5 sm:p-7 shadow-2xl relative text-left my-auto overflow-hidden">
+    <div class="bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 border-2 border-amber-500/40 rounded-3xl max-w-lg w-full p-5 sm:p-7 shadow-2xl relative text-left m-auto overflow-hidden">
       <!-- Glow effect -->
       <div class="absolute -right-16 -top-16 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
 
