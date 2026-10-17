@@ -92,12 +92,35 @@
     .glow-emerald {
       box-shadow: 0 0 30px -5px rgba(16, 185, 129, 0.4);
     }
-    /* Mobile Safe Area Insets (iPhone notch & dynamic island, Android gesture navigation) */
+    /* Mobile Safe Area Insets (iPhone notch & dynamic island, iOS Safari bottom bar, Android navigation) */
     .safe-top {
       padding-top: max(0.5rem, env(safe-area-inset-top, 0.5rem));
+      padding-top: max(0.5rem, -webkit-env(safe-area-inset-top, 0.5rem));
     }
     .safe-bottom {
-      padding-bottom: max(0.5rem, env(safe-area-inset-bottom, 0.5rem));
+      padding-bottom: max(0.75rem, env(safe-area-inset-bottom, 0.75rem));
+      padding-bottom: max(0.75rem, -webkit-env(safe-area-inset-bottom, 0.75rem));
+    }
+    .safe-left {
+      padding-left: max(0.5rem, env(safe-area-inset-left, 0.5rem));
+    }
+    .safe-right {
+      padding-right: max(0.5rem, env(safe-area-inset-right, 0.5rem));
+    }
+    /* iOS WebKit 100dvh & Fill-Available Height Hardening */
+    html {
+      height: -webkit-fill-available;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      min-height: -webkit-fill-available;
+    }
+    /* iOS Momentum Scrolling */
+    .overflow-y-auto, .overflow-x-auto {
+      -webkit-overflow-scrolling: touch;
     }
     /* Native App Mode Enhancements */
     .is-native-app #pwaInstallBanner,
@@ -159,16 +182,16 @@
     }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-amber-500 selection:text-black overflow-x-hidden w-full max-w-full pb-24 md:pb-8">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-amber-500 selection:text-black overflow-x-hidden w-full max-w-full " style="padding-bottom: max(7.5rem, calc(6rem + env(safe-area-inset-bottom, 20px)));">
 
     <!-- ========================================== -->
   <!-- ZIN ZONE 3-SCREEN INTERACTIVE STARTUP SPLASH -->
   <!-- Manual Navigation • Layer-by-Layer Energy Charge • Network-First Fallback -->
   <!-- ========================================== -->
-  <div id="appStartupSplash" style="position:fixed; inset:0; z-index:999998; background:radial-gradient(ellipse at 50% 12%, #1e1b4b 0%, #090d16 55%, #030712 100%); display:flex; flex-direction:column; align-items:center; justify-content:center; padding:max(16px, env(safe-area-inset-top, 16px)) 16px max(16px, env(safe-area-inset-bottom, 16px)); pointer-events:auto; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; overflow-y:auto; transition:opacity 0.35s ease-out, transform 0.35s ease-out;">
+  <div id="appStartupSplash" style="position:fixed; inset:0; z-index:999998; background:radial-gradient(ellipse at 50% 12%, #1e1b4b 0%, #090d16 55%, #030712 100%); display:flex; flex-direction:column; align-items:center; justify-content:flex-start; min-height:100vh; min-height:100dvh; height:100%; padding-top:max(12px, env(safe-area-inset-top, 12px)); padding-bottom:max(20px, env(safe-area-inset-bottom, 20px)); padding-left:max(12px, env(safe-area-inset-left, 12px)); padding-right:max(12px, env(safe-area-inset-right, 12px)); pointer-events:auto; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; overflow-y:auto; -webkit-overflow-scrolling:touch; transition:opacity 0.35s ease-out, transform 0.35s ease-out;">
     
-    <!-- Floating Rounded Card Container -->
-    <div class="w-full max-w-md mx-auto my-auto bg-slate-900/95 border border-amber-500/40 rounded-3xl p-4 sm:p-6 shadow-2xl backdrop-blur-2xl flex flex-col justify-between relative overflow-hidden text-center gold-pulse-box min-h-[540px]">
+    <!-- Floating Rounded Card Container (iPhone 13 & All Viewports Adaptive) -->
+    <div class="w-full max-w-md mx-auto my-auto bg-slate-900/95 border border-amber-500/40 rounded-3xl p-3.5 sm:p-5 shadow-2xl backdrop-blur-2xl flex flex-col justify-between relative overflow-hidden text-center gold-pulse-box shrink-0">
       
       <!-- Ambient Glow Blobs -->
       <div class="absolute -right-20 -top-20 w-52 h-52 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
@@ -206,12 +229,12 @@
       </div>
 
       <!-- Slide Carousel Container -->
-      <div id="splashSlidesContainer" class="w-full flex-1 flex flex-col justify-center my-auto min-h-[320px]">
+      <div id="splashSlidesContainer" class="w-full flex-1 flex flex-col justify-center my-auto py-1">
         
         <!-- ================= SLIDE 1: HUYẾT MẠCH THỨC TỈNH ================= -->
         <div id="splashSlide_1" class="w-full flex flex-col items-center animate-fadeIn">
           <!-- Artwork 1: Bloodline Ancient Han-Viet Resonance & Acoustic Bridge -->
-          <div class="w-full py-3 px-4 rounded-2xl bg-gradient-to-b from-amber-950/30 to-slate-950/60 border border-amber-500/30 mb-3.5 relative overflow-hidden shadow-inner">
+          <div class="w-full py-2 px-3 rounded-2xl bg-gradient-to-b from-amber-950/30 to-slate-950/60 border border-amber-500/30 mb-2.5 relative overflow-hidden shadow-inner">
             <div class="flex items-center justify-center gap-4 text-2xl py-1">
               <span class="p-2.5 rounded-2xl bg-amber-500/20 border border-amber-400/40 text-amber-300 shadow">🧬</span>
               <span class="text-amber-500/60 text-lg font-black animate-pulse">➔➔➔</span>
@@ -235,10 +258,10 @@
           </div>
 
           <!-- Main Vietnamese Text 1 (Exact User Copy) -->
-          <h2 class="text-amber-400 font-black text-base sm:text-lg leading-snug mb-2 px-1">
+          <h2 class="text-amber-400 font-black text-sm sm:text-base leading-snug mb-1.5 px-1">
             Người Việt mới giữ trọn tinh hoa Hán ngữ cổ! Không cần học, bạn đã biết nói sẵn 70% tiếng Trung.
           </h2>
-          <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-3 px-2">
+          <p class="text-slate-300 text-[11.5px] sm:text-xs leading-relaxed mb-2 px-1">
             Hơn 70% từ vựng tiếng Việt có gốc Hán-Việt cổ đại chuẩn xác nhất. Bạn không phải học ngoại ngữ từ đầu, bạn chỉ đang đánh thức kho báu ngôn ngữ sẵn có trong máu mình!
           </p>
           <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold">
@@ -249,7 +272,7 @@
         <!-- ================= SLIDE 2: VỨT BÚT ĐI ================= -->
         <div id="splashSlide_2" class="w-full flex flex-col items-center hidden animate-fadeIn">
           <!-- Artwork 2: Calligraphy Brush Snapped & Studio Microphone -->
-          <div class="w-full py-3 px-4 rounded-2xl bg-gradient-to-b from-cyan-950/30 to-slate-950/60 border border-cyan-500/30 mb-3.5 relative overflow-hidden shadow-inner">
+          <div class="w-full py-2 px-3 rounded-2xl bg-gradient-to-b from-cyan-950/30 to-slate-950/60 border border-cyan-500/30 mb-2.5 relative overflow-hidden shadow-inner">
             <div class="flex items-center justify-center gap-4 text-2xl py-1">
               <span class="p-2.5 rounded-2xl bg-rose-500/20 border border-rose-400/40 text-rose-300 shadow line-through opacity-80" title="Bỏ bút viết chữ">🖌️</span>
               <span class="text-cyan-400 text-lg font-black animate-bounce">⚡⚡⚡</span>
@@ -269,10 +292,10 @@
           </div>
 
           <!-- Main Vietnamese Text 2 (Exact User Copy) -->
-          <h2 class="text-cyan-400 font-black text-base sm:text-lg leading-snug mb-2 px-1">
+          <h2 class="text-cyan-400 font-black text-sm sm:text-base leading-snug mb-1.5 px-1">
             Vứt bút đi, chỉ cần biết NÓI! 80% sinh viên Trung Quốc cũng không tự viết nổi 100 chữ Hán thông dụng.
           </h2>
-          <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-3 px-2">
+          <p class="text-slate-300 text-[11.5px] sm:text-xs leading-relaxed mb-2 px-1">
             Thời đại gõ phím: 80% sinh viên Trung Quốc cũng quên cách viết tay! Trong nhà xưởng, người ta trả lương 15 triệu cho cái miệng biết nói của Tổ trưởng, không ai bắt bạn thi viết chữ đẹp!
           </p>
           <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-bold">
@@ -283,7 +306,7 @@
         <!-- ================= SLIDE 3: THÀNH NGHIỆN THÔNG QUAN ================= -->
         <div id="splashSlide_3" class="w-full flex flex-col items-center hidden animate-fadeIn">
           <!-- Artwork 3: 21 Days Drinking Water + Supervisor Crown -->
-          <div class="w-full py-3 px-4 rounded-2xl bg-gradient-to-b from-emerald-950/30 to-slate-950/60 border border-emerald-500/30 mb-3.5 relative overflow-hidden shadow-inner">
+          <div class="w-full py-2 px-3 rounded-2xl bg-gradient-to-b from-emerald-950/30 to-slate-950/60 border border-emerald-500/30 mb-2.5 relative overflow-hidden shadow-inner">
             <div class="flex items-center justify-center gap-3 text-2xl py-1">
               <span class="p-2.5 rounded-2xl bg-blue-500/20 border border-blue-400/40 text-blue-300 shadow" title="Dễ như uống nước">🥤</span>
               <span class="text-emerald-400 text-sm font-black tracking-widest uppercase">21 NGÀY ➔</span>
@@ -307,10 +330,10 @@
           </div>
 
           <!-- Main Vietnamese Text 3 (Exact User Copy) -->
-          <h2 class="text-emerald-400 font-black text-base sm:text-lg leading-snug mb-2 px-1">
+          <h2 class="text-emerald-400 font-black text-sm sm:text-base leading-snug mb-1.5 px-1">
             21 ngày nạp thẳng 3.000 từ dễ như uống nước. Học tiếng Trung gây nghiện như chơi Game!
           </h2>
-          <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-3 px-2">
+          <p class="text-slate-300 text-[11.5px] sm:text-xs leading-relaxed mb-2 px-1">
             Phản xạ âm thanh ba chiều cực tốc, combo liên hoàn, nuốt trọn 3.000 từ vựng cốt lõi nhà xưởng tự nhiên như uống 3 cốc nước mỗi ngày. Đắc đạo Tổ trưởng nhẹ tênh!
           </p>
           <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-bold">
@@ -561,7 +584,7 @@
   </div>
 
   <!-- Top Navigation & Universal Player HUD (Unified Sticky Top Rounded Card) -->
-  <div class="sticky top-0 z-40 w-full px-2.5 sm:px-4 pt-1.5 pb-1">
+  <div class="sticky top-0 z-40 w-full px-2 sm:px-4 pb-1" style="padding-top: max(6px, env(safe-area-inset-top, 6px));">
     <div class="max-w-7xl mx-auto rounded-2xl sm:rounded-3xl bg-slate-900/95 backdrop-blur-xl border border-slate-800 shadow-2xl overflow-hidden divide-y divide-slate-800/80">
       <!-- Main Navigation Header -->
       <header id="mainHeader" class="w-full px-3 sm:px-5 py-2 sm:py-2.5 flex items-center justify-between gap-1.5 sm:gap-4">
@@ -1662,7 +1685,7 @@
 
     <!-- Job Application Modal -->
     <div id="jobModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden items-center justify-center p-4" style="display: none;" onclick="if(event.target === this) closeJobModal();">
-      <div class="bg-slate-900 border border-amber-500/40 rounded-3xl max-w-lg w-full p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+      <div class="bg-slate-900 border border-amber-500/40 rounded-3xl max-w-lg w-full p-6 shadow-2xl relative max-h-[85dvh] max-h-[85vh] overflow-y-auto">
         <button onclick="closeJobModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">✕</button>
         
         <div class="flex items-center gap-2 mb-2">
@@ -2159,7 +2182,7 @@
   </footer>
 
   <!-- Mobile Bottom Floating Navigation Bar (Floating Rounded Island Dock) -->
-  <div class="md:hidden fixed bottom-3 inset-x-3 z-40 pointer-events-none safe-bottom">
+  <div class="md:hidden fixed inset-x-2.5 sm:inset-x-4 z-40 pointer-events-none" style="bottom: max(10px, calc(env(safe-area-inset-bottom, 0px) + 8px));">
     <nav class="pointer-events-auto max-w-md mx-auto bg-slate-900/95 backdrop-blur-xl border border-amber-500/30 rounded-2xl px-2 py-1.5 flex items-center justify-around text-xs shadow-2xl shadow-black/90">
       <button onclick="switchMainTab('learn')" id="mNav-learn" class="flex flex-col items-center text-amber-400 font-bold transition px-2 py-1">
         <span class="text-base">🎓</span>
@@ -2181,7 +2204,7 @@
   </div>
 
   <!-- Toast Notification Container -->
-  <div id="toastNotification" class="fixed bottom-16 sm:bottom-6 right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none bg-slate-800 border border-slate-700 text-white text-xs px-4 py-2.5 rounded-xl shadow-2xl flex items-center gap-2">
+  <div id="toastNotification" style="bottom: max(72px, calc(env(safe-area-inset-bottom, 0px) + 68px));" class="fixed right-4 sm:right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none bg-slate-800 border border-slate-700 text-white text-xs px-4 py-2.5 rounded-xl shadow-2xl flex items-center gap-2">
     <span id="toastIcon">📢</span>
     <span id="toastMessage">Thông báo</span>
   </div>
@@ -5391,7 +5414,7 @@
 
   <!-- Modal: Step-by-Step Install Guide (For iOS Safari or Android fallback) -->
   <div id="modalInstallGuide" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md hidden items-center justify-center p-4" style="display: none;" onclick="if(event.target === this) closeInstallGuide();">
-    <div class="bg-slate-900 border-2 border-amber-500/40 rounded-3xl max-w-md w-full p-6 shadow-2xl relative text-center max-h-[90vh] overflow-y-auto">
+    <div class="bg-slate-900 border-2 border-amber-500/40 rounded-3xl max-w-md w-full p-6 shadow-2xl relative text-center max-h-[85dvh] max-h-[85vh] overflow-y-auto">
       <button onclick="closeInstallGuide()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">✕</button>
 
       <img src="icons/icon-192.png?v=6" alt="Zin Zone App" class="w-20 h-20 rounded-2xl mx-auto shadow-2xl border-2 border-amber-400/80 object-cover mb-4">
@@ -5491,7 +5514,7 @@
 
   <!-- Modal: Daily Mystery Chest (Gacha Opening) -->
   <div id="modalMysteryChest" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden items-center justify-center p-4" style="display: none;" onclick="if(event.target === this) closeMysteryChestModal();">
-    <div class="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-amber-500/50 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative text-center max-h-[90vh] overflow-y-auto">
+    <div class="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-amber-500/50 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative text-center max-h-[85dvh] max-h-[85vh] overflow-y-auto">
       <button onclick="closeMysteryChestModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">✕</button>
 
       <!-- Ambient Glow Behind Chest -->
@@ -5549,7 +5572,7 @@
 
   <!-- Modal: Faction Wars (Đại Chiến 3 Đại Quân Đoàn KCN) -->
   <div id="modalFactionWars" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden items-center justify-center p-4" style="display: none;" onclick="if(event.target === this) closeFactionModal();">
-    <div class="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-cyan-500/40 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+    <div class="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-cyan-500/40 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[85dvh] max-h-[85vh] overflow-y-auto">
       <button onclick="closeFactionModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">✕</button>
 
       <div class="text-center mb-6">
@@ -5625,7 +5648,7 @@
 
   <!-- Modal: Player Profile & Inventory (Hồ Sơ Nhân Vật & Túi Đồ) -->
   <div id="modalPlayerProfile" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden items-center justify-center p-4" style="display: none;" onclick="if(event.target === this) closePlayerProfileModal();">
-    <div class="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-amber-500/40 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+    <div class="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-amber-500/40 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[85dvh] max-h-[85vh] overflow-y-auto">
       <button onclick="closePlayerProfileModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">✕</button>
 
       <!-- Player Header Card -->
@@ -5711,7 +5734,7 @@
 
   <!-- Modal: Privacy Policy (Nghị định 13/2023/NĐ-CP) -->
   <div id="modalPrivacyPolicy" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden items-center justify-center p-4" style="display: none;" onclick="if(event.target === this) closePrivacyModal();">
-    <div class="bg-gradient-to-b from-slate-900 to-slate-950 border border-slate-700 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[85vh] flex flex-col">
+    <div class="bg-gradient-to-b from-slate-900 to-slate-950 border border-slate-700 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[85dvh] max-h-[85vh] flex flex-col">
       <button onclick="closePrivacyModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">✕</button>
       
       <div class="flex items-center gap-2 mb-3">
@@ -5740,7 +5763,7 @@
 
   <!-- Modal: Terms of Service (Nghị định 72/2013/NĐ-CP & 27/2018/NĐ-CP) -->
   <div id="modalTermsOfService" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden items-center justify-center p-4" style="display: none;" onclick="if(event.target === this) closeTermsModal();">
-    <div class="bg-gradient-to-b from-slate-900 to-slate-950 border border-slate-700 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[85vh] flex flex-col">
+    <div class="bg-gradient-to-b from-slate-900 to-slate-950 border border-slate-700 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[85dvh] max-h-[85vh] flex flex-col">
       <button onclick="closeTermsModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">✕</button>
       
       <div class="flex items-center gap-2 mb-3">
