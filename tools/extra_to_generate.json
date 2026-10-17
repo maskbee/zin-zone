@@ -394,5 +394,95 @@
     "text": "总监",
     "type": "words",
     "exists": false
+  },
+  {
+    "id": "matrix_1",
+    "text": "工人",
+    "type": "words",
+    "exists": false
+  },
+  {
+    "id": "matrix_2",
+    "text": "工资",
+    "type": "words",
+    "exists": false
+  },
+  {
+    "id": "matrix_3",
+    "text": "工具",
+    "type": "words",
+    "exists": false
+  },
+  {
+    "id": "matrix_4",
+    "text": "电话",
+    "type": "words",
+    "exists": false
+  },
+  {
+    "id": "matrix_5",
+    "text": "电池",
+    "type": "words",
+    "exists": false
+  },
+  {
+    "id": "matrix_6",
+    "text": "电脑",
+    "type": "words",
+    "exists": false
+  },
+  {
+    "id": "matrix_7",
+    "text": "停电",
+    "type": "words",
+    "exists": false
+  },
+  {
+    "id": "matrix_8",
+    "text": "发电机",
+    "type": "words",
+    "exists": false
+  },
+  {
+    "id": "matrix_9",
+    "text": "标准",
+    "type": "words",
+    "exists": false
+  },
+  {
+    "id": "matrix_10",
+    "text": "标签",
+    "type": "words",
+    "exists": false
+  },
+  {
+    "id": "matrix_11",
+    "text": "检查",
+    "type": "words",
+    "exists": false
+  },
+  {
+    "id": "matrix_12",
+    "text": "质检",
+    "type": "words",
+    "exists": false
+  },
+  {
+    "id": "matrix_13",
+    "text": "检验",
+    "type": "words",
+    "exists": false
+  },
+  {
+    "id": "matrix_14",
+    "text": "查收",
+    "type": "words",
+    "exists": false
+  },
+  {
+    "id": "matrix_15",
+    "text": "复查",
+    "type": "words",
+    "exists": false
   }
 ]

@@ -269,6 +269,10 @@
 
         <!-- Header Actions -->
         <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          <button onclick="openOnboardingFlowModal()" class="px-2 sm:px-2.5 py-1.5 rounded-xl bg-slate-950/80 hover:bg-slate-800 text-amber-300 hover:text-amber-200 border border-amber-500/30 text-xs font-bold transition flex items-center gap-1 shrink-0" title="Đánh thức 70% Hán-Việt trong máu">
+            <span>📖</span>
+            <span class="hidden sm:inline">Khai Tâm</span>
+          </button>
           <div id="headerBadgeLicense" class="px-2 sm:px-3 py-1.5 rounded-xl bg-slate-950/80 border border-emerald-500/40 text-emerald-400 font-bold text-xs flex items-center gap-1.5 shadow-sm shrink-0" title="Thiết bị chính hãng đã kích hoạt hệ thống Zin Zone">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
             <span class="hidden sm:inline">Máy Chính Hãng • Đã Kích Hoạt</span>
@@ -402,16 +406,19 @@
           </div>
         </div>
 
-        <!-- 3 Interactive Tabs -->
-        <div class="flex items-center gap-1.5 mt-4 p-1 bg-slate-950 rounded-xl border border-slate-800 text-xs font-bold">
-          <button onclick="switchAwakeningTab('cognates')" id="tabBtnAwakeCognates" class="flex-1 py-1.5 rounded-lg bg-indigo-600 text-white shadow transition text-center px-1">
-            <span>⚔️</span> <span class="hidden sm:inline">1. Thần Từ Công Xưởng</span><span class="sm:hidden text-[11px]">Thần Từ</span>
+        <!-- 4 Interactive Tabs -->
+        <div class="flex items-center gap-1 mt-4 p-1 bg-slate-950 rounded-xl border border-slate-800 text-[11px] font-bold overflow-x-auto no-scrollbar">
+          <button onclick="switchAwakeningTab('cognates')" id="tabBtnAwakeCognates" class="flex-1 py-1.5 rounded-lg bg-indigo-600 text-white shadow transition text-center px-1 whitespace-nowrap">
+            <span>⚔️</span> <span class="hidden sm:inline">1. Thần Từ Công Xưởng</span><span class="sm:hidden">Thần Từ</span>
           </button>
-          <button onclick="switchAwakeningTab('tones')" id="tabBtnAwakeTones" class="flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white transition text-center px-1">
-            <span>🗡️</span> <span class="hidden sm:inline">2. Phi Kiếm Thanh 1 & 4</span><span class="sm:hidden text-[11px]">Thanh 1 & 4</span>
+          <button onclick="switchAwakeningTab('tones')" id="tabBtnAwakeTones" class="flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white transition text-center px-1 whitespace-nowrap">
+            <span>🗡️</span> <span class="hidden sm:inline">2. Phi Kiếm Thanh 1 & 4</span><span class="sm:hidden">Thanh 1 & 4</span>
           </button>
-          <button onclick="switchAwakeningTab('runes')" id="tabBtnAwakeRunes" class="flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white transition text-center px-1">
-            <span>🧩</span> <span class="hidden sm:inline">3. Chiết Tự Ghép Chữ</span><span class="sm:hidden text-[11px]">Ghép Chữ</span>
+          <button onclick="switchAwakeningTab('runes')" id="tabBtnAwakeRunes" class="flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white transition text-center px-1 whitespace-nowrap">
+            <span>🧩</span> <span class="hidden sm:inline">3. Chiết Tự Ghép Chữ</span><span class="sm:hidden">Ghép Chữ</span>
+          </button>
+          <button onclick="switchAwakeningTab('matrix')" id="tabBtnAwakeMatrix" class="flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white transition text-center px-1 whitespace-nowrap">
+            <span>🧬</span> <span class="hidden sm:inline">4. Ma Trận 1 Biến 5</span><span class="sm:hidden">1 Biến 5</span>
           </button>
         </div>
 
@@ -467,6 +474,243 @@
           </p>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="awakeRunesGrid">
             <!-- Injected dynamically -->
+          </div>
+        </div>
+
+        <!-- Sub-panel 4: 1-to-5 Cognate Matrix (Ma Trận 1 Biến 5 Hán-Việt Cổ Điển) -->
+        <div id="awakePanelMatrix" class="hidden mt-4">
+          <div class="p-3 rounded-2xl bg-slate-950 border border-slate-800 text-xs mb-3 flex items-start gap-3">
+            <span class="text-2xl shrink-0">🧬</span>
+            <div>
+              <div class="font-bold text-amber-400">PHƯƠNG PHÁP PHÂN HẠCH TỪ CĂN: 1 GỐC NỞ 5 TỪ CAO TẦN</div>
+              <p class="text-[11px] text-slate-300 mt-0.5">Chỉ cần kích hoạt 1 gốc từ Hán-Việt trong máu, bạn lập tức làm chủ ngay 5 từ vựng công xưởng cực phẩm. Bấm loa để nghe <strong>Ma Âm 3 Lần Liền Mạch</strong>!</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="awakeMatrixGrid">
+            <!-- Root 1: CÔNG (工 - gōng) -->
+            <div class="p-3.5 rounded-2xl bg-slate-950/90 border border-slate-800 hover:border-amber-500/40 transition">
+              <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-800">
+                <div class="flex items-center gap-2">
+                  <span class="w-7 h-7 rounded-lg bg-amber-500/20 text-amber-400 font-han font-black flex items-center justify-center text-base">工</span>
+                  <div>
+                    <span class="font-bold text-white text-xs">Gốc CÔNG</span>
+                    <span class="font-mono text-amber-400 text-xs ml-1">(gōng)</span>
+                  </div>
+                </div>
+                <span class="text-[10px] px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 font-bold">5 Từ Công Xưởng</span>
+              </div>
+              <div class="grid grid-cols-1 gap-1.5 text-xs">
+                <div onclick="speakWordTriple('工厂', this, 'cognate_5')" class="p-1.5 rounded-lg bg-slate-900/80 hover:bg-slate-800 flex items-center justify-between cursor-pointer group">
+                  <div class="flex items-baseline gap-2">
+                    <span class="font-han font-black text-white group-hover:text-amber-400">工厂</span>
+                    <span class="font-mono text-[11px] text-amber-300">gōngchǎng</span>
+                    <span class="text-[11px] text-slate-300 font-medium">Công xưởng / Nhà máy</span>
+                  </div>
+                  <span class="text-slate-500 group-hover:text-amber-400 text-xs font-mono">⚡ 3X</span>
+                </div>
+                <div onclick="speakWordTriple('工人', this, 'matrix_1')" class="p-1.5 rounded-lg bg-slate-900/80 hover:bg-slate-800 flex items-center justify-between cursor-pointer group">
+                  <div class="flex items-baseline gap-2">
+                    <span class="font-han font-black text-white group-hover:text-amber-400">工人</span>
+                    <span class="font-mono text-[11px] text-amber-300">gōngrén</span>
+                    <span class="text-[11px] text-slate-300 font-medium">Công nhân / Người làm</span>
+                  </div>
+                  <span class="text-slate-500 group-hover:text-amber-400 text-xs font-mono">⚡ 3X</span>
+                </div>
+                <div onclick="speakWordTriple('工资', this, 'matrix_2')" class="p-1.5 rounded-lg bg-slate-900/80 hover:bg-slate-800 flex items-center justify-between cursor-pointer group">
+                  <div class="flex items-baseline gap-2">
+                    <span class="font-han font-black text-white group-hover:text-amber-400">工资</span>
+                    <span class="font-mono text-[11px] text-amber-300">gōngzī</span>
+                    <span class="text-[11px] text-slate-300 font-medium">Công tư / Tiền lương</span>
+                  </div>
+                  <span class="text-slate-500 group-hover:text-amber-400 text-xs font-mono">⚡ 3X</span>
+                </div>
+                <div onclick="speakWordTriple('加班', this)" class="p-1.5 rounded-lg bg-slate-900/80 hover:bg-slate-800 flex items-center justify-between cursor-pointer group">
+                  <div class="flex items-baseline gap-2">
+                    <span class="font-han font-black text-white group-hover:text-amber-400">加班</span>
+                    <span class="font-mono text-[11px] text-amber-300">jiābān</span>
+                    <span class="text-[11px] text-slate-300 font-medium">Gia ban / Tăng ca</span>
+                  </div>
+                  <span class="text-slate-500 group-hover:text-amber-400 text-xs font-mono">⚡ 3X</span>
+                </div>
+                <div onclick="speakWordTriple('工具', this, 'matrix_3')" class="p-1.5 rounded-lg bg-slate-900/80 hover:bg-slate-800 flex items-center justify-between cursor-pointer group">
+                  <div class="flex items-baseline gap-2">
+                    <span class="font-han font-black text-white group-hover:text-amber-400">工具</span>
+                    <span class="font-mono text-[11px] text-amber-300">gōngjù</span>
+                    <span class="text-[11px] text-slate-300 font-medium">Công cụ / Dụng cụ</span>
+                  </div>
+                  <span class="text-slate-500 group-hover:text-amber-400 text-xs font-mono">⚡ 3X</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Root 2: ĐIỆN (电 - diàn) -->
+            <div class="p-3.5 rounded-2xl bg-slate-950/90 border border-slate-800 hover:border-cyan-500/40 transition">
+              <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-800">
+                <div class="flex items-center gap-2">
+                  <span class="w-7 h-7 rounded-lg bg-cyan-500/20 text-cyan-400 font-han font-black flex items-center justify-center text-base">电</span>
+                  <div>
+                    <span class="font-bold text-white text-xs">Gốc ĐIỆN</span>
+                    <span class="font-mono text-cyan-400 text-xs ml-1">(diàn)</span>
+                  </div>
+                </div>
+                <span class="text-[10px] px-2 py-0.5 rounded bg-cyan-500/10 text-cyan-300 font-bold">5 Từ Công Xưởng</span>
+              </div>
+              <div class="grid grid-cols-1 gap-1.5 text-xs">
+                <div onclick="speakWordTriple('电话', this, 'matrix_4')" class="p-1.5 rounded-lg bg-slate-900/80 hover:bg-slate-800 flex items-center justify-between cursor-pointer group">
+                  <div class="flex items-baseline gap-2">
+                    <span class="font-han font-black text-white group-hover:text-cyan-400">电话</span>
+                    <span class="font-mono text-[11px] text-cyan-300">diànhuà</span>
+                    <span class="text-[11px] text-slate-300 font-medium">Điện thoại</span>
+                  </div>
+                  <span class="text-slate-500 group-hover:text-cyan-400 text-xs font-mono">⚡ 3X</span>
+                </div>
+                <div onclick="speakWordTriple('电池', this, 'matrix_5')" class="p-1.5 rounded-lg bg-slate-900/80 hover:bg-slate-800 flex items-center justify-between cursor-pointer group">
+                  <div class="flex items-baseline gap-2">
+                    <span class="font-han font-black text-white group-hover:text-cyan-400">电池</span>
+                    <span class="font-mono text-[11px] text-cyan-300">diànchí</span>
+                    <span class="text-[11px] text-slate-300 font-medium">Điện trì / Cục pin</span>
+                  </div>
+                  <span class="text-slate-500 group-hover:text-cyan-400 text-xs font-mono">⚡ 3X</span>
+                </div>
+                <div onclick="speakWordTriple('电脑', this, 'matrix_6')" class="p-1.5 rounded-lg bg-slate-900/80 hover:bg-slate-800 flex items-center justify-between cursor-pointer group">
+                  <div class="flex items-baseline gap-2">
+                    <span class="font-han font-black text-white group-hover:text-cyan-400">电脑</span>
+                    <span class="font-mono text-[11px] text-cyan-300">diànnǎo</span>
+                    <span class="text-[11px] text-slate-300 font-medium">Điện não / Máy vi tính</span>
+                  </div>
+                  <span class="text-slate-500 group-hover:text-cyan-400 text-xs font-mono">⚡ 3X</span>
+                </div>
+                <div onclick="speakWordTriple('停电', this, 'matrix_7')" class="p-1.5 rounded-lg bg-slate-900/80 hover:bg-slate-800 flex items-center justify-between cursor-pointer group">
+                  <div class="flex items-baseline gap-2">
+                    <span class="font-han font-black text-white group-hover:text-cyan-400">停电</span>
+                    <span class="font-mono text-[11px] text-cyan-300">tíngdiàn</span>
+                    <span class="text-[11px] text-slate-300 font-medium">Đình điện / Mất điện</span>
+                  </div>
+                  <span class="text-slate-500 group-hover:text-cyan-400 text-xs font-mono">⚡ 3X</span>
+                </div>
+                <div onclick="speakWordTriple('发电机', this, 'matrix_8')" class="p-1.5 rounded-lg bg-slate-900/80 hover:bg-slate-800 flex items-center justify-between cursor-pointer group">
+                  <div class="flex items-baseline gap-2">
+                    <span class="font-han font-black text-white group-hover:text-cyan-400">发电机</span>
+                    <span class="font-mono text-[11px] text-cyan-300">fādiànjī</span>
+                    <span class="text-[11px] text-slate-300 font-medium">Phát điện cơ / Máy phát điện</span>
+                  </div>
+                  <span class="text-slate-500 group-hover:text-cyan-400 text-xs font-mono">⚡ 3X</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Root 3: TIÊU / CHUẨN (标 / 准) -->
+            <div class="p-3.5 rounded-2xl bg-slate-950/90 border border-slate-800 hover:border-emerald-500/40 transition">
+              <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-800">
+                <div class="flex items-center gap-2">
+                  <span class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 font-han font-black flex items-center justify-center text-base">准</span>
+                  <div>
+                    <span class="font-bold text-white text-xs">Gốc TIÊU / CHUẨN</span>
+                    <span class="font-mono text-emerald-400 text-xs ml-1">(zhǔn)</span>
+                  </div>
+                </div>
+                <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-300 font-bold">5 Từ Công Xưởng</span>
+              </div>
+              <div class="grid grid-cols-1 gap-1.5 text-xs">
+                <div onclick="speakWordTriple('标准', this, 'matrix_9')" class="p-1.5 rounded-lg bg-slate-900/80 hover:bg-slate-800 flex items-center justify-between cursor-pointer group">
+                  <div class="flex items-baseline gap-2">
+                    <span class="font-han font-black text-white group-hover:text-emerald-400">标准</span>
+                    <span class="font-mono text-[11px] text-emerald-300">biāozhǔn</span>
+                    <span class="text-[11px] text-slate-300 font-medium">Tiêu chuẩn kỹ thuật</span>
+                  </div>
+                  <span class="text-slate-500 group-hover:text-emerald-400 text-xs font-mono">⚡ 3X</span>
+                </div>
+                <div onclick="speakWordTriple('准时', this, 'w_d1_7')" class="p-1.5 rounded-lg bg-slate-900/80 hover:bg-slate-800 flex items-center justify-between cursor-pointer group">
+                  <div class="flex items-baseline gap-2">
+                    <span class="font-han font-black text-white group-hover:text-emerald-400">准时</span>
+                    <span class="font-mono text-[11px] text-emerald-300">zhǔnshí</span>
+                    <span class="text-[11px] text-slate-300 font-medium">Chuẩn thời / Đúng giờ</span>
+                  </div>
+                  <span class="text-slate-500 group-hover:text-emerald-400 text-xs font-mono">⚡ 3X</span>
+                </div>
+                <div onclick="speakWordTriple('准备', this, 'cognate_2')" class="p-1.5 rounded-lg bg-slate-900/80 hover:bg-slate-800 flex items-center justify-between cursor-pointer group">
+                  <div class="flex items-baseline gap-2">
+                    <span class="font-han font-black text-white group-hover:text-emerald-400">准备</span>
+                    <span class="font-mono text-[11px] text-emerald-300">zhǔnbèi</span>
+                    <span class="text-[11px] text-slate-300 font-medium">Chuẩn bị vật tư</span>
+                  </div>
+                  <span class="text-slate-500 group-hover:text-emerald-400 text-xs font-mono">⚡ 3X</span>
+                </div>
+                <div onclick="speakWordTriple('目标', this)" class="p-1.5 rounded-lg bg-slate-900/80 hover:bg-slate-800 flex items-center justify-between cursor-pointer group">
+                  <div class="flex items-baseline gap-2">
+                    <span class="font-han font-black text-white group-hover:text-emerald-400">目标</span>
+                    <span class="font-mono text-[11px] text-emerald-300">mùbiāo</span>
+                    <span class="text-[11px] text-slate-300 font-medium">Mục tiêu sản lượng</span>
+                  </div>
+                  <span class="text-slate-500 group-hover:text-emerald-400 text-xs font-mono">⚡ 3X</span>
+                </div>
+                <div onclick="speakWordTriple('标签', this, 'matrix_10')" class="p-1.5 rounded-lg bg-slate-900/80 hover:bg-slate-800 flex items-center justify-between cursor-pointer group">
+                  <div class="flex items-baseline gap-2">
+                    <span class="font-han font-black text-white group-hover:text-emerald-400">标签</span>
+                    <span class="font-mono text-[11px] text-emerald-300">biāoqiān</span>
+                    <span class="text-[11px] text-slate-300 font-medium">Tiêu khiêm / Nhãn dán</span>
+                  </div>
+                  <span class="text-slate-500 group-hover:text-emerald-400 text-xs font-mono">⚡ 3X</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Root 4: KIỂM / TRA (检 / 查) -->
+            <div class="p-3.5 rounded-2xl bg-slate-950/90 border border-slate-800 hover:border-purple-500/40 transition">
+              <div class="flex items-center justify-between pb-2 mb-2 border-b border-slate-800">
+                <div class="flex items-center gap-2">
+                  <span class="w-7 h-7 rounded-lg bg-purple-500/20 text-purple-400 font-han font-black flex items-center justify-center text-base">检</span>
+                  <div>
+                    <span class="font-bold text-white text-xs">Gốc KIỂM / TRA</span>
+                    <span class="font-mono text-purple-400 text-xs ml-1">(jiǎn / chá)</span>
+                  </div>
+                </div>
+                <span class="text-[10px] px-2 py-0.5 rounded bg-purple-500/10 text-purple-300 font-bold">5 Từ Công Xưởng</span>
+              </div>
+              <div class="grid grid-cols-1 gap-1.5 text-xs">
+                <div onclick="speakWordTriple('检查', this, 'matrix_11')" class="p-1.5 rounded-lg bg-slate-900/80 hover:bg-slate-800 flex items-center justify-between cursor-pointer group">
+                  <div class="flex items-baseline gap-2">
+                    <span class="font-han font-black text-white group-hover:text-purple-400">检查</span>
+                    <span class="font-mono text-[11px] text-purple-300">jiǎnchá</span>
+                    <span class="text-[11px] text-slate-300 font-medium">Kiểm tra chuyền hàng</span>
+                  </div>
+                  <span class="text-slate-500 group-hover:text-purple-400 text-xs font-mono">⚡ 3X</span>
+                </div>
+                <div onclick="speakWordTriple('质检', this, 'matrix_12')" class="p-1.5 rounded-lg bg-slate-900/80 hover:bg-slate-800 flex items-center justify-between cursor-pointer group">
+                  <div class="flex items-baseline gap-2">
+                    <span class="font-han font-black text-white group-hover:text-purple-400">质检</span>
+                    <span class="font-mono text-[11px] text-purple-300">zhìjiǎn</span>
+                    <span class="text-[11px] text-slate-300 font-medium">Chất kiểm / QC kiểm phẩm</span>
+                  </div>
+                  <span class="text-slate-500 group-hover:text-purple-400 text-xs font-mono">⚡ 3X</span>
+                </div>
+                <div onclick="speakWordTriple('检验', this, 'matrix_13')" class="p-1.5 rounded-lg bg-slate-900/80 hover:bg-slate-800 flex items-center justify-between cursor-pointer group">
+                  <div class="flex items-baseline gap-2">
+                    <span class="font-han font-black text-white group-hover:text-purple-400">检验</span>
+                    <span class="font-mono text-[11px] text-purple-300">jiǎnyàn</span>
+                    <span class="text-[11px] text-slate-300 font-medium">Kiểm nghiệm thông số</span>
+                  </div>
+                  <span class="text-slate-500 group-hover:text-purple-400 text-xs font-mono">⚡ 3X</span>
+                </div>
+                <div onclick="speakWordTriple('查收', this, 'matrix_14')" class="p-1.5 rounded-lg bg-slate-900/80 hover:bg-slate-800 flex items-center justify-between cursor-pointer group">
+                  <div class="flex items-baseline gap-2">
+                    <span class="font-han font-black text-white group-hover:text-purple-400">查收</span>
+                    <span class="font-mono text-[11px] text-purple-300">cháshōu</span>
+                    <span class="text-[11px] text-slate-300 font-medium">Tra thu / Kiểm tra nhận hàng</span>
+                  </div>
+                  <span class="text-slate-500 group-hover:text-purple-400 text-xs font-mono">⚡ 3X</span>
+                </div>
+                <div onclick="speakWordTriple('复查', this, 'matrix_15')" class="p-1.5 rounded-lg bg-slate-900/80 hover:bg-slate-800 flex items-center justify-between cursor-pointer group">
+                  <div class="flex items-baseline gap-2">
+                    <span class="font-han font-black text-white group-hover:text-purple-400">复查</span>
+                    <span class="font-mono text-[11px] text-purple-300">fùchá</span>
+                    <span class="text-[11px] text-slate-300 font-medium">Phức tra / Tái kiểm tra</span>
+                  </div>
+                  <span class="text-slate-500 group-hover:text-purple-400 text-xs font-mono">⚡ 3X</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -660,6 +904,83 @@
             <span id="dayMasteryCount" class="font-bold text-amber-400">0/5 câu đã thuộc</span>
           </div>
           <button id="btnResetDayProgress" class="text-slate-500 hover:text-slate-300 text-[11px] underline">Đặt lại tiến độ</button>
+        </div>
+      </div>
+
+      <!-- 3 Daily Water Checkpoints (Trạm Nạp Nước Giờ Giải Lao - 3 Phút/Trạm) -->
+      <div id="waterStationsCard" class="bg-gradient-to-r from-blue-950/40 via-slate-900 to-indigo-950/40 border border-blue-500/30 rounded-2xl p-4 sm:p-5 shadow-xl relative overflow-hidden">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-3 pb-3 border-b border-slate-800">
+          <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 rounded-xl bg-blue-500/20 text-blue-400 border border-blue-500/30 flex items-center justify-center text-lg shrink-0">
+              🚰
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 class="text-sm sm:text-base font-black text-white">3 Trạm Nạp Nước Hôm Nay</h3>
+                <span class="text-[10px] px-2 py-0.5 rounded-full font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">
+                  3 PHÚT / TRẠM
+                </span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-0.5">Mỗi lần giải lao uống ngụm nước, nuốt trọn từ vựng — Không áp lực, tích tiểu thành đại!</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-1.5 text-xs font-mono font-bold text-blue-300 bg-slate-950/80 px-2.5 py-1 rounded-xl border border-blue-500/20">
+            <span>💧 Trạm:</span>
+            <span id="waterProgressCount">0/3</span>
+          </div>
+        </div>
+
+        <!-- 3 Stations Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-2.5" id="waterStationsGrid">
+          <!-- Station 1 -->
+          <div id="waterStationCard_1" class="p-3 rounded-xl bg-slate-950/80 border border-slate-800 flex flex-col justify-between transition-all">
+            <div>
+              <div class="flex items-center justify-between text-xs mb-1">
+                <span class="font-bold text-amber-400">☀️ Trạm 1: Ca Sáng</span>
+                <span class="text-[10px] text-slate-400 font-mono">09:30</span>
+              </div>
+              <div class="text-[11px] text-slate-300 font-medium">3 từ mở máy & điểm danh</div>
+              <div class="text-[10px] text-slate-500 italic mt-0.5">Uống ngụm nước ấm, lấy tinh thần vào ca</div>
+            </div>
+            <button onclick="checkInWaterStation(1)" id="btnWaterStation_1" class="mt-2.5 w-full py-1.5 rounded-lg bg-blue-600/80 hover:bg-blue-600 text-white font-bold text-[11px] transition flex items-center justify-center gap-1">
+              <span>💧</span><span>Nạp Nước (+30 CP)</span>
+            </button>
+          </div>
+
+          <!-- Station 2 -->
+          <div id="waterStationCard_2" class="p-3 rounded-xl bg-slate-950/80 border border-slate-800 flex flex-col justify-between transition-all">
+            <div>
+              <div class="flex items-center justify-between text-xs mb-1">
+                <span class="font-bold text-cyan-400">⛅ Trạm 2: Ca Chiều</span>
+                <span class="text-[10px] text-slate-400 font-mono">14:30</span>
+              </div>
+              <div class="text-[11px] text-slate-300 font-medium">4 từ đối đáp giao nhận hàng</div>
+              <div class="text-[10px] text-slate-500 italic mt-0.5">Rửa mặt, uống nước lạnh, diệt cơn buồn ngủ</div>
+            </div>
+            <button onclick="checkInWaterStation(2)" id="btnWaterStation_2" class="mt-2.5 w-full py-1.5 rounded-lg bg-blue-600/80 hover:bg-blue-600 text-white font-bold text-[11px] transition flex items-center justify-center gap-1">
+              <span>💧</span><span>Nạp Nước (+30 CP)</span>
+            </button>
+          </div>
+
+          <!-- Station 3 -->
+          <div id="waterStationCard_3" class="p-3 rounded-xl bg-slate-950/80 border border-slate-800 flex flex-col justify-between transition-all">
+            <div>
+              <div class="flex items-center justify-between text-xs mb-1">
+                <span class="font-bold text-purple-400">🌙 Trạm 3: Tan Ca / Tối</span>
+                <span class="text-[10px] text-slate-400 font-mono">20:00</span>
+              </div>
+              <div class="text-[11px] text-slate-300 font-medium">3 từ chốt sản lượng & chào sếp</div>
+              <div class="text-[10px] text-slate-500 italic mt-0.5">Nạp nước cuối ca, thảnh thơi về phòng trọ</div>
+            </div>
+            <button onclick="checkInWaterStation(3)" id="btnWaterStation_3" class="mt-2.5 w-full py-1.5 rounded-lg bg-blue-600/80 hover:bg-blue-600 text-white font-bold text-[11px] transition flex items-center justify-center gap-1">
+              <span>💧</span><span>Nạp Nước (+30 CP)</span>
+            </button>
+          </div>
+        </div>
+
+        <div id="waterBonusBanner" class="hidden mt-3 p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs text-center font-bold flex items-center justify-center gap-2">
+          <span>🏆</span>
+          <span>BÌNH NƯỚC BẤT TỬ HOÀN TẤT: Bạn đã uống trọn 3 trạm nạp nước hôm nay! (+50 CP Thưởng)</span>
         </div>
       </div>
 
@@ -2239,7 +2560,7 @@
     }
 
     function switchAwakeningTab(tab) {
-      const tabs = ['cognates', 'tones', 'runes'];
+      const tabs = ['cognates', 'tones', 'runes', 'matrix'];
       tabs.forEach(t => {
         const btn = document.getElementById(`tabBtnAwake${t.charAt(0).toUpperCase() + t.slice(1)}`);
         const panel = document.getElementById(`awakePanel${t.charAt(0).toUpperCase() + t.slice(1)}`);
@@ -2287,7 +2608,7 @@
     function playCognateCard(idx, cardEl) {
       const c = AWAKENING_COGNATES[idx];
       if (!c) return;
-      speakWordTriple(c.zh, cardEl);
+      speakWordTriple(c.zh, cardEl, 'cognate_' + (idx + 1));
       if (!awakeProgress.includes(idx)) {
         awakeProgress.push(idx);
         safeStorage.setItem('zin_awake_progress_v1', JSON.stringify(awakeProgress));
@@ -2360,7 +2681,7 @@
               <div class="text-[10px] text-emerald-400 italic mt-0.5">${r.story}</div>
             </div>
           </div>
-          <button onclick="speakWordTriple('${r.char}', this)" aria-label="Nghe âm" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs shrink-0 transition" title="Nghe âm">
+          <button onclick="speakWordTriple('${r.char}', this, 'rune_${idx + 1}')" aria-label="Nghe âm" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-amber-400 text-xs shrink-0 transition" title="Nghe âm">
             🔊
           </button>
         `;
@@ -3109,6 +3430,7 @@
       if (typeof closeJobModal === 'function') closeJobModal();
       if (typeof closeDeviceVerificationModal === 'function') closeDeviceVerificationModal();
       if (typeof closeDealerPartnerModal === 'function') closeDealerPartnerModal();
+      if (typeof closeOnboardingFlowModal === 'function') closeOnboardingFlowModal();
       closePrivacyModal();
       closeTermsModal();
     }
@@ -3344,23 +3666,25 @@
 
       audio.onended = finishStep;
       audio.onerror = () => {
-        const cloudUrl = getCloudFallbackUrl(cleanText);
+        const isWordTriplet = id && (id.startsWith('w_') || id.startsWith('rune_') || id.startsWith('cognate_'));
+        const fallbackText = isWordTriplet ? `${cleanText} ${cleanText} ${cleanText}` : cleanText;
+        const cloudUrl = getCloudFallbackUrl(fallbackText);
         if (audio.src !== cloudUrl) {
           console.warn('[ZinZone Audio] Switching to rock-solid cloud TTS:', cloudUrl);
           audio.src = cloudUrl;
           audio.play().then(() => {}).catch(() => {
-            playWebSpeechTts(cleanText, rate, finishStep);
+            playWebSpeechTts(fallbackText, rate, finishStep);
           });
         } else {
           // Tier 3: Google Translate TTS fallback
-          const googleUrl = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(cleanText)}&tl=zh-CN&client=tw-ob`;
+          const googleUrl = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(fallbackText)}&tl=zh-CN&client=tw-ob`;
           if (audio.src !== googleUrl) {
             audio.src = googleUrl;
             audio.play().then(() => {}).catch(() => {
-              playWebSpeechTts(cleanText, rate, finishStep);
+              playWebSpeechTts(fallbackText, rate, finishStep);
             });
           } else {
-            playWebSpeechTts(cleanText, rate, finishStep);
+            playWebSpeechTts(fallbackText, rate, finishStep);
           }
         }
       };
@@ -3497,63 +3821,36 @@
       playSingleAudio(cleanText, targetRate, null);
     }
 
-    // "Tam Đoạn Ma Âm" - 3-Beat Echo Repeat Mode for Vocabulary Word Cards
-    // Beat 1 (0.9x standard) -> 50ms pause -> Beat 2 (0.8x tone clarify) -> 50ms pause -> Beat 3 (1.0x confident shadow)
+    // "Tam Đoạn Ma Âm" - Phản Xạ Thần Tốc 3 Lần Đọc Liền (Zero Time Interval / Rapid Triplet)
+    // Audio pre-baked directly with 3-repeat burst (100% liền mạch không khoảng nghỉ)
     function speakWordTriple(text, cardEl = null, wordId = null) {
       if (!text) return;
       const cleanText = extractPronunciationText(text);
       if (!cleanText) return;
 
-      const repeatSetting = parseInt(document.getElementById('audioRepeatMode')?.value || safeStorage.getItem('zin_audio_repeat_mode') || '3', 10);
-      if (repeatSetting === 1) {
-        speakText(cleanText, 0.9, cardEl);
-        return;
-      }
-
       stopAllAudioPlayback();
       const myLoopId = currentLoopId;
       activeCardPlaying = cardEl;
 
-      const baseRate = parseFloat(document.getElementById('speechRateSelect')?.value || '0.9');
-      // 3-beat rhythm ladder: standard -> slower (tones) -> standard
-      const rates = [baseRate, Math.max(0.7, +(baseRate * 0.9).toFixed(2)), Math.min(1.2, +(baseRate * 1.05).toFixed(2))];
-      let step = 0;
-
+      const targetRate = parseFloat(document.getElementById('speechRateSelect')?.value || '1.0');
       const speakerBtn = cardEl ? cardEl.querySelector('button[aria-label="Nghe âm"]') : null;
       const stepSpan = cardEl ? cardEl.querySelector('.audio-step-label') : null;
 
-      function playStep() {
-        if (myLoopId !== currentLoopId) return; // Interrupted by new click
-        if (step >= 3) {
-          // Finished all 3 repetitions
-          if (cardEl) cardEl.classList.remove('ring-2', 'ring-amber-400', 'bg-slate-900/90');
-          if (speakerBtn) speakerBtn.innerHTML = '🔊';
-          if (stepSpan) stepSpan.textContent = '🔊';
-          activeCardPlaying = null;
-          return;
-        }
-
-        const curBeat = step + 1;
-        if (cardEl) cardEl.classList.add('ring-2', 'ring-amber-400', 'bg-slate-900/90');
-        if (speakerBtn) {
-          speakerBtn.innerHTML = `<span class="text-amber-400 font-mono font-black text-xs animate-pulse">${curBeat}/3</span>`;
-        }
-        if (stepSpan) {
-          stepSpan.innerHTML = `<span class="text-amber-400 font-mono font-black text-[10px] animate-pulse">${curBeat}/3</span>`;
-        }
-
-        playSingleAudio(cleanText, rates[step], () => {
-          if (myLoopId !== currentLoopId) return;
-          step++;
-          if (step < 3) {
-            loopTimeout = setTimeout(playStep, 50); // 50ms interval between repetitions
-          } else {
-            playStep();
-          }
-        }, wordId);
+      if (cardEl) cardEl.classList.add('ring-2', 'ring-amber-400', 'bg-slate-900/90');
+      if (speakerBtn) {
+        speakerBtn.innerHTML = '<span class="text-amber-400 font-mono font-black text-xs animate-pulse">⚡3X</span>';
+      }
+      if (stepSpan) {
+        stepSpan.innerHTML = '<span class="text-amber-400 font-mono font-black text-[10px] animate-pulse">⚡3X</span>';
       }
 
-      playStep();
+      playSingleAudio(cleanText, targetRate, () => {
+        if (myLoopId !== currentLoopId) return;
+        if (cardEl) cardEl.classList.remove('ring-2', 'ring-amber-400', 'bg-slate-900/90');
+        if (speakerBtn) speakerBtn.innerHTML = '🔊';
+        if (stepSpan) stepSpan.textContent = '🔊';
+        activeCardPlaying = null;
+      }, wordId);
     }
 
     function playWebSpeechTts(text, rate, onEnded = null) {
@@ -3684,6 +3981,80 @@
       renderMission();
     }
 
+    // 3 Daily Water Break Checkpoints (Trạm Nạp Nước Giờ Giải Lao - 3 Phút/Trạm)
+    function getTodayWaterKey() {
+      return `zin_water_stations_d${currentDay || 1}`;
+    }
+
+    function checkInWaterStation(stationNum) {
+      const key = getTodayWaterKey();
+      let completed = [];
+      try {
+        completed = JSON.parse(safeStorage.getItem(key) || '[]');
+      } catch (e) {}
+
+      if (!completed.includes(stationNum)) {
+        completed.push(stationNum);
+        safeStorage.setItem(key, JSON.stringify(completed));
+        addCp(30);
+        soundFX.playSuccess();
+        if (particleEngine) particleEngine.burst(window.innerWidth / 2, window.innerHeight / 2, 35);
+        showToast(`💧 ĐÃ NẠP NƯỚC TRẠM ${stationNum}! Tinh lực tràn trề! (+30 CP)`, 'success');
+
+        if (completed.length === 3) {
+          addCp(50);
+          showToast(`🏆 ĐẠT BÌNH NƯỚC BẤT TỬ! Nuốt trọn 3 trạm ngày ${currentDay}! (+50 CP Thưởng)`, 'success');
+        }
+      }
+      renderWaterStations();
+    }
+
+    function renderWaterStations() {
+      const key = getTodayWaterKey();
+      let completed = [];
+      try {
+        completed = JSON.parse(safeStorage.getItem(key) || '[]');
+      } catch (e) {}
+
+      const countEl = document.getElementById('waterProgressCount');
+      if (countEl) countEl.textContent = `${completed.length}/3`;
+
+      for (let s = 1; s <= 3; s++) {
+        const card = document.getElementById(`waterStationCard_${s}`);
+        const btn = document.getElementById(`btnWaterStation_${s}`);
+        const isDone = completed.includes(s);
+
+        if (card) {
+          if (isDone) {
+            card.classList.add('border-emerald-500/50', 'bg-emerald-950/20');
+            card.classList.remove('border-slate-800');
+          } else {
+            card.classList.remove('border-emerald-500/50', 'bg-emerald-950/20');
+            card.classList.add('border-slate-800');
+          }
+        }
+
+        if (btn) {
+          if (isDone) {
+            btn.className = 'mt-2.5 w-full py-1.5 rounded-lg bg-emerald-900/60 text-emerald-300 font-bold text-[11px] border border-emerald-500/40 cursor-default flex items-center justify-center gap-1';
+            btn.innerHTML = '<span>✅</span><span>Đã Nạp Nước</span>';
+          } else {
+            btn.className = 'mt-2.5 w-full py-1.5 rounded-lg bg-blue-600/80 hover:bg-blue-600 text-white font-bold text-[11px] transition flex items-center justify-center gap-1';
+            btn.innerHTML = '<span>💧</span><span>Nạp Nước (+30 CP)</span>';
+          }
+        }
+      }
+
+      const bonusBanner = document.getElementById('waterBonusBanner');
+      if (bonusBanner) {
+        if (completed.length === 3) {
+          bonusBanner.classList.remove('hidden');
+        } else {
+          bonusBanner.classList.add('hidden');
+        }
+      }
+    }
+
     // Render 21 Days
     function renderDayTabs() {
       const container = document.getElementById('dayTabsContainer');
@@ -3745,6 +4116,7 @@
       document.getElementById('storyTitle').textContent = dayData.story.title;
       document.getElementById('storyContent').textContent = dayData.story.content;
       renderMission();
+      renderWaterStations();
       updateProgressDisplay();
     }
 
@@ -4350,6 +4722,11 @@
           splash.style.opacity = '0';
           setTimeout(() => {
             if (splash && splash.parentNode) splash.parentNode.removeChild(splash);
+            if (!safeStorage.getItem('zin_onboarding_completed')) {
+              setTimeout(() => {
+                openOnboardingFlowModal();
+              }, 400);
+            }
           }, 400);
         }, 220);
       }, remainingTime);
@@ -4610,6 +4987,103 @@
       }).catch(() => {
         showToast('Số Zalo phòng B2B: 0988.888.888', 'info');
       });
+    }
+
+    // --- ONBOARDING SPLASH FLOW CONTROLLER ---
+    let currentOnboardingStep = 1;
+
+    function playAwakeningSurgeSound() {
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+        const ctx = new AudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(220, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.45);
+        gain.gain.setValueAtTime(0.18, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.5);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.5);
+      } catch (e) {}
+    }
+
+    function openOnboardingFlowModal(forceStep = 1) {
+      const modal = document.getElementById('modalOnboardingFlow');
+      if (modal) {
+        currentOnboardingStep = forceStep;
+        renderOnboardingStep();
+        modal.classList.remove('hidden');
+        modal.style.display = 'flex';
+      }
+    }
+
+    function closeOnboardingFlowModal() {
+      const modal = document.getElementById('modalOnboardingFlow');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.style.display = 'none';
+        safeStorage.setItem('zin_onboarding_completed', 'true');
+        if (soundFX && soundFX.playSuccess) soundFX.playSuccess();
+        if (particleEngine) particleEngine.burst(window.innerWidth / 2, window.innerHeight / 2, 45);
+      }
+    }
+
+    function setOnboardingStep(step) {
+      if (step === 2 && currentOnboardingStep === 1) {
+        playAwakeningSurgeSound();
+        if (navigator.vibrate) navigator.vibrate([40, 60, 100]);
+        if (soundFX && soundFX.playSuccess) soundFX.playSuccess();
+      } else if (step > currentOnboardingStep) {
+        if (soundFX && soundFX.playClick) soundFX.playClick();
+      }
+      currentOnboardingStep = step;
+      renderOnboardingStep();
+    }
+
+    function renderOnboardingStep() {
+      for (let s = 1; s <= 4; s++) {
+        const slide = document.getElementById(`onboardingSlide_${s}`);
+        const dot = document.getElementById(`onboardingDot_${s}`);
+        if (slide) {
+          if (s === currentOnboardingStep) {
+            slide.classList.remove('hidden');
+          } else {
+            slide.classList.add('hidden');
+          }
+        }
+        if (dot) {
+          if (s === currentOnboardingStep) {
+            dot.className = 'w-6 h-2 rounded-full bg-amber-400 transition-all';
+          } else if (s < currentOnboardingStep) {
+            dot.className = 'w-2 h-2 rounded-full bg-emerald-400 transition-all';
+          } else {
+            dot.className = 'w-2 h-2 rounded-full bg-slate-700 transition-all';
+          }
+        }
+      }
+
+      // Energy Progress Bar surge
+      const bar = document.getElementById('onboardingEnergyBar');
+      const text = document.getElementById('onboardingEnergyPercent');
+      if (bar && text) {
+        if (currentOnboardingStep === 1) {
+          bar.style.width = '0%';
+          text.textContent = '0%';
+        } else if (currentOnboardingStep === 2) {
+          bar.style.width = '70%';
+          text.textContent = '70%';
+        } else if (currentOnboardingStep === 3) {
+          bar.style.width = '85%';
+          text.textContent = '85%';
+        } else {
+          bar.style.width = '100%';
+          text.textContent = '100% SẴN SÀNG';
+        }
+      }
     }
   </script>
 
@@ -5221,6 +5695,181 @@
       <p class="text-[10px] text-slate-500 text-center mt-3">
         * Ưu tiên các cửa hàng có sẵn hỗ trợ trả góp FE Credit / Home Credit / HD Saison tại Quế Võ, Yên Phong, Thuận Thành, Tiên Sơn.
       </p>
+    </div>
+  </div>
+
+  <!-- Modal: Dopamine Onboarding Splash Flow (4-Screen Dark-Gold Awakening) -->
+  <div id="modalOnboardingFlow" class="fixed inset-0 z-[100005] bg-slate-950/95 backdrop-blur-xl hidden items-center justify-center p-3 sm:p-4 overflow-y-auto" style="display: none;">
+    <div class="bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 border-2 border-amber-500/40 rounded-3xl max-w-lg w-full p-5 sm:p-7 shadow-2xl relative text-left my-auto overflow-hidden">
+      <!-- Glow effect -->
+      <div class="absolute -right-16 -top-16 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <!-- Header: Title & Close Button -->
+      <div class="flex items-center justify-between gap-3 pb-3 border-b border-slate-800">
+        <div class="flex items-center gap-2">
+          <span class="w-8 h-8 rounded-xl bg-gradient-to-tr from-amber-500 to-emerald-400 p-[1px] flex items-center justify-center font-black text-slate-950 text-sm shadow">
+            ⚡
+          </span>
+          <div>
+            <h3 class="text-sm sm:text-base font-black text-white">KHAI TÂM ĐẮC ĐẠO</h3>
+            <p class="text-[10px] text-amber-400 font-bold uppercase tracking-wider">Huyết Mạch Thần Ngữ 70%</p>
+          </div>
+        </div>
+        <button onclick="closeOnboardingFlowModal()" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center text-sm font-bold transition">✕</button>
+      </div>
+
+      <!-- Energy Progress Surge Bar (0% -> 70% Surge!) -->
+      <div class="my-3.5 bg-slate-950 p-2.5 rounded-2xl border border-slate-800">
+        <div class="flex items-center justify-between text-[11px] mb-1.5 font-bold">
+          <span class="text-slate-300 flex items-center gap-1.5">
+            <span>🧬</span>
+            <span>Năng Lượng Giác Ngộ Hán-Việt Sẵn Có:</span>
+          </span>
+          <span id="onboardingEnergyPercent" class="text-amber-400 font-mono text-xs font-black animate-pulse">0%</span>
+        </div>
+        <div class="w-full h-3 bg-slate-900 rounded-full overflow-hidden p-0.5 border border-slate-800">
+          <div id="onboardingEnergyBar" class="h-full bg-gradient-to-r from-amber-500 via-emerald-400 to-amber-300 rounded-full transition-all duration-700 ease-out" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <!-- Carousel Container: 4 Slides -->
+      <div class="min-h-[290px] flex flex-col justify-between">
+        
+        <!-- Slide 1: Huyết Mạch Thức Tỉnh -->
+        <div id="onboardingSlide_1" class="space-y-3">
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[10px] font-black">
+            <span>⚡ BƯỚC 1/4 • HUYẾT MẠCH THỨC TỈNH · CÓ SẴN 70%</span>
+          </div>
+          <h4 class="text-base sm:text-lg font-black text-white leading-snug">
+            Người Việt mới giữ trọn tinh hoa cổ ngữ — Bạn đã biết nói 70% tiếng Trung mà không cần học!
+          </h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Hơn 70% từ vựng tiếng Việt có gốc Hán Việt cổ đại chuẩn xác nhất. Bạn không phải học ngoại ngữ, bạn chỉ đang đánh thức kho báu ngôn ngữ sẵn có trong máu mình!
+          </p>
+          <div class="p-3 rounded-2xl bg-slate-950/80 border border-amber-500/20 space-y-1.5 text-xs">
+            <div class="flex items-center gap-2 text-slate-200">
+              <span class="text-emerald-400">✓</span>
+              <span><strong>Thái độ</strong> = Tàidù (态度) • <strong>An toàn</strong> = Ānquán (安全)</span>
+            </div>
+            <div class="flex items-center gap-2 text-slate-200">
+              <span class="text-emerald-400">✓</span>
+              <span><strong>Công xưởng</strong> = Gōngchǎng (工厂) • <strong>Chuẩn bị</strong> = Zhǔnbèi (准备)</span>
+            </div>
+            <div class="text-[11px] text-amber-400/90 font-medium italic pt-1 border-t border-slate-800/80">
+              👉 Bạn sinh ra đã đứng ở vạch đích 70%! Bấm tiếp tục để giải phóng kiếm khí!
+            </div>
+          </div>
+          <button onclick="setOnboardingStep(2)" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 hover:opacity-95 text-slate-950 font-black text-xs shadow-xl transition flex items-center justify-center gap-2">
+            <span>Khai Mở Năng Lượng Thiên Bẩm</span>
+            <span>👉</span>
+          </button>
+        </div>
+
+        <!-- Slide 2: Phế Bỏ Viết Tay -->
+        <div id="onboardingSlide_2" class="hidden space-y-3">
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-red-500/20 text-red-300 border border-red-500/40 text-[10px] font-black">
+            <span>🚫 BƯỚC 2/4 • PHẾ BỎ VIẾT TAY · BIẾT NÓI LÀ LÀM TỔ TRƯỞNG</span>
+          </div>
+          <h4 class="text-base sm:text-lg font-black text-white leading-snug">
+            Vứt cây bút đi! Bạn KHÔNG CẦN biết viết chữ Hán, chỉ cần biết NÓI là đủ!
+          </h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Sự thật chấn động: 80% sinh viên đại học Trung Quốc hiện nay cũng quên cách viết tay 100 chữ Hán thông dụng vì chỉ dùng bàn phím. Trong xưởng, người ta trả lương 15 triệu cho cái miệng biết nói của Tổ trưởng, không ai bắt bạn thi viết chữ đẹp!
+          </p>
+          <div class="p-3 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-1.5 text-xs">
+            <div class="flex items-center gap-2 text-slate-200">
+              <span class="text-red-400">✗</span>
+              <span><strong>Zero tập viết:</strong> Không vẽ nét vuông, không tốn 2 năm vô ích.</span>
+            </div>
+            <div class="flex items-center gap-2 text-slate-200">
+              <span class="text-emerald-400">✓</span>
+              <span><strong>100% Khẩu quyết:</strong> Lắp ghép từ bồi phiên âm phản xạ trong 50ms.</span>
+            </div>
+            <div class="text-[11px] text-emerald-400/90 font-medium italic pt-1 border-t border-slate-800/80">
+              💰 Người Hoa trả lương thưởng cho công việc hoàn thành, không trả cho viết thư pháp!
+            </div>
+          </div>
+          <button onclick="setOnboardingStep(3)" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 hover:opacity-95 text-slate-950 font-black text-xs shadow-xl transition flex items-center justify-center gap-2">
+            <span>Xem Cơ Chế Đột Phá 21 Ngày</span>
+            <span>👉</span>
+          </button>
+        </div>
+
+        <!-- Slide 3: Cơ Chế Gây Nghiện -->
+        <div id="onboardingSlide_3" class="hidden space-y-3">
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 text-[10px] font-black">
+            <span>🎮 BƯỚC 3/4 • CƠ CHẾ GÂY NGHIỆN · 21 NGÀY 3000 TỪ</span>
+          </div>
+          <h4 class="text-base sm:text-lg font-black text-white leading-snug">
+            21 ngày nuốt trọn 3.000 từ vựng dễ như uống nước — Học tiếng Trung gây nghiện như chơi Game!
+          </h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Phản xạ âm thanh cực tốc 50ms. Không ngữ pháp nhức đầu. 3 trạm nạp nước mỗi ngày, mỗi trạm 3 phút, thăng cấp từ Luyện Khí lên Tổ Trưởng Kim Đan!
+          </p>
+          <div class="grid grid-cols-3 gap-2 text-center text-xs">
+            <div class="p-2 rounded-xl bg-slate-950 border border-slate-800">
+              <div class="text-amber-400 font-black text-sm">3 Phút</div>
+              <div class="text-[10px] text-slate-400 mt-0.5">3 Trạm nạp nước/ngày</div>
+            </div>
+            <div class="p-2 rounded-xl bg-slate-950 border border-slate-800">
+              <div class="text-cyan-400 font-black text-sm">1 Biến 5</div>
+              <div class="text-[10px] text-slate-400 mt-0.5">Ma trận từ căn đồng âm</div>
+            </div>
+            <div class="p-2 rounded-xl bg-slate-950 border border-slate-800">
+              <div class="text-emerald-400 font-black text-sm">3X Ma Âm</div>
+              <div class="text-[10px] text-slate-400 mt-0.5">Không khoảng nghỉ</div>
+            </div>
+          </div>
+          <button onclick="setOnboardingStep(4)" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 hover:opacity-95 text-slate-950 font-black text-xs shadow-xl transition flex items-center justify-center gap-2">
+            <span>Nhận Lệnh Xuất Sư</span>
+            <span>👉</span>
+          </button>
+        </div>
+
+        <!-- Slide 4: Xuất Sư Đại Lễ -->
+        <div id="onboardingSlide_4" class="hidden space-y-3">
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-[10px] font-black">
+            <span>🚀 BƯỚC 4/4 • XUẤT SƯ ĐẠI LỄ · BƯỚC VÀO CHIẾN DỊCH</span>
+          </div>
+          <h4 class="text-base sm:text-lg font-black text-white leading-snug">
+            Chiến Dịch 21 Ngày Thần Ngữ Tu Chân — Khởi Động!
+          </h4>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Bạn đã nắm sẵn 70% phần thắng trong tay. Chỉ cần 21 ngày tiếp theo, mỗi ngày 3 ngụm nước, vị trí Tổ Trưởng và mức lương 15.000.000đ đang đợi bạn!
+          </p>
+          <div class="p-3.5 rounded-2xl bg-gradient-to-br from-amber-500/10 via-slate-950 to-emerald-500/10 border border-amber-500/30 text-xs space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-slate-400">⚡ Tỷ lệ chiến thắng ban đầu:</span>
+              <span class="font-black text-amber-400 font-mono">70% CÓ SẴN TRONG MÁU</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-slate-400">🎯 Mục tiêu chức danh:</span>
+              <span class="font-bold text-white">Tổ Trưởng Chuyền Foxconn/Samsung</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-slate-400">💵 Mức lương kỳ vọng:</span>
+              <span class="font-bold text-emerald-400">15.000.000đ - 22.000.000đ</span>
+            </div>
+          </div>
+          <button onclick="closeOnboardingFlowModal()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 hover:opacity-95 text-slate-950 font-black text-xs sm:text-sm shadow-xl shadow-amber-500/20 transition flex items-center justify-center gap-2 animate-pulse">
+            <span>⚡</span>
+            <span>BẮT ĐẦU TU CHÂN (ĐÃ NẮM 70% THẮNG LỢI)</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Dot Indicators & Step Selector -->
+      <div class="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between">
+        <div class="flex items-center gap-1.5" id="onboardingDots">
+          <button onclick="setOnboardingStep(1)" id="onboardingDot_1" class="w-6 h-2 rounded-full bg-amber-400 transition-all"></button>
+          <button onclick="setOnboardingStep(2)" id="onboardingDot_2" class="w-2 h-2 rounded-full bg-slate-700 transition-all"></button>
+          <button onclick="setOnboardingStep(3)" id="onboardingDot_3" class="w-2 h-2 rounded-full bg-slate-700 transition-all"></button>
+          <button onclick="setOnboardingStep(4)" id="onboardingDot_4" class="w-2 h-2 rounded-full bg-slate-700 transition-all"></button>
+        </div>
+        <button onclick="closeOnboardingFlowModal()" class="text-[11px] text-slate-400 hover:text-slate-200 underline">Bỏ qua hướng dẫn</button>
+      </div>
+
     </div>
   </div>
 </body>
