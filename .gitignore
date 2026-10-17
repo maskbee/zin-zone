@@ -11,3 +11,6 @@ __pycache__/
 Thumbs.db
 test_audio.mp3
 test_sentence.mp3
+apk_extracted/
+screen_test*.png
+splash_preview.png

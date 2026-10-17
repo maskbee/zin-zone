@@ -99,7 +99,9 @@ if (!aid || aid.length < 4) aid = serial;
 
 const cleanBrand = brand.replace(/[^a-zA-Z0-9]/g, '');
 const cleanModel = marketName.replace(/[^a-zA-Z0-9]/g, '') || rawModel.replace(/[^a-zA-Z0-9]/g, '');
-const token = `ZZ-${cleanBrand}-${cleanModel}-${aid.substring(0, 8).toUpperCase()}`;
+const aidHex = aid.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+const token = `ZZ-${cleanBrand}-${cleanModel}-${aidHex.substring(0, 8)}`;
+const deviceRefCode = `ZIN-${aidHex.substring(0, 4)}`;
 
 console.log('---------------------------------------------------------------------');
 console.log(`  📱 手机品牌:    \x1b[32m${brand}\x1b[0m`);
@@ -107,6 +109,7 @@ console.log(`  📱 商业机型:    \x1b[32m${marketName}\x1b[0m \x1b[90m(工�
 console.log(`  🔑 硬件串号:    ${serial}`);
 console.log(`  🆔 底层 AID:    ${aid}`);
 console.log(`  ⭐ 专属 Token:  \x1b[33m${token}\x1b[0m`);
+console.log(`  🎁 专属邀请码:  \x1b[32m${deviceRefCode}\x1b[0m (一机一码，绑定硬件)`);
 console.log('---------------------------------------------------------------------\n');
 
 // 4. Generate local license
@@ -122,6 +125,7 @@ const licenseData = {
   serial: serial,
   android_id: aid,
   token: token,
+  referral_code: deviceRefCode,
   status: 'AUTHENTIC_ZIN_VERIFIED',
   warranty_grade: '100_PERCENT_ORIGINAL_ZIN',
   promotion_license: 'ACTIVE_PHASE_1_PROMOTION',
@@ -187,19 +191,20 @@ if (!isInstalled) {
 console.log('[*] 正在手机上启动 Zin Zone 并展示正品界面...');
 try {
   adbCmd('shell am force-stop zone.zin.app');
-  adbCmd('shell am start -n zone.zin.app/.MainActivity');
+  adbCmd(`shell am start -n zone.zin.app/.MainActivity --es token "${token}" --es my_ref "${deviceRefCode}"`);
 } catch (e) {}
 try {
-  adbCmd(`shell am start -a android.intent.action.VIEW -d "https://zin.zone/?token=${token}"`);
+  adbCmd(`shell am start -a android.intent.action.VIEW -d "https://zin.zone/?token=${token}&my_ref=${deviceRefCode}"`);
 } catch (e) {}
 
 console.log('\n\x1b[32m=====================================================================\x1b[0m');
 console.log('\x1b[32m  🎉 恭喜！安卓设备已成功完成一键绑定与正品认证！\x1b[0m');
 console.log('\x1b[32m=====================================================================\x1b[0m');
-console.log(`  - 认证状态:  \x1b[33m✅ 100% 原装正品 Zin 认证通过\x1b[0m`);
-console.log(`  - 设备型号:  \x1b[32m${marketName}\x1b[0m \x1b[90m(${rawModel})\x1b[0m`);
-console.log(`  - 专属Token: \x1b[36m${token}\x1b[0m`);
-console.log('  - 防复制保护: 已开启（仅限本机解密，私传至其他手机无法通过校验）');
-console.log('  - 附赠特权:  已随设备附赠 21天华人工厂升职秘籍');
+console.log(`  - 认证状态:    \x1b[33m✅ 100% 原装正品 Zin 认证通过\x1b[0m`);
+console.log(`  - 设备型号:    \x1b[32m${marketName}\x1b[0m \x1b[90m(${rawModel})\x1b[0m`);
+console.log(`  - 专属 Token:  \x1b[36m${token}\x1b[0m`);
+console.log(`  - 专属邀请码:  \x1b[32m${deviceRefCode}\x1b[0m (一机一码，机主分享赚200k现金)`);
+console.log('  - 防复制保护:  已开启（仅限本机解密，私传至其他手机无法通过校验）');
+console.log('  - 附赠特权:    已随设备附赠 21天华人工厂升职秘籍');
 console.log('\n👉 \x1b[32m现在可以拔出 USB 数据线，手机桌面打开 Zin Zone 即可畅享体验！\x1b[0m');
 console.log('=====================================================================\n');

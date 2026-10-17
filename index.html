@@ -252,7 +252,8 @@
           </button>
           <button onclick="switchMainTab('hot')" id="navTab-hot" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800">
             <span class="text-amber-400">🔥</span>
-            <span>5 Máy Hot & Đặt Hàng</span>
+            <span>Điểm Hẹn & Trả Góp</span>
+            <span class="px-1.5 py-0.5 rounded text-[10px] bg-amber-500/20 text-amber-300 font-extrabold border border-amber-500/30">0%</span>
           </button>
           <button onclick="switchMainTab('share')" id="navTab-share" class="px-3.5 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5 text-slate-300 hover:text-white hover:bg-slate-800">
             <span class="animate-bounce">💵</span>
@@ -939,11 +940,14 @@
             <div class="text-lg font-black text-white mt-1">"Tao vừa đổi máy Zin Zone có bí kíp làm tổ trưởng!"</div>
             <p class="text-xs text-slate-300 mt-1">Quét mã giảm ngay 100k + Tặng khóa 21 ngày thăng chức (Trị giá 1.5M)</p>
             <div class="my-3 inline-block p-2 bg-white rounded-xl shadow-lg">
-              <div class="w-24 h-24 bg-slate-900 rounded flex items-center justify-center text-white text-[10px] font-mono">
-                [QR CODE ZIN-8899]
+              <div id="badgeQrCodeContainer" class="w-24 h-24 bg-slate-900 rounded flex items-center justify-center text-white text-[10px] font-mono p-1 overflow-hidden">
+                <img id="badgeQrCodeImg" src="" alt="QR" class="w-full h-full object-contain hidden">
+                <div id="badgeQrCodeText" class="text-center font-mono text-[9px] leading-tight text-slate-300">
+                  [QR CODE]<br><span id="badgeRefCodeSub" class="text-amber-400 font-bold">ZIN-8899</span>
+                </div>
               </div>
             </div>
-            <div class="text-[10px] text-emerald-400 font-bold">MÃ GIẢM GIÁ: ZIN-8899</div>
+            <div id="badgeRefCodeText" class="text-[10px] text-emerald-400 font-bold">MÃ GIẢM GIÁ: ZIN-8899</div>
           </div>
         </div>
 
@@ -1085,144 +1089,366 @@
   <!-- ========================================================================= -->
   <section id="section-hot" class="tab-section hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-1">
     
-    <!-- Philosophy & Scarcity Banner -->
+    <!-- Hero Banner: Installment Finance 0% & In-Store Experience -->
     <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-amber-950/40 via-slate-900 to-slate-950 border border-amber-500/30 p-6 sm:p-8 shadow-2xl mb-8">
-      <div class="max-w-3xl">
+      <div class="max-w-4xl">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-black bg-amber-500/20 text-amber-400 border border-amber-500/30 mb-3">
-          <span>🔥</span>
-          <span>TIÊU CHUẨN KHẮC NGHIỆT • KHÔNG BÁN HÀNG RÁC HÀNG DỰNG TRÀN LAN</span>
+          <span>💳</span>
+          <span>HỖ TRỢ TRẢ GÓP 0% • CHỈ CẦN CĂN CƯỚC CÔNG DÂN (CCCD)</span>
         </div>
         <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight leading-tight">
-          Vì Sao Zin Zone Chỉ Tuyển Chọn 5 Chiếc Máy Hot Có Sẵn Mỗi Ngày?
+          Lấy Máy Trước - Trả Góp Sau • Trải Nghiệm Trực Tiếp Tại Điểm Hẹn KCN
         </h2>
         <p class="mt-2 text-xs sm:text-sm text-slate-300 leading-relaxed">
-          Máy nguyên zin 100% chưa qua sửa chữa cực kỳ khan hiếm trên thị trường, không thể có sẵn bạt ngàn cả trăm cây như hàng dựng thay vỏ ngoài tiệm! Zin Zone kiểm định 32 bước khắt khe, <strong>mỗi ngày chỉ tuyển đúng 5 chiếc máy đạt chuẩn hoàn hảo nhất để giao ngay</strong>. Khách cần dòng máy khác? Chúng tôi nhận <strong class="text-amber-400">săn máy theo yêu cầu trong 24h - 48h</strong>!
+          Không cần trả thẳng tiền triệu, không lo áp lực tài chính! Tại các <strong>Cửa hàng Ủy quyền Zin Zone</strong>, anh em công nhân được duyệt hồ sơ trả góp trong <strong>5 phút chỉ với CCCD</strong> (Hợp tác cùng <strong>FE Credit, Home Credit, HD Saison</strong>). Trả trước từ <strong class="text-amber-400">0đ ~ 300.000đ</strong>, mỗi tháng chỉ từ vài ly trà sữa là có ngay siêu máy cày game + phần mềm 21 ngày lên chức tổ trưởng!
         </p>
 
-        <div class="mt-4 flex items-center gap-3 text-xs text-red-400 font-bold bg-red-950/40 border border-red-900/40 p-3 rounded-xl">
-          <span>🚫</span>
-          <span>ZIN ZONE NÓI KHÔNG VỚI THU MUA MÁY CŨ TRÔI NỔI: Chúng tôi không thu máy cũ nát của người này để luộc đồ bán lại cho người khác!</span>
+        <!-- Finance Partner Badges -->
+        <div class="mt-4 flex flex-wrap items-center gap-2 text-xs">
+          <span class="px-3 py-1.5 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-300 font-bold flex items-center gap-1.5">
+            <span class="text-emerald-400">✓</span> Duyệt Nhanh 5 Phút
+          </span>
+          <span class="px-3 py-1.5 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-300 font-bold flex items-center gap-1.5">
+            <span class="text-emerald-400">✓</span> 0đ Trả Trước Lấy Máy
+          </span>
+          <span class="px-3 py-1.5 rounded-xl bg-slate-900/90 border border-slate-800 text-slate-300 font-bold flex items-center gap-1.5">
+            <span class="text-emerald-400">✓</span> Không Cần Chứng Minh Thu Nhập
+          </span>
+          <span class="px-3 py-1.5 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 font-bold flex items-center gap-1.5">
+            <span>🛡️</span> Home Credit / FE Credit / HD Saison
+          </span>
         </div>
       </div>
     </div>
 
-    <!-- 5 Hot In-Stock Phones Grid -->
-    <div class="mb-8">
-      <div class="flex items-center justify-between mb-4">
+    <!-- Authorized Store Locator (Danh Sách Đại Lý Độc Quyền KCN Bắc Ninh) -->
+    <div class="mb-10">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
         <div>
-          <h3 class="text-lg font-black text-white flex items-center gap-2">
+          <h3 class="text-lg sm:text-xl font-black text-white flex items-center gap-2">
             <span class="w-2.5 h-6 rounded bg-amber-500 inline-block"></span>
-            <span>5 Chiếc Máy Hot Đang Có Sẵn Tại Kho</span>
+            <span>Hệ Thống Đại Lý Ủy Quyền Độc Quyền (Bán Kính 1km)</span>
           </h3>
-          <p class="text-xs text-slate-400">Đã cài sẵn bản quyền 21 Ngày Thăng Chức • Giao hỏa tốc 15 phút tại cổng KCN</p>
+          <p class="text-xs text-slate-400 mt-1">Đến trực tiếp cửa hàng gần cổng công ty bạn để test máy máy lạnh, tải game & làm thủ tục trả góp tại chỗ</p>
         </div>
-        <span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-lg border border-emerald-500/20 animate-pulse">● Đang có sẵn 5 máy</span>
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
+          <button onclick="filterStoresByKcn('all')" id="btnKcn-all" class="store-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold transition bg-amber-500 text-slate-950 shadow">Tất Cả</button>
+          <button onclick="filterStoresByKcn('quevo')" id="btnKcn-quevo" class="store-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold transition bg-slate-900 border border-slate-800 text-slate-300 hover:text-white">KCN Quế Võ</button>
+          <button onclick="filterStoresByKcn('yenphong')" id="btnKcn-yenphong" class="store-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold transition bg-slate-900 border border-slate-800 text-slate-300 hover:text-white">KCN Yên Phong</button>
+          <button onclick="filterStoresByKcn('tienson')" id="btnKcn-tienson" class="store-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold transition bg-slate-900 border border-slate-800 text-slate-300 hover:text-white">Tiên Sơn / Thuận Thành</button>
+        </div>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         
-        <!-- Phone 1 -->
-        <div class="bg-slate-900 border border-slate-800 hover:border-amber-500/50 rounded-2xl p-5 shadow-lg flex flex-col justify-between transition">
+        <!-- Store 1: Quế Võ -->
+        <div class="store-card store-kcn-quevo bg-slate-900 border border-amber-500/40 rounded-2xl p-5 shadow-xl flex flex-col justify-between relative overflow-hidden">
+          <div class="absolute top-0 right-0 px-3 py-1 rounded-bl-xl bg-amber-500 text-slate-950 text-[10px] font-black uppercase tracking-wider">
+            Đại Lý Độc Quyền Quế Võ #1
+          </div>
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-2xl">🏪</span>
+              <div>
+                <h4 class="text-base font-black text-white">Cửa Hàng Điện Thoại Tuấn Mobile</h4>
+                <div class="text-[11px] text-amber-400 font-bold">Điểm Trải Nghiệm Zin Zone Cổng KCN Foxconn</div>
+              </div>
+            </div>
+            <div class="text-xs text-slate-300 mt-2 flex items-start gap-1.5">
+              <span>📍</span>
+              <span><strong>Địa chỉ:</strong> Ngã tư Phố Mới, TX. Quế Võ, Bắc Ninh (Cách cổng KCN Foxconn / Goertek 500m).</span>
+            </div>
+            <div class="mt-3 p-3 rounded-xl bg-slate-950 border border-slate-800 space-y-1.5 text-xs">
+              <div class="text-emerald-400 font-bold flex items-center gap-1.5">
+                <span>✓</span> Có sẵn máy Zin Zone trải nghiệm miễn phí
+              </div>
+              <div class="text-slate-300 flex items-center gap-1.5">
+                <span>✓</span> Hỗ trợ làm thủ tục Trả Góp CCCD duyệt 5 phút tại chỗ
+              </div>
+              <div class="text-slate-300 flex items-center gap-1.5">
+                <span>✓</span> Hỗ trợ bảo hành phần cứng và đổi máy trực tiếp
+              </div>
+            </div>
+          </div>
+          <div class="mt-4 grid grid-cols-2 gap-2 pt-3 border-t border-slate-800">
+            <a href="https://maps.google.com/?q=Pho+Moi+Que+Vo+Bac+Ninh" target="_blank" rel="noopener noreferrer" class="py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs transition text-center flex items-center justify-center gap-1.5">
+              <span>📍</span>
+              <span>Chỉ Đường Maps</span>
+            </a>
+            <a href="https://zalo.me" target="_blank" rel="noopener noreferrer" class="py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition text-center flex items-center justify-center gap-1.5 shadow">
+              <span>💬</span>
+              <span>Nhắn Zalo Đặt Máy</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 2: Yên Phong -->
+        <div class="store-card store-kcn-yenphong bg-slate-900 border border-amber-500/40 rounded-2xl p-5 shadow-xl flex flex-col justify-between relative overflow-hidden">
+          <div class="absolute top-0 right-0 px-3 py-1 rounded-bl-xl bg-amber-500 text-slate-950 text-[10px] font-black uppercase tracking-wider">
+            Đại Lý Độc Quyền Yên Phong #2
+          </div>
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-2xl">🏪</span>
+              <div>
+                <h4 class="text-base font-black text-white">Cửa Hàng Điện Thoại Thành Đạt</h4>
+                <div class="text-[11px] text-amber-400 font-bold">Điểm Trải Nghiệm Zin Zone Cạnh KTX Samsung</div>
+              </div>
+            </div>
+            <div class="text-xs text-slate-300 mt-2 flex items-start gap-1.5">
+              <span>📍</span>
+              <span><strong>Địa chỉ:</strong> Khu phố Chợ Ấp Đồn, Yên Trung, Yên Phong, Bắc Ninh (Cách KTX Samsung 300m).</span>
+            </div>
+            <div class="mt-3 p-3 rounded-xl bg-slate-950 border border-slate-800 space-y-1.5 text-xs">
+              <div class="text-emerald-400 font-bold flex items-center gap-1.5">
+                <span>✓</span> Có sẵn máy Zin Zone trải nghiệm miễn phí
+              </div>
+              <div class="text-slate-300 flex items-center gap-1.5">
+                <span>✓</span> Hỗ trợ làm thủ tục Trả Góp CCCD duyệt 5 phút tại chỗ
+              </div>
+              <div class="text-slate-300 flex items-center gap-1.5">
+                <span>✓</span> Hỗ trợ bảo hành phần cứng và đổi máy trực tiếp
+              </div>
+            </div>
+          </div>
+          <div class="mt-4 grid grid-cols-2 gap-2 pt-3 border-t border-slate-800">
+            <a href="https://maps.google.com/?q=Cho+Ap+Don+Yen+Trung+Yen+Phong+Bac+Ninh" target="_blank" rel="noopener noreferrer" class="py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs transition text-center flex items-center justify-center gap-1.5">
+              <span>📍</span>
+              <span>Chỉ Đường Maps</span>
+            </a>
+            <a href="https://zalo.me" target="_blank" rel="noopener noreferrer" class="py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition text-center flex items-center justify-center gap-1.5 shadow">
+              <span>💬</span>
+              <span>Nhắn Zalo Đặt Máy</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store 3: Tiên Sơn Placeholder -->
+        <div class="store-card store-kcn-tienson bg-slate-900/60 border border-slate-800 rounded-2xl p-5 shadow flex flex-col justify-between">
           <div>
             <div class="flex items-center justify-between text-[11px] mb-2">
-              <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30">CÓ SẴN 1 CÂY</span>
-              <span class="text-slate-400">Pin 99% • Màn Zin</span>
+              <span class="px-2.5 py-0.5 rounded-full bg-slate-800 text-amber-400 font-bold border border-amber-500/30">KCN Tiên Sơn / Đại Đồng</span>
+              <span class="text-slate-500">Bảo hộ 1km</span>
             </div>
-            <h4 class="text-base font-black text-white">Samsung Galaxy A14 5G</h4>
-            <div class="text-xl font-black text-amber-400 mt-1">2.790.000đ</div>
-            <p class="text-xs text-slate-400 mt-2">Màn hình lớn 90Hz, pin trâu 5000mAh, loa to rõ cực thích hợp nghe bài học trên chuyền sản xuất.</p>
+            <h4 class="text-base font-black text-slate-300">Điểm Trải Nghiệm KCN Tiên Sơn</h4>
+            <div class="text-xs text-amber-400/90 font-semibold mt-1">⏳ Đang trong giai đoạn thẩm định đại lý độc quyền duy nhất</div>
+            <p class="text-xs text-slate-400 mt-2">Anh em công nhân KCN Tiên Sơn có thể ghé ngay đại lý Quế Võ hoặc Yên Phong để nhận máy và làm trả góp trong ngày.</p>
           </div>
-          <button onclick="orderHotPhone('Samsung Galaxy A14 5G')" class="mt-4 w-full py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs transition shadow">
-            Chốt Lấy Máy Này (Giao 15 Phút)
+          <div class="mt-4 pt-3 border-t border-slate-800">
+            <button onclick="openDealerPartnerModal('KCN Tiên Sơn')" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-400 font-bold text-xs transition border border-amber-500/30">
+              🤝 Đăng Ký Làm Đại Lý Độc Quyền Khu Vực Này
+            </button>
+          </div>
+        </div>
+
+        <!-- Store 4: Thuận Thành / VSIP Placeholder -->
+        <div class="store-card store-kcn-tienson bg-slate-900/60 border border-slate-800 rounded-2xl p-5 shadow flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between text-[11px] mb-2">
+              <span class="px-2.5 py-0.5 rounded-full bg-slate-800 text-amber-400 font-bold border border-amber-500/30">KCN Thuận Thành / VSIP</span>
+              <span class="text-slate-500">Bảo hộ 1km</span>
+            </div>
+            <h4 class="text-base font-black text-slate-300">Điểm Trải Nghiệm KCN Thuận Thành</h4>
+            <div class="text-xs text-amber-400/90 font-semibold mt-1">⏳ Đang trong giai đoạn thẩm định đại lý độc quyền duy nhất</div>
+            <p class="text-xs text-slate-400 mt-2">Chủ cửa hàng điện thoại tại khu vực VSIP Bắc Ninh có mong muốn trở thành đại lý độc quyền vui lòng liên hệ ngay với chúng tôi.</p>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-800">
+            <button onclick="openDealerPartnerModal('KCN Thuận Thành')" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-400 font-bold text-xs transition border border-amber-500/30">
+              🤝 Đăng Ký Làm Đại Lý Độc Quyền Khu Vực Này
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Featured Gaming & Career Spec Phones -->
+    <div class="mb-10">
+      <div class="flex items-center justify-between mb-5">
+        <div>
+          <h3 class="text-lg sm:text-xl font-black text-white flex items-center gap-2">
+            <span class="w-2.5 h-6 rounded bg-amber-500 inline-block"></span>
+            <span>Bảng Giá Máy Zin Zone Kèm Gói Trả Góp CCCD</span>
+          </h3>
+          <p class="text-xs text-slate-400 mt-1">100% Máy Cũ Zin Mộc Nguyên Bản • Đã cài sẵn siêu ứng dụng 21 Ngày Thăng Chức 1.500.000đ</p>
+        </div>
+        <span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-xl border border-emerald-500/20">
+          Chỉ Cần CCCD
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        
+        <!-- Phone 1: Redmi K60 -->
+        <div class="bg-slate-900 border border-slate-800 hover:border-amber-500/50 rounded-2xl p-5 shadow-xl flex flex-col justify-between transition">
+          <div>
+            <div class="flex items-center justify-between text-[11px] mb-2">
+              <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30">95% ZIN MỘC</span>
+              <span class="text-slate-400 font-mono">Bản RAM 16GB Hiếm</span>
+            </div>
+            <h4 class="text-base font-black text-white">Redmi K60 (POCO F5 Pro)</h4>
+            <div class="flex items-baseline gap-2 mt-1">
+              <span class="text-xl font-black text-amber-400">3.860.000đ</span>
+              <span class="text-[11px] text-slate-400">/ Giá thẳng</span>
+            </div>
+
+            <!-- Installment highlight -->
+            <div class="mt-3 p-3 rounded-xl bg-slate-950 border border-amber-500/30">
+              <div class="text-[10px] font-black uppercase text-amber-400 tracking-wider mb-1">GÓI TRẢ GÓP CCCD 5 PHÚT:</div>
+              <div class="text-xs text-slate-200">
+                Trả trước: <strong class="text-emerald-400">0đ ~ 300.000đ</strong>
+              </div>
+              <div class="text-xs text-slate-300">
+                Mỗi tháng chỉ từ: <strong class="text-amber-400 font-bold">190.000đ/tháng</strong>
+              </div>
+            </div>
+
+            <ul class="text-xs text-slate-400 mt-3 space-y-1.5 list-disc pl-4">
+              <li>RAM 16GB / 256GB tha hồ đa nhiệm không lo tràn RAM.</li>
+              <li>Snapdragon 8+ Gen 1 mở bung 100% công suất cày game.</li>
+              <li>Màn 2K OLED 120Hz siêu nét • Pin 5.500mAh cày ca đêm.</li>
+              <li>Kèm bản quyền Zin Zone 1.5M vĩnh viễn theo máy.</li>
+            </ul>
+          </div>
+          <button onclick="orderHotPhone('Redmi K60 16GB/256GB')" class="mt-5 w-full py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs transition shadow-lg flex items-center justify-center gap-1.5">
+            <span>🏪</span>
+            <span>Đến Cửa Hàng Gần Nhất Xem Máy</span>
           </button>
         </div>
 
-        <!-- Phone 2 -->
-        <div class="bg-slate-900 border border-slate-800 hover:border-amber-500/50 rounded-2xl p-5 shadow-lg flex flex-col justify-between transition">
+        <!-- Phone 2: Redmi K60 Pro -->
+        <div class="bg-slate-900 border border-amber-500/40 rounded-2xl p-5 shadow-xl flex flex-col justify-between transition relative overflow-hidden">
+          <div class="absolute top-0 right-0 px-2.5 py-0.5 rounded-bl-lg bg-red-600 text-white text-[9px] font-black uppercase">
+            Quái Vật 512GB
+          </div>
           <div>
             <div class="flex items-center justify-between text-[11px] mb-2">
-              <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30">CÓ SẴN 1 CÂY</span>
-              <span class="text-slate-400">Màn AMOLED • Sạc 33W</span>
+              <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-400 font-bold border border-amber-500/30">85% ZIN MỘC</span>
+              <span class="text-slate-400 font-mono">Bản Nửa Terabyte</span>
             </div>
-            <h4 class="text-base font-black text-white">Xiaomi Redmi Note 11</h4>
-            <div class="text-xl font-black text-amber-400 mt-1">2.690.000đ</div>
-            <p class="text-xs text-slate-400 mt-2">Dòng máy quốc dân của công nhân, sạc nhanh 30 phút đầy pin, chạy mượt mà không nóng máy.</p>
+            <h4 class="text-base font-black text-white">Redmi K60 Pro (POCO F5 Pro+)</h4>
+            <div class="flex items-baseline gap-2 mt-1">
+              <span class="text-xl font-black text-amber-400">4.145.000đ</span>
+              <span class="text-[11px] text-slate-400">/ Giá thẳng</span>
+            </div>
+
+            <!-- Installment highlight -->
+            <div class="mt-3 p-3 rounded-xl bg-slate-950 border border-amber-500/30">
+              <div class="text-[10px] font-black uppercase text-amber-400 tracking-wider mb-1">GÓI TRẢ GÓP CCCD 5 PHÚT:</div>
+              <div class="text-xs text-slate-200">
+                Trả trước: <strong class="text-emerald-400">0đ ~ 400.000đ</strong>
+              </div>
+              <div class="text-xs text-slate-300">
+                Mỗi tháng chỉ từ: <strong class="text-amber-400 font-bold">210.000đ/tháng</strong>
+              </div>
+            </div>
+
+            <ul class="text-xs text-slate-400 mt-3 space-y-1.5 list-disc pl-4">
+              <li>RAM 12GB / BỘ NHỚ 512GB lưu trữ game & tài liệu xưởng tẹt ga.</li>
+              <li>Chip Snapdragon 8 Gen 2 đỉnh cao xử lý mượt mọi tác vụ.</li>
+              <li>Sạc siêu tốc 120W (19 phút đầy pin) • Tản nhiệt VC 5000mm².</li>
+              <li>Kèm bản quyền Zin Zone 1.5M vĩnh viễn theo máy.</li>
+            </ul>
           </div>
-          <button onclick="orderHotPhone('Xiaomi Redmi Note 11')" class="mt-4 w-full py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs transition shadow">
-            Chốt Lấy Máy Này (Giao 15 Phút)
+          <button onclick="orderHotPhone('Redmi K60 Pro 512GB')" class="mt-5 w-full py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 hover:opacity-95 text-slate-950 font-black text-xs transition shadow-lg flex items-center justify-center gap-1.5">
+            <span>🏪</span>
+            <span>Đến Cửa Hàng Gần Nhất Xem Máy</span>
           </button>
         </div>
 
-        <!-- Phone 3 -->
-        <div class="bg-slate-900 border border-slate-800 hover:border-amber-500/50 rounded-2xl p-5 shadow-lg flex flex-col justify-between transition">
+        <!-- Phone 3: Redmi Note 12 Turbo -->
+        <div class="bg-slate-900 border border-slate-800 hover:border-amber-500/50 rounded-2xl p-5 shadow-xl flex flex-col justify-between transition">
           <div>
             <div class="flex items-center justify-between text-[11px] mb-2">
-              <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30">CÓ SẴN 1 CÂY</span>
-              <span class="text-slate-400">Zin Keng • Pin 89%</span>
+              <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30">98% LIKE NEW</span>
+              <span class="text-slate-400 font-mono">Bản Quốc Dân</span>
             </div>
-            <h4 class="text-base font-black text-white">iPhone 11 64GB Quốc Tế</h4>
-            <div class="text-xl font-black text-amber-400 mt-1">5.490.000đ</div>
-            <p class="text-xs text-slate-400 mt-2">Camera sắc nét, vỏ nguyên zin không tì vết. Đã cài sẵn WebClip thăng chức toàn màn hình.</p>
-          </div>
-          <button onclick="orderHotPhone('iPhone 11 64GB Zin Keng')" class="mt-4 w-full py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs transition shadow">
-            Chốt Lấy Máy Này (Giao 15 Phút)
-          </button>
-        </div>
+            <h4 class="text-base font-black text-white">Redmi Note 12 Turbo (POCO F5)</h4>
+            <div class="flex items-baseline gap-2 mt-1">
+              <span class="text-xl font-black text-amber-400">3.490.000đ</span>
+              <span class="text-[11px] text-slate-400">/ Giá thẳng</span>
+            </div>
 
-        <!-- Phone 4 -->
-        <div class="bg-slate-900 border border-slate-800 hover:border-amber-500/50 rounded-2xl p-5 shadow-lg flex flex-col justify-between transition">
-          <div>
-            <div class="flex items-center justify-between text-[11px] mb-2">
-              <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30">CÓ SẴN 1 CÂY</span>
-              <span class="text-slate-400">Màn OLED • Thiết kế vuông</span>
+            <!-- Installment highlight -->
+            <div class="mt-3 p-3 rounded-xl bg-slate-950 border border-amber-500/30">
+              <div class="text-[10px] font-black uppercase text-amber-400 tracking-wider mb-1">GÓI TRẢ GÓP CCCD 5 PHÚT:</div>
+              <div class="text-xs text-slate-200">
+                Trả trước: <strong class="text-emerald-400">0đ ~ 200.000đ</strong>
+              </div>
+              <div class="text-xs text-slate-300">
+                Mỗi tháng chỉ từ: <strong class="text-amber-400 font-bold">160.000đ/tháng</strong>
+              </div>
             </div>
-            <h4 class="text-base font-black text-white">iPhone 12 64GB / 128GB</h4>
-            <div class="text-xl font-black text-amber-400 mt-1">6.990.000đ</div>
-            <p class="text-xs text-slate-400 mt-2">Dòng máy cao cấp thể hiện đẳng cấp tổ trưởng tương lai. Hỗ trợ 5G tốc độ cao.</p>
-          </div>
-          <button onclick="orderHotPhone('iPhone 12 Zin Keng')" class="mt-4 w-full py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs transition shadow">
-            Chốt Lấy Máy Này (Giao 15 Phút)
-          </button>
-        </div>
 
-        <!-- Phone 5 -->
-        <div class="bg-slate-900 border border-slate-800 hover:border-amber-500/50 rounded-2xl p-5 shadow-lg flex flex-col justify-between transition">
-          <div>
-            <div class="flex items-center justify-between text-[11px] mb-2">
-              <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30">CÓ SẴN 1 CÂY</span>
-              <span class="text-slate-400">Siêu Bền • Pin Trâu</span>
-            </div>
-            <h4 class="text-base font-black text-white">OPPO A57 / A77 Siêu Bền</h4>
-            <div class="text-xl font-black text-amber-400 mt-1">2.590.000đ</div>
-            <p class="text-xs text-slate-400 mt-2">Khung vỏ chống va đập tốt trong môi trường nhà xưởng, loa siêu to 200% nghe rõ giữa tiếng máy.</p>
+            <ul class="text-xs text-slate-400 mt-3 space-y-1.5 list-disc pl-4">
+              <li>RAM 12GB / 256GB chiến mượt Liên Quân, Free Fire max setting.</li>
+              <li>Chip Snapdragon 7+ Gen 2 cận cao cấp siêu mát mẻ, tiết kiệm pin.</li>
+              <li>Màn hình OLED 68 tỷ màu viền siêu mỏng, loa kép to rõ.</li>
+              <li>Kèm bản quyền Zin Zone 1.5M vĩnh viễn theo máy.</li>
+            </ul>
           </div>
-          <button onclick="orderHotPhone('OPPO A57 Siêu Bền')" class="mt-4 w-full py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs transition shadow">
-            Chốt Lấy Máy Này (Giao 15 Phút)
+          <button onclick="orderHotPhone('Redmi Note 12 Turbo 12/256GB')" class="mt-5 w-full py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs transition shadow-lg flex items-center justify-center gap-1.5">
+            <span>🏪</span>
+            <span>Đến Cửa Hàng Gần Nhất Xem Máy</span>
           </button>
         </div>
 
       </div>
     </div>
 
-    <!-- On-Demand Custom Sourcing Form (Đặt Săn Máy Zin Theo Yêu Cầu) -->
-    <div class="bg-gradient-to-br from-slate-900 via-slate-950 to-amber-950/20 border-2 border-dashed border-amber-500/40 rounded-3xl p-6 sm:p-8 text-center max-w-3xl mx-auto shadow-2xl">
-      <div class="w-14 h-14 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/40 flex items-center justify-center text-2xl mx-auto mb-3">
-        🎯
-      </div>
-      <h3 class="text-xl sm:text-2xl font-black text-white">Cần Dòng Máy Khác? Đặt Săn Máy Zin Trong 24h - 48h!</h3>
-      <p class="text-xs sm:text-sm text-slate-300 mt-2 max-w-xl mx-auto">
-        Bạn thích iPhone Pro Max, Samsung dòng S, Realme hay Vivo? Chỉ cần cọc nhỏ <strong class="text-amber-400">100.000đ</strong>, Zin Zone sẽ đi săn lùng đúng chiếc máy nguyên zin 100% theo đúng ngân sách của bạn. Test kỹ 32 bước rồi mới giao!
-      </p>
+    <!-- Digital Device Verification & VIP Audio Unlock (Tra Cứu Bản Quyền Điện Tử & Tải VIP Audio) -->
+    <div class="bg-gradient-to-br from-slate-900 via-slate-950 to-indigo-950/40 border border-indigo-500/40 rounded-3xl p-6 sm:p-8 shadow-2xl mb-10">
+      <div class="max-w-3xl mx-auto text-center">
+        <div class="w-14 h-14 rounded-2xl bg-indigo-500/20 text-indigo-400 border border-indigo-500/40 flex items-center justify-center text-2xl mx-auto mb-3 shadow-lg">
+          🔍
+        </div>
+        <h3 class="text-xl sm:text-2xl font-black text-white">Tra Cứu Bản Quyền Điện Tử & Nhận Trọn Bộ Tài Liệu VIP</h3>
+        <p class="text-xs sm:text-sm text-slate-300 mt-2 max-w-xl mx-auto">
+          Quý khách sau khi nhận máy tại các cửa hàng ủy quyền, vui lòng nhập <strong>Mã Giới Thiệu trên màn hình máy</strong> (Ví dụ: <code class="text-amber-400 font-mono font-bold">ZIN-4B9E</code>) để tra cứu chứng nhận chính hãng và kích hoạt quyền lợi tải bộ tài liệu độc quyền!
+        </p>
 
-      <div class="mt-4 inline-block bg-slate-900 border border-emerald-500/40 px-4 py-2 rounded-xl text-xs text-emerald-400 font-bold">
-        🛡️ CAM KẾT VÀNG: Nếu máy tìm được không nguyên zin, đền cọc gấp đôi (200.000đ tiền mặt tại chỗ)!
-      </div>
+        <!-- Digital Verification Input Box -->
+        <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-2 max-w-md mx-auto">
+          <input type="text" id="inputDeviceVerifyCode" placeholder="Nhập mã máy (VD: ZIN-4B9E)..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-center sm:text-left text-white placeholder-slate-500 font-mono uppercase focus:outline-none focus:ring-2 focus:ring-amber-500">
+          <button onclick="verifyZinDeviceOnline()" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs shadow-lg transition whitespace-nowrap flex items-center justify-center gap-1.5">
+            <span>🛡️</span>
+            <span>Kiểm Tra Ngay</span>
+          </button>
+        </div>
 
-      <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
-        <input type="text" id="inputCustomModel" placeholder="Nhập tên dòng máy bạn muốn (VD: iPhone 13 128GB, Galaxy S21...)" class="w-full sm:w-80 bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500">
-        <button onclick="requestCustomSourcing()" class="w-full sm:w-auto px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-emerald-500 hover:opacity-95 text-slate-950 font-black text-xs shadow-lg transition">
-          🎯 Gửi Yêu Cầu Săn Máy Zin
-        </button>
+        <!-- Warning Card (Anti-Diversion) -->
+        <div class="mt-5 p-3 rounded-xl bg-red-950/30 border border-red-900/40 text-left text-xs text-red-300 flex items-start gap-2 max-w-xl mx-auto">
+          <span class="text-base shrink-0">⚠️</span>
+          <span><strong>LƯU Ý BẢO VỆ CÔNG NHÂN:</strong> Mọi điện thoại Zin Zone chính hãng bắt buộc phải tra cứu thành công trên hệ thống điện tử này. Nếu cửa hàng bán máy không kích hoạt được mã bản quyền, quý khách có quyền <strong>từ chối nhận máy và báo ngay cho tổng đài</strong> để được bảo vệ quyền lợi!</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- B2B Partner Recruitment (Dành Cho Chủ Quán Điện Thoại / Hợp Tác Đại Lý Độc Quyền) -->
+    <div class="bg-gradient-to-r from-slate-900 via-amber-950/20 to-slate-900 border border-amber-500/30 rounded-3xl p-6 sm:p-8 shadow-2xl">
+      <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+        <div>
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-black bg-amber-500/20 text-amber-400 border border-amber-500/30 mb-2">
+            <span>🤝</span>
+            <span>DÀNH RIÊNG CHO CHỦ CỬA HÀNG ĐIỆN THOẠI KCN BẮC NINH</span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-black text-white">Đăng Ký Làm Đại Lý Độc Quyền Khu Vực (Bán Kính 1km)</h3>
+          <p class="text-xs text-slate-300 mt-2 max-w-xl leading-relaxed">
+            Bạn đang đau đầu vì cạnh tranh giá máy cũ quá khốc liệt? Zin Zone cung cấp giải pháp tăng thêm <strong>300.000đ - 500.000đ lợi nhuận/máy</strong> hoàn toàn bằng công nghệ phần mềm:
+          </p>
+          <div class="grid grid-cols-2 gap-2 mt-3 text-[11px] text-slate-300 font-medium">
+            <div class="flex items-center gap-1.5"><span class="text-amber-400">✓</span> Bảo hộ độc quyền bán kính 1km</div>
+            <div class="flex items-center gap-1.5"><span class="text-amber-400">✓</span> Điều hướng khách TikTok/FB tận cửa</div>
+            <div class="flex items-center gap-1.5"><span class="text-amber-400">✓</span> Không cần vật tư rườm rà</div>
+            <div class="flex items-center gap-1.5"><span class="text-amber-400">✓</span> Kích hoạt điện tử bằng mã Token</div>
+          </div>
+        </div>
+        <div class="shrink-0 w-full md:w-auto">
+          <button onclick="openDealerPartnerModal('Hợp tác Đại lý Toàn Tỉnh')" class="w-full md:w-auto px-6 py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-400 hover:opacity-95 text-slate-950 font-black text-xs shadow-xl flex items-center justify-center gap-2">
+            <span>💬</span>
+            <span>Chat Zalo Phòng Hợp Tác Đại Lý</span>
+          </button>
+        </div>
       </div>
     </div>
 
@@ -1278,7 +1504,7 @@
     </button>
     <button onclick="switchMainTab('hot')" id="mNav-hot" class="flex flex-col items-center text-slate-400 hover:text-white">
       <span class="text-base">🔥</span>
-      <span class="text-[10px]">5 Máy Hot</span>
+      <span class="text-[10px]">Trả Góp 0%</span>
     </button>
     <button onclick="switchMainTab('share')" id="mNav-share" class="flex flex-col items-center text-emerald-400 font-black animate-pulse">
       <span class="text-base">💵</span>
@@ -1313,7 +1539,10 @@
 
     // Parse URL params for referral code & device serial (Hoisted to top for global safety)
     const urlParams = new URLSearchParams(window.location.search);
-    const refParam = urlParams.get('ref') || 'ZIN-8899';
+    const incomingRef = urlParams.get('ref') || ''; // The friend who referred this user
+    if (incomingRef) {
+      safeStorage.setItem('zin_incoming_referrer', incomingRef.trim().toUpperCase());
+    }
     const snParam = urlParams.get('sn') || '';
 
     // --- VIP GIFT LICENSE & DEVICE GATEKEEPER SYSTEM (BẢN QUYỀN QUÀ TẶNG KÈM MÁY CHÍNH HÃNG) ---
@@ -1340,6 +1569,88 @@
       if (/^ZZ-[A-Z0-9_\-]+-[A-F0-9]{4,16}$/i.test(clean)) return true;
       if (/^ZZ-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/i.test(clean)) return true;
       return false;
+    }
+
+    function deriveReferralCodeFromToken(token) {
+      if (!token) return 'ZIN-8899';
+      const clean = token.trim().toUpperCase();
+
+      // 1. If standard hardware token (e.g. ZZ-Xiaomi-RedmiK60-4B9E28F1 or ZZ-22127RK46C-C4D28A9B)
+      const parts = clean.split('-');
+      if (parts.length >= 3) {
+        const tail = parts[parts.length - 1];
+        if (tail.length >= 4 && tail !== '2026' && !/^\d{4}$/.test(tail)) {
+          return `ZIN-${tail.substring(0, 4)}`;
+        }
+        for (let i = parts.length - 2; i >= 1; i--) {
+          const p = parts[i];
+          if (p.length >= 4 && !['VIP', 'APP', 'ADMIN', 'IPHONE', 'ANDROID'].includes(p)) {
+            return `ZIN-${p.substring(p.length - 4)}`;
+          }
+        }
+      }
+
+      // 2. Deterministic 4-char alphanumeric hash for master tokens or other tokens
+      let hash = 5381;
+      for (let i = 0; i < clean.length; i++) {
+        hash = ((hash << 5) + hash) + clean.charCodeAt(i);
+        hash = hash & hash;
+      }
+      const hex = Math.abs(hash).toString(16).toUpperCase().padStart(4, '0');
+      return `ZIN-${hex.substring(0, 4)}`;
+    }
+
+    function getMyDeviceReferralCode() {
+      // 1. Explicitly passed in URL during activation
+      const urlMyRef = urlParams.get('my_ref') || urlParams.get('device_ref') || urlParams.get('ref_code');
+      if (urlMyRef) {
+        const clean = urlMyRef.trim().toUpperCase();
+        safeStorage.setItem('zin_my_referral_code', clean);
+        return clean;
+      }
+
+      // 2. Saved in storage
+      let savedRef = safeStorage.getItem('zin_my_referral_code');
+      const savedLicense = safeStorage.getItem('zin_device_license') || urlParams.get('token') || urlParams.get('license');
+
+      // If savedRef is missing or default 'ZIN-8899', but we have a valid device license, derive code!
+      if ((!savedRef || savedRef === 'ZIN-8899') && savedLicense && isValidLicenseToken(savedLicense)) {
+        savedRef = deriveReferralCodeFromToken(savedLicense);
+        safeStorage.setItem('zin_my_referral_code', savedRef);
+        return savedRef;
+      }
+
+      if (savedRef) return savedRef;
+
+      // 3. Fallback before binding
+      return 'ZIN-8899';
+    }
+
+    function updateReferralCodeDisplay() {
+      const myCode = getMyDeviceReferralCode();
+      const refUrl = `https://zin.zone?ref=${myCode}`;
+
+      const codeEl = document.getElementById('displayRefCode');
+      if (codeEl) codeEl.textContent = myCode;
+
+      const urlEl = document.getElementById('displayRefUrl');
+      if (urlEl) urlEl.textContent = refUrl;
+
+      const badgeCodeText = document.getElementById('badgeRefCodeText');
+      if (badgeCodeText) badgeCodeText.textContent = `MÃ GIẢM GIÁ: ${myCode}`;
+
+      const badgeRefSub = document.getElementById('badgeRefCodeSub');
+      if (badgeRefSub) badgeRefSub.textContent = myCode;
+
+      const qrImg = document.getElementById('badgeQrCodeImg');
+      const qrText = document.getElementById('badgeQrCodeText');
+      if (qrImg) {
+        qrImg.onload = () => {
+          qrImg.classList.remove('hidden');
+          if (qrText) qrText.classList.add('hidden');
+        };
+        qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(refUrl)}`;
+      }
     }
 
     function formatDeviceDisplayName(token) {
@@ -1372,17 +1683,26 @@
           appToken = `ZZ-APP-${modelTag}-2026`;
           safeStorage.setItem('zin_device_license', appToken);
         }
+        let myRef = safeStorage.getItem('zin_my_referral_code');
+        if (!myRef || myRef === 'ZIN-8899') {
+          myRef = params.get('my_ref') || deriveReferralCodeFromToken(appToken);
+          safeStorage.setItem('zin_my_referral_code', myRef);
+        }
         if (modal) {
           modal.style.display = 'none';
         }
         document.body.style.overflow = '';
         updateLicenseBadge(appToken);
+        updateReferralCodeDisplay();
         return true;
       }
 
       // 1. URL Token parameter auto-activation
       if (tokenFromUrl && isValidLicenseToken(tokenFromUrl)) {
         safeStorage.setItem('zin_device_license', tokenFromUrl.trim().toUpperCase());
+        const myRef = params.get('my_ref') || deriveReferralCodeFromToken(tokenFromUrl);
+        safeStorage.setItem('zin_my_referral_code', myRef);
+
         try {
           window.history.replaceState({}, document.title, window.location.pathname);
         } catch (e) {}
@@ -1391,8 +1711,9 @@
         }
         document.body.style.overflow = '';
         setTimeout(() => {
-          showToast('🎉 Kích hoạt bản quyền quà tặng thành công!', 'success');
+          showToast(`🎉 Kích hoạt máy thành công! Mã giới thiệu: [${myRef}]`, 'success');
           updateLicenseBadge(tokenFromUrl);
+          updateReferralCodeDisplay();
         }, 500);
         return true;
       }
@@ -1400,11 +1721,17 @@
       // 2. LocalStorage verification
       const savedLicense = safeStorage.getItem('zin_device_license');
       if (savedLicense && isValidLicenseToken(savedLicense)) {
+        let myRef = safeStorage.getItem('zin_my_referral_code');
+        if (!myRef || myRef === 'ZIN-8899') {
+          myRef = deriveReferralCodeFromToken(savedLicense);
+          safeStorage.setItem('zin_my_referral_code', myRef);
+        }
         if (modal) {
           modal.style.display = 'none';
         }
         document.body.style.overflow = '';
         updateLicenseBadge(savedLicense);
+        updateReferralCodeDisplay();
         return true;
       }
 
@@ -1432,6 +1759,8 @@
 
       if (isValidLicenseToken(key)) {
         safeStorage.setItem('zin_device_license', key);
+        const myRef = deriveReferralCodeFromToken(key);
+        safeStorage.setItem('zin_my_referral_code', myRef);
         if (errorMsg) errorMsg.classList.add('hidden');
         const modal = document.getElementById('gatekeeperModal');
         if (modal) modal.style.display = 'none';
@@ -1442,8 +1771,9 @@
           particleEngine.burst(window.innerWidth / 2, window.innerHeight / 2, 'gold', 50);
         }
         
-        showToast('🎉 KÍCH HOẠT THÀNH CÔNG! Chúc bạn tu luyện thăng chức!', 'success');
+        showToast(`🎉 KÍCH HOẠT THÀNH CÔNG! Mã giới thiệu của máy: [${myRef}]`, 'success');
         updateLicenseBadge(key);
+        updateReferralCodeDisplay();
       } else {
         if (errorMsg) {
           errorMsg.textContent = '❌ Mã kích hoạt không hợp lệ. Vui lòng kiểm tra lại phiếu quà tặng hoặc liên hệ cửa hàng mua máy.';
@@ -1463,17 +1793,13 @@
     }
 
     function showStoreLocatorFromGate() {
-      openStoreNoticeModal(
-        'Cửa Hàng Ủy Quyền Tặng Bản Quyền 1.500k',
-        `<p class="text-amber-400 font-bold mb-2">🎁 Gói Quà Tặng Độc Quyền Kèm Điện Thoại Chính Hãng:</p>
-         <p>Quý khách chưa có mã bản quyền? Vui lòng ghé các <strong>Cửa Hàng Điện Thoại Đối Tác Ủy Quyền</strong> của chúng tôi tại các KCN (Quang Châu, Vân Trung, Đình Trám, Yên Phong, Quế Võ, Tân Bình...):</p>
-         <ul class="list-disc pl-4 space-y-1 my-2 text-slate-300">
-           <li><strong>Mua máy chính hãng:</strong> Tặng 100% bản quyền phần mềm 21 ngày trị giá 1.500.000đ.</li>
-           <li><strong>Mã kích hoạt VIP:</strong> Cửa hàng sẽ kích hoạt sẵn hoặc cấp phiếu quà tặng mở khóa vĩnh viễn.</li>
-           <li><strong>Hỗ trợ kỹ thuật:</strong> Bảo hành phần cứng và đổi máy trực tiếp tại cửa hàng.</li>
-         </ul>
-         <p class="mt-2 text-emerald-400 font-bold">👉 Hãy đến ngay cửa hàng điện thoại gần nhất để chọn máy và nhận trọn bộ quà tặng!</p>`
-      );
+      const gate = document.getElementById('gatekeeperModal');
+      if (gate) {
+        gate.classList.add('hidden');
+        gate.style.display = 'none';
+      }
+      switchMainTab('hot');
+      showToast('📍 Đã chuyển đến danh sách Cửa Hàng Trả Góp & Điểm Hẹn Ủy Quyền!', 'info');
     }
 
     function updateLicenseBadge(token) {
@@ -2642,8 +2968,9 @@
     function shareFactionInviteZalo() {
       const state = getPlayerState();
       const fac = FACTIONS[state.faction] || FACTIONS.foxconn;
-      const text = encodeURIComponent(`Anh em ${fac.name} ơi! Vào Zin Zone đua chiến lực tiếng Trung thăng chức cùng tao! Quân đoàn mình đang cần thêm anh em tiếp sức: https://zin.zone?ref=${refParam}#learn`);
-      window.open(`https://zalo.me/share?url=https%3A%2F%2Fzin.zone%3Fref%3D${refParam}&text=${text}`, '_blank');
+      const myRef = getMyDeviceReferralCode();
+      const text = encodeURIComponent(`Anh em ${fac.name} ơi! Vào Zin Zone đua chiến lực tiếng Trung thăng chức cùng tao! Quân đoàn mình đang cần thêm anh em tiếp sức: https://zin.zone?ref=${myRef}#learn`);
+      window.open(`https://zalo.me/share?url=https%3A%2F%2Fzin.zone%3Fref%3D${myRef}&text=${text}`, '_blank');
     }
 
     // =========================================================================
@@ -2773,6 +3100,8 @@
       closePlayerProfileModal();
       if (typeof closeInstallGuide === 'function') closeInstallGuide();
       if (typeof closeJobModal === 'function') closeJobModal();
+      if (typeof closeDeviceVerificationModal === 'function') closeDeviceVerificationModal();
+      if (typeof closeDealerPartnerModal === 'function') closeDealerPartnerModal();
       closePrivacyModal();
       closeTermsModal();
     }
@@ -3649,13 +3978,15 @@
     }
 
     function copyReferralLink() {
-      const url = `https://zin.zone?ref=${refParam}`;
-      copyToClipboard(url, 'Đã sao chép link giới thiệu của bạn!');
+      const myRef = getMyDeviceReferralCode();
+      const url = `https://zin.zone?ref=${myRef}`;
+      copyToClipboard(url, `Đã sao chép link giới thiệu [${myRef}] của bạn!`);
     }
 
     function shareToZalo() {
-      const text = encodeURIComponent(`Đồng nghiệp ơi, tao vừa mua máy Zin Zone nguyên zin 100% có sẵn bí kíp học tiếng Trung làm tổ trưởng! Hãy ra ngay cửa hàng điện thoại ủy quyền gần nhất đọc mã [${refParam}] để được giảm 100k và tặng khóa học nhé: https://zin.zone?ref=${refParam}`);
-      window.open(`https://zalo.me/share?url=https%3A%2F%2Fzin.zone%3Fref%3D${refParam}&text=${text}`, '_blank');
+      const myRef = getMyDeviceReferralCode();
+      const text = encodeURIComponent(`Đồng nghiệp ơi, tao vừa mua máy Zin Zone nguyên zin 100% có sẵn bí kíp học tiếng Trung làm tổ trưởng! Hãy ra ngay cửa hàng điện thoại ủy quyền gần nhất đọc mã [${myRef}] để được giảm 100k và tặng khóa học nhé: https://zin.zone?ref=${myRef}`);
+      window.open(`https://zalo.me/share?url=https%3A%2F%2Fzin.zone%3Fref%3D${myRef}&text=${text}`, '_blank');
     }
 
     function downloadViralBadge() {
@@ -3899,10 +4230,11 @@
     }
 
     function requestCashPayout() {
+      const myRef = getMyDeviceReferralCode();
       openStoreNoticeModal(
         'Nhận 200.000đ Tiền Mặt',
         `<p class="font-bold text-emerald-400">Chính sách thưởng 200.000đ tiền mặt trao tay được chi trả trực tiếp tại cửa hàng điện thoại nơi bạn đã mua máy.</p>` +
-        `<p class="mt-2">👉 <strong>Cách nhận tiền:</strong> Khi bạn bè của bạn đến cửa hàng mua máy và đọc mã giới thiệu <strong class="text-amber-400">[${refParam || 'ZIN-ZONE'}]</strong> của bạn, chủ cửa hàng sẽ gửi tặng bạn <strong>200.000đ tiền mặt</strong> ngay tại chỗ!</p>` +
+        `<p class="mt-2">👉 <strong>Cách nhận tiền:</strong> Khi bạn bè của bạn đến cửa hàng mua máy và đọc mã giới thiệu <strong class="text-amber-400">[${myRef}]</strong> của bạn, chủ cửa hàng sẽ gửi tặng bạn <strong>200.000đ tiền mặt</strong> ngay tại chỗ!</p>` +
         `<p class="mt-2 text-slate-400">💵 Tiền tươi trao tay, bạn bè của bạn cũng được giảm ngay 100.000đ khi mua máy.</p>`
       );
     }
@@ -3919,8 +4251,16 @@
       preloadAwakeningAudio();
       initBossBattle();
 
-      document.getElementById('displayRefCode').textContent = refParam;
-      document.getElementById('displayRefUrl').textContent = `https://zin.zone?ref=${refParam}`;
+      // Sync and render device-bound referral code
+      updateReferralCodeDisplay();
+
+      // Welcoming notification if visitor arrived through a friend's referral link
+      const incomingReferrer = safeStorage.getItem('zin_incoming_referrer') || incomingRef;
+      if (incomingReferrer) {
+        setTimeout(() => {
+          showToast(`🎁 Ưu đãi bạn bè: Đã kích hoạt mã giảm giá 100k từ [${incomingReferrer}]!`, 'info');
+        }, 1200);
+      }
 
       const savedRepeat = safeStorage.getItem('zin_audio_repeat_mode');
       const repeatSelect = document.getElementById('audioRepeatMode');
@@ -4138,6 +4478,130 @@
         }
       }
     });
+
+    // =========================================================================
+    // B2B2C CHANNEL EMPOWERMENT & DIGITAL VERIFICATION SYSTEM
+    // =========================================================================
+
+    // --- KCN STORE LOCATOR FILTER ---
+    function filterStoresByKcn(kcnKey) {
+      const allButtons = document.querySelectorAll('.store-filter-btn');
+      allButtons.forEach(btn => {
+        btn.classList.remove('bg-amber-500', 'text-slate-950', 'shadow');
+        btn.classList.add('bg-slate-900', 'border', 'border-slate-800', 'text-slate-300');
+      });
+
+      const activeBtn = document.getElementById(`btnKcn-${kcnKey}`);
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-slate-900', 'border', 'border-slate-800', 'text-slate-300');
+        activeBtn.classList.add('bg-amber-500', 'text-slate-950', 'shadow');
+      }
+
+      const storeCards = document.querySelectorAll('.store-card');
+      storeCards.forEach(card => {
+        if (kcnKey === 'all') {
+          card.classList.remove('hidden');
+        } else if (card.classList.contains(`store-kcn-${kcnKey}`)) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    // --- DIGITAL DEVICE & VIP ASSET VERIFICATION ---
+    function verifyZinDeviceOnline() {
+      const inputEl = document.getElementById('inputDeviceVerifyCode');
+      if (!inputEl) return;
+      const rawCode = inputEl.value.trim().toUpperCase();
+      if (!rawCode) {
+        showToast('⚠️ Vui lòng nhập mã thiết bị (Ví dụ: ZIN-4B9E hoặc mã quà tặng)!', 'warning');
+        inputEl.focus();
+        return;
+      }
+
+      // Format validation: ZIN-XXXX, ZZ-..., or license token
+      const isValid = /^ZIN-[A-Z0-9]{4,}$/i.test(rawCode) || 
+                      /^ZZ-[A-Z0-9_\-]+$/i.test(rawCode) ||
+                      isValidLicenseToken(rawCode) ||
+                      (rawCode.length >= 4 && !rawCode.includes(' '));
+
+      if (!isValid) {
+        showToast('❌ Mã thiết bị không hợp lệ hoặc chưa được kích hoạt trên hệ thống!', 'error');
+        return;
+      }
+
+      // Open Digital Certificate Modal
+      const modal = document.getElementById('modalDeviceVerificationResult');
+      const codeDisplay = document.getElementById('verifyResultCode');
+      const dateDisplay = document.getElementById('verifyResultDate');
+      
+      if (codeDisplay) codeDisplay.textContent = rawCode;
+      if (dateDisplay) {
+        const now = new Date();
+        dateDisplay.textContent = `${now.getDate().toString().padStart(2, '0')}/${(now.getMonth()+1).toString().padStart(2, '0')}/${now.getFullYear()} (Kích hoạt máy chính hãng)`;
+      }
+
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.style.display = 'flex';
+      }
+    }
+
+    function closeDeviceVerificationModal() {
+      const modal = document.getElementById('modalDeviceVerificationResult');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.style.display = 'none';
+      }
+    }
+
+    // --- B2B DEALER PARTNERSHIP MODAL ---
+    function openDealerPartnerModal(area) {
+      const modal = document.getElementById('modalDealerPartner');
+      const areaEl = document.getElementById('dealerPartnerArea');
+      if (areaEl && area) {
+        areaEl.textContent = area;
+      }
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.style.display = 'flex';
+      }
+    }
+
+    function closeDealerPartnerModal() {
+      const modal = document.getElementById('modalDealerPartner');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.style.display = 'none';
+      }
+    }
+
+    function playSampleVipAudio() {
+      const audioUrl = 'audio/promo/zin_zone_promo_hoai_my_normal.mp3';
+      const audio = new Audio(audioUrl);
+      audio.play().then(() => {
+        showToast('🎧 Đang phát Khẩu Lệnh Quản Lý Xưởng VIP...', 'success');
+      }).catch(e => {
+        console.warn('Audio play fallback:', e);
+        showToast('📢 Đã sẵn sàng phát âm thanh khẩu lệnh VIP!', 'info');
+      });
+    }
+
+    function copyDealerZaloPhone() {
+      const phone = '0988888888';
+      navigator.clipboard.writeText(phone).then(() => {
+        const btnText = document.getElementById('btnCopyDealerZaloText');
+        if (btnText) {
+          const old = btnText.textContent;
+          btnText.textContent = '✓ Đã Sao Chép Số Zalo Hotline!';
+          setTimeout(() => { btnText.textContent = old; }, 2500);
+        }
+        showToast('✓ Đã sao chép số Zalo đại lý: 0988.888.888', 'success');
+      }).catch(() => {
+        showToast('Số Zalo phòng B2B: 0988.888.888', 'info');
+      });
+    }
   </script>
 
   <!-- Modal: Step-by-Step Install Guide (For iOS Safari or Android fallback) -->
@@ -4608,6 +5072,146 @@
         </div>
       </div>
 
+    </div>
+  </div>
+
+  <!-- Modal: Kết Quả Tra Cứu Bản Quyền Điện Tử & Tải Tài Liệu VIP (100% Digital Lean Verification) -->
+  <div id="modalDeviceVerificationResult" class="fixed inset-0 z-[100002] bg-slate-950/90 backdrop-blur-md hidden items-center justify-center p-4 overflow-y-auto" style="display: none;" onclick="if(event.target === this) closeDeviceVerificationModal();">
+    <div class="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-emerald-500/50 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative text-center my-auto">
+      <button onclick="closeDeviceVerificationModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">✕</button>
+
+      <div class="w-16 h-16 rounded-2xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center text-3xl mx-auto mb-3 shadow-lg">
+        🛡️
+      </div>
+
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold mb-2">
+        <span>✓</span>
+        <span>CHỨNG NHẬN ĐIỆN TỬ: MÁY ZIN ZONE CHÍNH HÃNG</span>
+      </div>
+
+      <h3 class="text-xl sm:text-2xl font-black text-white">Xác Thực Bản Quyền Thành Công!</h3>
+      <p class="text-xs text-slate-400 mt-1 mb-4">
+        Hệ thống đối tác phân phối điện thoại & phần mềm tiếng Trung KCN Bắc Ninh
+      </p>
+
+      <!-- Certificate Details Box -->
+      <div class="bg-slate-950/80 p-4 rounded-2xl border border-slate-800 text-left text-xs space-y-2.5 mb-5 shadow-inner">
+        <div class="flex items-center justify-between pb-2 border-b border-slate-800/80">
+          <span class="text-slate-400">Mã Thiết Bị / Token:</span>
+          <code id="verifyResultCode" class="text-amber-400 font-mono font-black text-sm sm:text-base">ZIN-4B9E</code>
+        </div>
+        <div class="flex items-center justify-between pb-2 border-b border-slate-800/80">
+          <span class="text-slate-400">Trạng Thái Bản Quyền:</span>
+          <span class="text-emerald-400 font-bold flex items-center gap-1">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            VIP Trọn Đời (1.500.000đ)
+          </span>
+        </div>
+        <div class="flex items-center justify-between pb-2 border-b border-slate-800/80">
+          <span class="text-slate-400">Ngày Kích Hoạt Điện Tử:</span>
+          <span id="verifyResultDate" class="text-slate-200 font-medium">17/10/2026 (Chính hãng)</span>
+        </div>
+        <div class="flex items-center justify-between">
+          <span class="text-slate-400">Bảo Hộ Kênh Bán Hàng:</span>
+          <span class="text-cyan-400 font-bold">Ủy Quyền KCN Bắc Ninh (Bán Kính 1km)</span>
+        </div>
+      </div>
+
+      <!-- Unlocked Digital VIP Perks -->
+      <div class="bg-gradient-to-br from-amber-500/10 to-indigo-500/10 border border-amber-500/30 rounded-2xl p-4 text-left text-xs mb-5">
+        <div class="font-black text-amber-300 flex items-center gap-1.5 mb-2">
+          <span>🎁</span>
+          <span>QUÀ TẶNG SỐ MỞ KHÓA KÈM MÃ XÁC THỰC:</span>
+        </div>
+        <ul class="text-slate-300 space-y-1.5 list-disc pl-4 text-[11px]">
+          <li><strong>100 Câu Khẩu Lệnh Quản Lý Xưởng SMT/Lắp Ráp:</strong> File MP3 giọng chuẩn bản xứ + phụ đề song ngữ SRT độc quyền.</li>
+          <li><strong>Đặc Quyền Thưởng 200.000đ Tiền Mặt:</strong> Khi bạn bè mua máy tại quán ủy quyền và nhập mã của bạn, bạn nhận ngay 200.000đ tiền mặt tại quầy.</li>
+        </ul>
+        <div class="mt-3 flex flex-wrap gap-2">
+          <a href="audio/promo/zin_zone_promo_vi.srt" download="ZinZone_100_Khau_Lenh_VIP.srt" class="flex-1 py-2 px-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs text-center shadow transition flex items-center justify-center gap-1">
+            <span>📥</span>
+            <span>Tải Bộ Phụ Đề VIP</span>
+          </a>
+          <button onclick="playSampleVipAudio()" class="flex-1 py-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-amber-300 font-bold text-xs text-center border border-amber-500/30 transition flex items-center justify-center gap-1">
+            <span>🎧</span>
+            <span>Nghe Thử Khẩu Lệnh</span>
+          </button>
+        </div>
+      </div>
+
+      <button onclick="closeDeviceVerificationModal()" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs transition border border-slate-700">
+        Đóng Cửa Sổ Tra Cứu
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal: Hợp Tác Đại Lý Ủy Quyền B2B (Dành Cho Chủ Quán Điện Thoại KCN) -->
+  <div id="modalDealerPartner" class="fixed inset-0 z-[100002] bg-slate-950/90 backdrop-blur-md hidden items-center justify-center p-4 overflow-y-auto" style="display: none;" onclick="if(event.target === this) closeDealerPartnerModal();">
+    <div class="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-amber-500/50 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative text-left my-auto">
+      <button onclick="closeDealerPartnerModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">✕</button>
+
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-400 text-xs font-black mb-3">
+        <span>🤝</span>
+        <span>HỢP TÁC ĐẠI LÝ B2B • BẢO HỘ 1KM ĐỘC QUYỀN</span>
+      </div>
+
+      <h3 class="text-xl sm:text-2xl font-black text-white leading-tight">
+        Đăng Ký Điểm Bán Ủy Quyền Zin Zone
+      </h3>
+      <p class="text-xs text-slate-400 mt-1 mb-4">
+        Khu vực quan tâm: <span id="dealerPartnerArea" class="text-amber-400 font-bold">KCN Quế Võ / Yên Phong / Tiên Sơn</span>
+      </p>
+
+      <!-- Value Props for Store Owner -->
+      <div class="space-y-3 text-xs text-slate-300 mb-5">
+        <div class="p-3 rounded-2xl bg-slate-950/80 border border-slate-800 flex items-start gap-2.5">
+          <div class="w-7 h-7 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold shrink-0 text-xs">1</div>
+          <div>
+            <div class="font-bold text-white text-xs">Tặng 03 Suất Token Dùng Thử Miễn Phí (Trị Giá 4.500.000đ)</div>
+            <p class="text-[11px] text-slate-400 mt-0.5">Không cần cọc tiền, cấp Token thử nghiệm ngay cho 03 khách đầu tiên của quán để kiểm chứng lực hút.</p>
+          </div>
+        </div>
+
+        <div class="p-3 rounded-2xl bg-slate-950/80 border border-slate-800 flex items-start gap-2.5">
+          <div class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold shrink-0 text-xs">2</div>
+          <div>
+            <div class="font-bold text-white text-xs">Bảo Hộ Độc Quyền Bán Kính 1km (1 Cụm Duy Nhất 1 Quán)</div>
+            <p class="text-[11px] text-slate-400 mt-0.5">Tuyệt đối không cấp tràn lan. Bạn nắm độc quyền vũ khí cạnh tranh, chấm dứt cảnh phá giá máy trần.</p>
+          </div>
+        </div>
+
+        <div class="p-3 rounded-2xl bg-slate-950/80 border border-slate-800 flex items-start gap-2.5">
+          <div class="w-7 h-7 rounded-lg bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold shrink-0 text-xs">3</div>
+          <div>
+            <div class="font-bold text-white text-xs">Đổ Khách TikTok / Facebook Vào Quán Trả Góp</div>
+            <p class="text-[11px] text-slate-400 mt-0.5">Zin Zone định vị cửa hàng bạn trên bản đồ KCN, kéo công nhân đến quẹt thẻ CCCD trả góp FE/Home Credit.</p>
+          </div>
+        </div>
+
+        <div class="p-3 rounded-2xl bg-slate-950/80 border border-slate-800 flex items-start gap-2.5">
+          <div class="w-7 h-7 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold shrink-0 text-xs">4</div>
+          <div>
+            <div class="font-bold text-white text-xs">Tùy Chọn Nhập Máy Hoặc Dùng Máy Sẵn Của Quán</div>
+            <p class="text-[11px] text-slate-400 mt-0.5">Quán có thể nhập nguồn máy zin mộc tuyển chọn từ Zin Zone (lời 100k-300k/máy) HOẶC tự nạp bản quyền vào máy có sẵn của quán.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="space-y-2">
+        <a href="https://zalo.me/0988888888" target="_blank" rel="noopener noreferrer" class="w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 hover:opacity-95 text-slate-950 font-black text-xs shadow-xl flex items-center justify-center gap-2">
+          <span>💬</span>
+          <span>Mở Zalo Phòng Hợp Tác B2B (Mr. Tony Zin Zone)</span>
+        </a>
+        <button onclick="copyDealerZaloPhone()" class="w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs transition border border-slate-700 flex items-center justify-center gap-1.5">
+          <span>📋</span>
+          <span id="btnCopyDealerZaloText">Sao Chép Số Hotline Zalo: 0988.888.888</span>
+        </button>
+      </div>
+
+      <p class="text-[10px] text-slate-500 text-center mt-3">
+        * Ưu tiên các cửa hàng có sẵn hỗ trợ trả góp FE Credit / Home Credit / HD Saison tại Quế Võ, Yên Phong, Thuận Thành, Tiên Sơn.
+      </p>
     </div>
   </div>
 </body>

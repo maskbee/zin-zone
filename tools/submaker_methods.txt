@@ -1,0 +1,4 @@
+cues: []
+feed: <bound method SubMaker.feed of <edge_tts.submaker.SubMaker object at 0x000001B1A055A360>>
+get_srt: <bound method SubMaker.get_srt of <edge_tts.submaker.SubMaker object at 0x000001B1A055A360>>
+type: None
