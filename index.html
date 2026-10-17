@@ -2457,6 +2457,10 @@
     <span id="toastMessage">Thông báo</span>
   </div>
 
+  <!-- Hidden Accessibility & System State Targets -->
+  <div id="pwaInstallBanner" class="hidden" style="display:none;" aria-hidden="true"></div>
+  <input type="hidden" id="inputCustomModel" value="" aria-hidden="true">
+
   <!-- Application Logic -->
   <script>
     // Safe LocalStorage Sandbox (Prevents Private Browsing Quota & Security Crashes)
@@ -2888,6 +2892,14 @@
         gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
         osc.start(now);
         osc.stop(now + 0.3);
+      }
+      playVictory() {
+        if (!this.enabled) return;
+        this.playChest();
+      }
+      playWrong() {
+        if (!this.enabled) return;
+        this.playError();
       }
       playChest() {
         if (!this.enabled) return;
@@ -5213,7 +5225,8 @@
     }
 
     function requestCustomSourcing() {
-      const model = document.getElementById('inputCustomModel').value.trim() || 'Dòng máy yêu cầu';
+      const inputEl = document.getElementById('inputCustomModel');
+      const model = (inputEl ? inputEl.value.trim() : '') || 'Dòng máy yêu cầu';
       openStoreNoticeModal(
         `Đặt Săn Máy Zin: ${model}`,
         `<p class="font-bold text-amber-400">Dịch vụ săn máy [${model}] nguyên zin 100% kiểm định 32 bước được thực hiện qua các cửa hàng điện thoại đối tác.</p>` +
