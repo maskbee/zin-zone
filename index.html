@@ -793,19 +793,19 @@
   <div class="sticky top-0 z-40 w-full px-2 sm:px-4 pb-1">
     <div class="max-w-7xl mx-auto rounded-2xl sm:rounded-3xl bg-slate-900/95 backdrop-blur-xl border border-slate-800 shadow-2xl overflow-hidden divide-y divide-slate-800/80">
       <!-- Main Navigation Header -->
-      <header id="mainHeader" class="w-full px-3 sm:px-5 py-2 sm:py-2.5 flex items-center justify-between gap-1.5 sm:gap-4">
+      <header id="mainHeader" class="w-full px-2.5 sm:px-5 py-2 sm:py-2.5 flex items-center justify-between gap-1.5 sm:gap-4">
         
         <!-- Brand & Domain Identity -->
-        <div class="flex items-center gap-2 sm:gap-3 cursor-pointer shrink-0" onclick="switchMainTab('learn')">
-          <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-amber-500 via-emerald-500 to-cyan-500 p-[1.5px] shadow-lg shadow-amber-500/20 shrink-0">
-            <div class="w-full h-full bg-slate-950 rounded-[9px] sm:rounded-[10px] flex items-center justify-center font-black text-base sm:text-lg text-amber-400">
+        <div class="flex items-center gap-1.5 sm:gap-3 cursor-pointer shrink-0" onclick="switchMainTab('learn')">
+          <div class="w-7 h-7 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gradient-to-br from-amber-500 via-emerald-500 to-cyan-500 p-[1.5px] shadow-md shadow-amber-500/20 shrink-0 flex items-center justify-center">
+            <div class="w-full h-full bg-slate-950 rounded-[7px] sm:rounded-[10px] flex items-center justify-center font-black text-sm sm:text-lg text-amber-400">
               Z
             </div>
           </div>
           <div>
             <div class="flex items-center gap-1 sm:gap-1.5">
-              <span class="text-base sm:text-xl font-black tracking-tight text-white whitespace-nowrap">ZIN<span class="text-amber-400">.ZONE</span></span>
-              <span class="text-[9px] sm:text-[10px] font-extrabold uppercase px-1 sm:px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 whitespace-nowrap">Zin 100%</span>
+              <span class="text-sm sm:text-xl font-black tracking-tight text-white whitespace-nowrap">ZIN<span class="text-amber-400">.ZONE</span></span>
+              <span class="text-[8px] sm:text-[10px] font-extrabold uppercase px-1 sm:px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 whitespace-nowrap">Zin 100%</span>
             </div>
             <p class="hidden sm:block text-[11px] text-slate-400">Đánh Thức 70% Hán-Việt • Thăng Chức Tổ Trưởng Nhà Máy Hoa Kiều</p>
           </div>
@@ -832,19 +832,30 @@
           </button>
         </nav>
 
-        <!-- Header Actions -->
-        <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
-          <button onclick="openOnboardingFlowModal()" class="px-2 sm:px-2.5 py-1.5 rounded-xl bg-slate-950/80 hover:bg-slate-800 text-amber-300 hover:text-amber-200 border border-amber-500/30 text-xs font-bold transition flex items-center gap-1 shrink-0" title="Đánh thức 70% Hán-Việt trong máu">
-            <span>📖</span>
+        <!-- Header Actions (Optimized System Controls Bar) -->
+        <div class="flex items-center gap-1 sm:gap-2 shrink-0">
+          <!-- Khai Tâm Guide -->
+          <button onclick="openOnboardingFlowModal()" class="h-7 sm:h-auto px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg sm:rounded-xl bg-slate-950/80 hover:bg-slate-800 text-amber-300 hover:text-amber-200 border border-amber-500/30 text-xs font-bold transition flex items-center gap-1 shrink-0" title="Đánh thức 70% Hán-Việt trong máu">
+            <span class="text-xs">📖</span>
             <span class="hidden sm:inline">Khai Tâm</span>
           </button>
-          <div id="headerBadgeLicense" class="px-2 sm:px-3 py-1.5 rounded-xl bg-slate-950/80 border border-emerald-500/40 text-emerald-400 font-bold text-xs flex items-center gap-1.5 shadow-sm shrink-0" title="Thiết bị chính hãng đã kích hoạt hệ thống Zin Zone">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+
+          <!-- Sound FX Toggle (Moved to Header to free space and guarantee visibility) -->
+          <button onclick="toggleGameSound()" id="btnSoundToggle" class="h-7 sm:h-auto w-7 sm:w-auto px-1.5 sm:px-2.5 py-1 sm:py-1.5 rounded-lg sm:rounded-xl bg-slate-950/80 hover:bg-slate-800 border border-slate-800 text-slate-300 hover:text-white text-xs font-bold transition flex items-center justify-center gap-1 shrink-0" title="Bật/Tắt âm thanh game">
+            <span id="iconSoundToggle" class="text-xs">🔊</span>
+            <span class="hidden sm:inline">Âm Thanh</span>
+          </button>
+
+          <!-- Authentic Device License Badge -->
+          <div id="headerBadgeLicense" class="h-7 sm:h-auto px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl bg-slate-950/80 border border-emerald-500/40 text-emerald-400 font-bold text-xs flex items-center gap-1.5 shadow-sm shrink-0" title="Thiết bị chính hãng đã kích hoạt hệ thống Zin Zone">
+            <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
             <span class="hidden sm:inline">Máy Chính Hãng • Đã Kích Hoạt</span>
-            <span class="sm:hidden text-[11px] max-w-[120px] truncate">Chính Hãng</span>
+            <span class="sm:hidden text-[10px] font-bold text-emerald-400 whitespace-nowrap">Chính Hãng</span>
           </div>
-          <button id="btnInstallApp" onclick="installPwaApp()" class="px-2 sm:px-2.5 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs transition shadow-md flex items-center gap-1 shrink-0">
-            <span>📲</span>
+
+          <!-- Install App or Standalone Reload -->
+          <button id="btnInstallApp" onclick="installPwaApp()" class="h-7 sm:h-auto px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-lg sm:rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs transition shadow-sm flex items-center gap-1 shrink-0" title="Cài đặt App Zin Zone">
+            <span class="text-xs">📲</span>
             <span class="hidden sm:inline">Cài App</span>
           </button>
         </div>
@@ -852,15 +863,15 @@
       </header>
 
       <!-- UNIVERSAL RPG PLAYER HUD (BAR STATUS & GAME MULTIPLIERS) -->
-      <div id="playerHudBar" class="px-2.5 sm:px-5 py-1.5 sm:py-2 bg-slate-950/60 w-full overflow-x-auto no-scrollbar">
+      <div id="playerHudBar" class="px-2.5 sm:px-5 py-1.5 sm:py-2 bg-slate-950/60 w-full overflow-hidden">
         <div class="flex items-center justify-between gap-1.5 sm:gap-4 min-w-0">
           
           <!-- Left: Player Avatar, Level, Title & CP Counter -->
-          <div class="flex items-center gap-1.5 sm:gap-3 cursor-pointer shrink-0" onclick="openPlayerProfileModal()" title="Bấm xem hồ sơ nhân vật">
+          <div class="flex items-center gap-1.5 sm:gap-3 cursor-pointer shrink-0 min-w-0" onclick="openPlayerProfileModal()" title="Bấm xem hồ sơ nhân vật">
             <!-- Avatar with animated border -->
             <div class="relative shrink-0">
-              <div id="hudAvatarBorder" class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-amber-500 via-emerald-400 to-cyan-500 p-[1.5px] shadow-md">
-                <div class="w-full h-full bg-slate-950 rounded-[9px] flex items-center justify-center text-sm sm:text-lg font-black" id="hudAvatarEmoji">
+              <div id="hudAvatarBorder" class="w-7 h-7 sm:w-10 sm:h-10 rounded-lg sm:rounded-xl bg-gradient-to-tr from-amber-500 via-emerald-400 to-cyan-500 p-[1.5px] shadow-md">
+                <div class="w-full h-full bg-slate-950 rounded-[6px] sm:rounded-[9px] flex items-center justify-center text-xs sm:text-lg font-black" id="hudAvatarEmoji">
                   ⚡
                 </div>
               </div>
@@ -871,7 +882,7 @@
 
             <div class="min-w-0">
               <div class="flex items-center gap-1 sm:gap-2">
-                <span id="hudPlayerTitle" class="text-[11px] sm:text-sm font-black text-white tracking-tight truncate max-w-[85px] sm:max-w-none">Culi Tập Sự</span>
+                <span id="hudPlayerTitle" class="text-[11px] sm:text-sm font-black text-white tracking-tight truncate max-w-[105px] sm:max-w-none">Culi Tập Sự</span>
                 <span id="hudVipAura" class="hidden text-[8px] sm:text-[10px] px-1 py-0.2 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold items-center gap-0.5 animate-pulse">
                   👑 +50%
                 </span>
@@ -889,37 +900,32 @@
           <!-- Center: Streak Flame & Faction Selector -->
           <div class="flex items-center gap-1 sm:gap-2 shrink-0">
             <!-- Streak Flame -->
-            <div class="flex items-center gap-1 bg-slate-950 px-1.5 sm:px-2.5 py-1 rounded-xl border border-red-500/30 text-xs shadow-sm" title="Chuỗi ngày liên tiếp giữ lửa">
+            <div class="flex items-center gap-1 bg-slate-950/80 px-1.5 sm:px-2.5 py-1 rounded-lg sm:rounded-xl border border-red-500/30 text-xs shadow-sm" title="Chuỗi ngày liên tiếp giữ lửa">
               <span class="text-xs sm:text-base animate-bounce">🔥</span>
-              <span id="hudStreakDays" class="font-black text-red-400 text-[10px] sm:text-xs">5 Ngày</span>
+              <span id="hudStreakDays" class="font-black text-red-400 text-[10px] sm:text-xs whitespace-nowrap">5 Ngày</span>
             </div>
 
             <!-- Faction Tag -->
-            <button onclick="openFactionModal()" class="flex items-center gap-1 bg-slate-950 hover:bg-slate-800 px-1.5 sm:px-2.5 py-1 rounded-xl border border-slate-800 text-xs text-slate-300 transition shadow-sm" title="Đổi hoặc xem Quân Đoàn KCN">
+            <button onclick="openFactionModal()" class="flex items-center gap-1 bg-slate-950/80 hover:bg-slate-800 px-1.5 sm:px-2.5 py-1 rounded-lg sm:rounded-xl border border-slate-800 text-xs text-slate-300 transition shadow-sm" title="Đổi hoặc xem Quân Đoàn KCN">
               <span id="hudFactionFlag">🔴</span>
-              <span id="hudFactionName" class="font-bold text-[10px] sm:text-[11px] hidden xs:inline">Foxconn</span>
+              <span id="hudFactionName" class="font-bold text-[10px] sm:text-[11px] hidden sm:inline">Foxconn</span>
             </button>
           </div>
 
-          <!-- Right: Mystery Chest Gacha Button & Boss Arena Launcher & Sound FX Toggle -->
+          <!-- Right: Boss Arena Launcher & Daily Mystery Chest -->
           <div class="flex items-center gap-1 sm:gap-2 shrink-0">
             <!-- Quick Boss Arena Launcher -->
-            <button onclick="launchBossBattle()" class="px-2 sm:px-3 py-1 sm:py-1.5 rounded-xl bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-black text-[11px] sm:text-xs flex items-center gap-1 shadow-md shadow-red-600/30 transition hover:scale-105 active:scale-95 animate-pulse">
+            <button onclick="launchBossBattle()" class="px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-black text-[11px] sm:text-xs flex items-center gap-1 shadow-md shadow-red-600/30 transition hover:scale-105 active:scale-95 animate-pulse shrink-0">
               <span>⚔️</span>
               <span class="hidden sm:inline">Đấu Boss Sếp Hoa</span>
               <span class="sm:hidden">Boss</span>
             </button>
 
             <!-- Daily Mystery Chest Button -->
-            <button onclick="openMysteryChestModal()" id="btnHudChest" class="relative px-2 sm:px-3 py-1 sm:py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 hover:opacity-95 text-slate-950 font-black text-[11px] sm:text-xs flex items-center gap-1 shadow-md shadow-amber-500/20 transition hover:scale-105 active:scale-95">
+            <button onclick="openMysteryChestModal()" id="btnHudChest" class="relative px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 hover:opacity-95 text-slate-950 font-black text-[11px] sm:text-xs flex items-center gap-1 shadow-md shadow-amber-500/20 transition hover:scale-105 active:scale-95 shrink-0">
               <span class="text-xs sm:text-sm">🎁</span>
               <span class="hidden sm:inline">Rương Hoàng Kim</span>
               <span id="hudChestBadge" class="w-2 h-2 rounded-full bg-red-600 border border-white absolute -top-1 -right-1 animate-ping"></span>
-            </button>
-
-            <!-- Sound Toggle -->
-            <button onclick="toggleGameSound()" id="btnSoundToggle" class="w-6 h-6 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-center text-[10px] sm:text-xs text-slate-300 hover:text-white transition" title="Bật/Tắt âm thanh game">
-              🔊
             </button>
           </div>
 
@@ -2699,10 +2705,11 @@
       const badge = document.getElementById('headerBadgeLicense');
       if (badge) {
         const name = formatDeviceDisplayName(token);
+        const shortName = name.replace(/^(Máy\s+|Điện\s+thoại\s+)/i, '');
         badge.innerHTML = `
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
           <span class="hidden sm:inline">${name} • Đã Kích Hoạt</span>
-          <span class="sm:hidden text-[11px] max-w-[120px] truncate">${name}</span>
+          <span class="sm:hidden text-[10px] font-bold text-emerald-400 whitespace-nowrap">${shortName}</span>
         `;
       }
     }
@@ -3050,7 +3057,10 @@
       const factionFlagEl = document.getElementById('hudFactionFlag');
       const factionNameEl = document.getElementById('hudFactionName');
 
-      if (titleEl) titleEl.textContent = rank.title;
+      if (titleEl) {
+        const shortTitle = rank.realm || rank.title.split('•')[0].trim();
+        titleEl.innerHTML = `<span class="sm:hidden">${shortTitle}</span><span class="hidden sm:inline">${rank.title}</span>`;
+      }
       if (badgeEl) badgeEl.textContent = `Lv.${rank.level}`;
       if (emojiEl) emojiEl.textContent = rank.emoji;
       if (cpEl) cpEl.textContent = `${state.cp.toLocaleString()} CP`;
@@ -5386,11 +5396,10 @@
         }
         if (btn) {
           btn.outerHTML = `
-            <div onclick="window.location.reload(true)" title="Chạm để làm mới trang" class="cursor-pointer px-2 sm:px-2.5 py-1.5 rounded-xl bg-amber-500/15 border border-amber-500/40 hover:border-amber-400 text-amber-300 font-black text-xs flex items-center gap-1 shadow-sm transition shrink-0">
-              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <button onclick="window.location.reload(true)" title="Chạm để làm mới trang" class="h-7 sm:h-auto w-7 sm:w-auto px-1.5 sm:px-2.5 py-1 sm:py-1.5 rounded-lg sm:rounded-xl bg-amber-500/15 border border-amber-500/40 hover:border-amber-400 text-amber-300 font-black text-xs flex items-center justify-center gap-1 shadow-sm transition shrink-0">
+              <span class="text-xs">↻</span>
               <span class="hidden sm:inline">BẢN APP</span>
-              <span>↻</span>
-            </div>
+            </button>
           `;
         }
       }
