@@ -1,5 +1,6 @@
-// Service Worker for Zin.Zone Offline App & OTA Updates
-const CACHE_NAME = 'zin-zone-v31-apple-splash-logo';
+// Service Worker for Zin.Zone - Network-First with Offline Cache Fallback
+// "Ưu tiên mạng trực tuyến, không có mạng mới tải nội dung ngoại tuyến"
+const CACHE_NAME = 'zin-zone-v36-network-first';
 const STATIC_ASSETS = [
   './',
   './index.html',
@@ -53,23 +54,33 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fast stale-while-revalidate with ignoreSearch for instant 0ms launch & background update
-async function staleWhileRevalidate(request) {
+// Network-First with 2.5s timeout fallback to offline cache ("优先联网，无法联网才加载离线内容")
+async function networkFirst(request) {
   const cache = await caches.open(CACHE_NAME);
-  // Match with ignoreSearch: true so requests like ?mode=app&token=... hit the cached index.html immediately!
-  let cachedResponse = await cache.match(request, { ignoreSearch: true });
-  if (!cachedResponse && request.mode === 'navigate') {
-    cachedResponse = (await cache.match('./index.html')) || (await cache.match('./'));
-  }
 
-  const fetchPromise = fetch(request).then((networkResponse) => {
+  // Set 2500ms network timeout with AbortController so poor network doesn't hang forever
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 2500);
+
+  try {
+    const networkResponse = await fetch(request, { signal: controller.signal });
+    clearTimeout(timeoutId);
     if (networkResponse && networkResponse.status === 200) {
       cache.put(request, networkResponse.clone());
     }
     return networkResponse;
-  }).catch(() => cachedResponse);
-
-  return cachedResponse || fetchPromise;
+  } catch (err) {
+    clearTimeout(timeoutId);
+    // Network failed or timed out: fall back to offline cache
+    let cachedResponse = await cache.match(request, { ignoreSearch: true });
+    if (!cachedResponse && request.mode === 'navigate') {
+      cachedResponse = (await cache.match('./index.html')) || (await cache.match('./'));
+    }
+    if (cachedResponse) {
+      return cachedResponse;
+    }
+    throw err;
+  }
 }
 
 self.addEventListener('fetch', (event) => {
@@ -85,6 +96,6 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Handle all requests with staleWhileRevalidate for instant 0-second launch
-  event.respondWith(staleWhileRevalidate(event.request));
+  // Handle all requests with networkFirst strategy: Network First -> Offline Cache Fallback
+  event.respondWith(networkFirst(event.request));
 });
