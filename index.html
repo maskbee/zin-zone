@@ -159,7 +159,7 @@
     }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-amber-500 selection:text-black overflow-x-hidden w-full max-w-full pb-16 md:pb-0">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-amber-500 selection:text-black overflow-x-hidden w-full max-w-full pb-24 md:pb-8">
 
   <!-- Instant Native-Feel iOS & Web App Splash Screen (0ms white-screen elimination) -->
   <div id="iosAppSplash" style="position:fixed; inset:0; z-index:999998; background:linear-gradient(180deg, #070b14 0%, #0e172a 50%, #060913 100%); display:flex; flex-direction:column; align-items:center; justify-content:space-between; padding:max(48px, env(safe-area-inset-top, 48px)) 20px max(30px, env(safe-area-inset-bottom, 30px)); font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; pointer-events:auto; transition:opacity 0.4s ease-out;">
@@ -209,24 +209,26 @@
   <!-- Interactive Particle Canvas for Coins & Stars Burst -->
   <canvas id="particleCanvas" class="fixed inset-0 pointer-events-none z-[9999]"></canvas>
 
-  <!-- Top Announcement: Brand Slogan & Viral Hook -->
-  <div class="bg-gradient-to-r from-amber-950 via-slate-900 to-emerald-950 border-b border-amber-500/20 text-xs py-1.5 sm:py-2 px-3 sm:px-4 flex items-center justify-between w-full overflow-hidden">
-    <div class="flex items-center gap-2 mx-auto sm:mx-0 overflow-hidden text-ellipsis whitespace-nowrap">
-      <span class="inline-flex items-center px-1.5 sm:px-2 py-0.5 rounded text-[10px] font-black bg-gradient-to-r from-amber-500 to-emerald-500 text-slate-950 shrink-0">ZIN.ZONE</span>
-      <span class="text-slate-200 font-semibold hidden sm:inline">Thần Ngữ Tu Chân Ký • Đánh Thức 70% Hán-Việt Trong Máu • 21 Ngày Đắc Đạo Thăng Chức Tổ Trưởng!</span>
-      <span class="text-amber-400 font-bold sm:hidden truncate">Thần Ngữ Tu Tiên • 21 Ngày Thăng Chức</span>
-    </div>
-    <div class="hidden sm:flex items-center gap-3 text-xs shrink-0">
-      <span class="text-emerald-400 font-bold animate-pulse">💵 Giới thiệu 1 máy = Rút ngay 200.000đ tiền mặt trao tay!</span>
-      <a href="pocket-cards.html" target="_blank" class="text-slate-400 hover:text-white underline text-[11px]">In thẻ bỏ túi</a>
+  <!-- Top Announcement: Brand Slogan & Viral Hook (Floating Rounded Capsule) -->
+  <div class="w-full px-2.5 sm:px-4 pt-2 safe-top">
+    <div class="max-w-7xl mx-auto rounded-2xl bg-gradient-to-r from-amber-950/80 via-slate-900 to-emerald-950/80 border border-amber-500/30 text-xs py-1.5 px-3 sm:px-4 flex items-center justify-between shadow-lg overflow-hidden">
+      <div class="flex items-center gap-2 mx-auto sm:mx-0 overflow-hidden text-ellipsis whitespace-nowrap">
+        <span class="inline-flex items-center px-1.5 sm:px-2 py-0.5 rounded-md text-[10px] font-black bg-gradient-to-r from-amber-500 to-emerald-500 text-slate-950 shrink-0">ZIN.ZONE</span>
+        <span class="text-slate-200 font-semibold hidden sm:inline">Thần Ngữ Tu Chân Ký • Đánh Thức 70% Hán-Việt Trong Máu • 21 Ngày Đắc Đạo Thăng Chức Tổ Trưởng!</span>
+        <span class="text-amber-400 font-bold sm:hidden truncate">Thần Ngữ Tu Tiên • 21 Ngày Thăng Chức</span>
+      </div>
+      <div class="hidden sm:flex items-center gap-3 text-xs shrink-0">
+        <span class="text-emerald-400 font-bold animate-pulse">💵 Giới thiệu 1 máy = Rút ngay 200.000đ tiền mặt trao tay!</span>
+        <a href="pocket-cards.html" target="_blank" class="text-slate-400 hover:text-white underline text-[11px]">In thẻ bỏ túi</a>
+      </div>
     </div>
   </div>
 
-  <!-- Top Navigation & Universal Player HUD (Unified Sticky Top Shell) -->
-  <div class="sticky top-0 z-40 w-full bg-slate-900/95 backdrop-blur-md shadow-lg">
-    <!-- Main Navigation Header -->
-    <header id="mainHeader" class="border-b border-slate-800 w-full safe-top">
-      <div class="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 py-2 sm:py-3 flex items-center justify-between gap-1.5 sm:gap-4 w-full">
+  <!-- Top Navigation & Universal Player HUD (Unified Sticky Top Rounded Card) -->
+  <div class="sticky top-0 z-40 w-full px-2.5 sm:px-4 pt-1.5 pb-1">
+    <div class="max-w-7xl mx-auto rounded-2xl sm:rounded-3xl bg-slate-900/95 backdrop-blur-xl border border-slate-800 shadow-2xl overflow-hidden divide-y divide-slate-800/80">
+      <!-- Main Navigation Header -->
+      <header id="mainHeader" class="w-full px-3 sm:px-5 py-2 sm:py-2.5 flex items-center justify-between gap-1.5 sm:gap-4">
         
         <!-- Brand & Domain Identity -->
         <div class="flex items-center gap-2 sm:gap-3 cursor-pointer shrink-0" onclick="switchMainTab('learn')">
@@ -267,10 +269,10 @@
 
         <!-- Header Actions -->
         <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
-          <div id="headerBadgeLicense" class="px-2.5 sm:px-3 py-1.5 rounded-xl bg-slate-900 border border-emerald-500/40 text-emerald-400 font-bold text-xs flex items-center gap-1.5 shadow-sm shrink-0" title="Thiết bị chính hãng đã kích hoạt hệ thống Zin Zone">
+          <div id="headerBadgeLicense" class="px-2 sm:px-3 py-1.5 rounded-xl bg-slate-950/80 border border-emerald-500/40 text-emerald-400 font-bold text-xs flex items-center gap-1.5 shadow-sm shrink-0" title="Thiết bị chính hãng đã kích hoạt hệ thống Zin Zone">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
             <span class="hidden sm:inline">Máy Chính Hãng • Đã Kích Hoạt</span>
-            <span class="sm:hidden text-[11px]">Chính Hãng</span>
+            <span class="sm:hidden text-[11px] max-w-[120px] truncate">Chính Hãng</span>
           </div>
           <button id="btnInstallApp" onclick="installPwaApp()" class="px-2 sm:px-2.5 py-1.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs transition shadow-md flex items-center gap-1 shrink-0">
             <span>📲</span>
@@ -278,89 +280,90 @@
           </button>
         </div>
 
-      </div>
-    </header>
+      </header>
 
-    <!-- UNIVERSAL RPG PLAYER HUD (BAR STATUS & GAME MULTIPLIERS) -->
-    <div id="playerHudBar" class="border-b border-amber-500/30 px-2.5 sm:px-6 py-1.5 sm:py-2 w-full overflow-x-auto no-scrollbar">
-    <div class="max-w-7xl mx-auto flex items-center justify-between gap-1.5 sm:gap-4 min-w-0">
-      
-      <!-- Left: Player Avatar, Level, Title & CP Counter -->
-      <div class="flex items-center gap-1.5 sm:gap-3 cursor-pointer shrink-0" onclick="openPlayerProfileModal()" title="Bấm xem hồ sơ nhân vật">
-        <!-- Avatar with animated border -->
-        <div class="relative shrink-0">
-          <div id="hudAvatarBorder" class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-amber-500 via-emerald-400 to-cyan-500 p-[1.5px] shadow-md">
-            <div class="w-full h-full bg-slate-950 rounded-[9px] flex items-center justify-center text-sm sm:text-lg font-black" id="hudAvatarEmoji">
-              ⚡
+      <!-- UNIVERSAL RPG PLAYER HUD (BAR STATUS & GAME MULTIPLIERS) -->
+      <div id="playerHudBar" class="px-2.5 sm:px-5 py-1.5 sm:py-2 bg-slate-950/60 w-full overflow-x-auto no-scrollbar">
+        <div class="flex items-center justify-between gap-1.5 sm:gap-4 min-w-0">
+          
+          <!-- Left: Player Avatar, Level, Title & CP Counter -->
+          <div class="flex items-center gap-1.5 sm:gap-3 cursor-pointer shrink-0" onclick="openPlayerProfileModal()" title="Bấm xem hồ sơ nhân vật">
+            <!-- Avatar with animated border -->
+            <div class="relative shrink-0">
+              <div id="hudAvatarBorder" class="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-amber-500 via-emerald-400 to-cyan-500 p-[1.5px] shadow-md">
+                <div class="w-full h-full bg-slate-950 rounded-[9px] flex items-center justify-center text-sm sm:text-lg font-black" id="hudAvatarEmoji">
+                  ⚡
+                </div>
+              </div>
+              <span id="hudLevelBadge" class="absolute -bottom-1 -right-1 px-1 py-0.2 bg-amber-500 text-slate-950 text-[8px] sm:text-[9px] font-black rounded font-mono shadow">
+                Lv.1
+              </span>
+            </div>
+
+            <div class="min-w-0">
+              <div class="flex items-center gap-1 sm:gap-2">
+                <span id="hudPlayerTitle" class="text-[11px] sm:text-sm font-black text-white tracking-tight truncate max-w-[85px] sm:max-w-none">Culi Tập Sự</span>
+                <span id="hudVipAura" class="hidden text-[8px] sm:text-[10px] px-1 py-0.2 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold items-center gap-0.5 animate-pulse">
+                  👑 +50%
+                </span>
+              </div>
+              <!-- XP Bar & CP Counter -->
+              <div class="flex items-center gap-1.5 text-xs">
+                <span id="hudCpCount" class="font-mono font-black text-amber-400 text-[11px] sm:text-sm tracking-wide">350 CP</span>
+                <div class="w-10 sm:w-24 h-1.5 bg-slate-800 rounded-full overflow-hidden border border-slate-700/60 hidden sm:block">
+                  <div id="hudXpFill" class="h-full bg-gradient-to-r from-amber-500 to-emerald-400 transition-all duration-300" style="width: 35%;"></div>
+                </div>
+              </div>
             </div>
           </div>
-          <span id="hudLevelBadge" class="absolute -bottom-1 -right-1 px-1 py-0.2 bg-amber-500 text-slate-950 text-[8px] sm:text-[9px] font-black rounded font-mono shadow">
-            Lv.1
-          </span>
-        </div>
 
-        <div class="min-w-0">
-          <div class="flex items-center gap-1 sm:gap-2">
-            <span id="hudPlayerTitle" class="text-[11px] sm:text-sm font-black text-white tracking-tight truncate max-w-[85px] sm:max-w-none">Culi Tập Sự</span>
-            <span id="hudVipAura" class="hidden text-[8px] sm:text-[10px] px-1 py-0.2 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold items-center gap-0.5 animate-pulse">
-              👑 +50%
-            </span>
-          </div>
-          <!-- XP Bar & CP Counter -->
-          <div class="flex items-center gap-1.5 text-xs">
-            <span id="hudCpCount" class="font-mono font-black text-amber-400 text-[11px] sm:text-sm tracking-wide">350 CP</span>
-            <div class="w-10 sm:w-24 h-1.5 bg-slate-800 rounded-full overflow-hidden border border-slate-700/60 hidden sm:block">
-              <div id="hudXpFill" class="h-full bg-gradient-to-r from-amber-500 to-emerald-400 transition-all duration-300" style="width: 35%;"></div>
+          <!-- Center: Streak Flame & Faction Selector -->
+          <div class="flex items-center gap-1 sm:gap-2 shrink-0">
+            <!-- Streak Flame -->
+            <div class="flex items-center gap-1 bg-slate-950 px-1.5 sm:px-2.5 py-1 rounded-xl border border-red-500/30 text-xs shadow-sm" title="Chuỗi ngày liên tiếp giữ lửa">
+              <span class="text-xs sm:text-base animate-bounce">🔥</span>
+              <span id="hudStreakDays" class="font-black text-red-400 text-[10px] sm:text-xs">5 Ngày</span>
             </div>
+
+            <!-- Faction Tag -->
+            <button onclick="openFactionModal()" class="flex items-center gap-1 bg-slate-950 hover:bg-slate-800 px-1.5 sm:px-2.5 py-1 rounded-xl border border-slate-800 text-xs text-slate-300 transition shadow-sm" title="Đổi hoặc xem Quân Đoàn KCN">
+              <span id="hudFactionFlag">🔴</span>
+              <span id="hudFactionName" class="font-bold text-[10px] sm:text-[11px] hidden xs:inline">Foxconn</span>
+            </button>
           </div>
+
+          <!-- Right: Mystery Chest Gacha Button & Boss Arena Launcher & Sound FX Toggle -->
+          <div class="flex items-center gap-1 sm:gap-2 shrink-0">
+            <!-- Quick Boss Arena Launcher -->
+            <button onclick="launchBossBattle()" class="px-2 sm:px-3 py-1 sm:py-1.5 rounded-xl bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-black text-[11px] sm:text-xs flex items-center gap-1 shadow-md shadow-red-600/30 transition hover:scale-105 active:scale-95 animate-pulse">
+              <span>⚔️</span>
+              <span class="hidden sm:inline">Đấu Boss Sếp Hoa</span>
+              <span class="sm:hidden">Boss</span>
+            </button>
+
+            <!-- Daily Mystery Chest Button -->
+            <button onclick="openMysteryChestModal()" id="btnHudChest" class="relative px-2 sm:px-3 py-1 sm:py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 hover:opacity-95 text-slate-950 font-black text-[11px] sm:text-xs flex items-center gap-1 shadow-md shadow-amber-500/20 transition hover:scale-105 active:scale-95">
+              <span class="text-xs sm:text-sm">🎁</span>
+              <span class="hidden sm:inline">Rương Hoàng Kim</span>
+              <span id="hudChestBadge" class="w-2 h-2 rounded-full bg-red-600 border border-white absolute -top-1 -right-1 animate-ping"></span>
+            </button>
+
+            <!-- Sound Toggle -->
+            <button onclick="toggleGameSound()" id="btnSoundToggle" class="w-6 h-6 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-center text-[10px] sm:text-xs text-slate-300 hover:text-white transition" title="Bật/Tắt âm thanh game">
+              🔊
+            </button>
+          </div>
+
         </div>
-      </div>
-
-      <!-- Center: Streak Flame & Faction Selector -->
-      <div class="flex items-center gap-1 sm:gap-2 shrink-0">
-        <!-- Streak Flame -->
-        <div class="flex items-center gap-1 bg-slate-950 px-1.5 sm:px-2.5 py-1 rounded-xl border border-red-500/30 text-xs shadow-sm" title="Chuỗi ngày liên tiếp giữ lửa">
-          <span class="text-xs sm:text-base animate-bounce">🔥</span>
-          <span id="hudStreakDays" class="font-black text-red-400 text-[10px] sm:text-xs">5 Ngày</span>
-        </div>
-
-        <!-- Faction Tag -->
-        <button onclick="openFactionModal()" class="flex items-center gap-1 bg-slate-950 hover:bg-slate-800 px-1.5 sm:px-2.5 py-1 rounded-xl border border-slate-800 text-xs text-slate-300 transition shadow-sm" title="Đổi hoặc xem Quân Đoàn KCN">
-          <span id="hudFactionFlag">🔴</span>
-          <span id="hudFactionName" class="font-bold text-[10px] sm:text-[11px] hidden xs:inline">Foxconn</span>
-        </button>
-      </div>
-
-      <!-- Right: Mystery Chest Gacha Button & Boss Arena Launcher & Sound FX Toggle -->
-      <div class="flex items-center gap-1 sm:gap-2 shrink-0">
-        <!-- Quick Boss Arena Launcher -->
-        <button onclick="launchBossBattle()" class="px-2 sm:px-3 py-1 sm:py-1.5 rounded-xl bg-gradient-to-r from-red-600 to-amber-600 hover:from-red-500 hover:to-amber-500 text-white font-black text-[11px] sm:text-xs flex items-center gap-1 shadow-md shadow-red-600/30 transition hover:scale-105 active:scale-95 animate-pulse">
-          <span>⚔️</span>
-          <span class="hidden sm:inline">Đấu Boss Sếp Hoa</span>
-          <span class="sm:hidden">Boss</span>
-        </button>
-
-        <!-- Daily Mystery Chest Button -->
-        <button onclick="openMysteryChestModal()" id="btnHudChest" class="relative px-2 sm:px-3 py-1 sm:py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 hover:opacity-95 text-slate-950 font-black text-[11px] sm:text-xs flex items-center gap-1 shadow-md shadow-amber-500/20 transition hover:scale-105 active:scale-95">
-          <span class="text-xs sm:text-sm">🎁</span>
-          <span class="hidden sm:inline">Rương Hoàng Kim</span>
-          <span id="hudChestBadge" class="w-2 h-2 rounded-full bg-red-600 border border-white absolute -top-1 -right-1 animate-ping"></span>
-        </button>
-
-        <!-- Sound Toggle -->
-        <button onclick="toggleGameSound()" id="btnSoundToggle" class="w-6 h-6 sm:w-8 sm:h-8 rounded-lg sm:rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-center text-[10px] sm:text-xs text-slate-300 hover:text-white transition" title="Bật/Tắt âm thanh game">
-          🔊
-        </button>
       </div>
 
     </div>
-  </div>
   </div>
 
   <!-- ========================================================================= -->
   <!-- TAB: ZIN HỌC - GIÁO TRÌNH 21 NGÀY THĂNG CHỨC (BẢN TÀ ĐẠO NHÀ MÁY)    -->
   <!-- ========================================================================= -->
-  <section id="section-learn" class="tab-section max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-6 w-full flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6">
+  <section id="section-learn" class="tab-section max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 py-4 sm:py-6 w-full flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6">
     
 
     
@@ -798,7 +801,7 @@
   <!-- ========================================================================= -->
   <!-- TAB 4: ZIN SHARE / KIẾM TIỀN - CỖ MÁY VIRUS LAN TRUYỀN (GIỚI THIỆU 200K) -->
   <!-- ========================================================================= -->
-  <section id="section-share" class="tab-section hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-1">
+  <section id="section-share" class="tab-section hidden max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 py-5 sm:py-8 w-full flex-1">
     
     <!-- Hero Commission Calculator -->
     <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-950 via-slate-900 to-amber-950 border border-emerald-500/40 p-6 sm:p-8 shadow-2xl mb-8">
@@ -964,7 +967,7 @@
   <!-- ========================================================================= -->
   <!-- TAB 4: ZIN VIỆC - SÀN TUYỂN DỤNG TỔ TRƯỞNG & QUẢN LÝ LƯƠNG 14M - 25M     -->
   <!-- ========================================================================= -->
-  <section id="section-jobs" class="tab-section hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-1">
+  <section id="section-jobs" class="tab-section hidden max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 py-5 sm:py-8 w-full flex-1">
     
     <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
       <div>
@@ -1087,7 +1090,7 @@
   <!-- ========================================================================= -->
   <!-- TAB 2: ZIN HOT - 5 MÁY HOT CÓ SẴN & DỊCH VỤ SĂN MÁY ZIN THEO YÊU CẦU       -->
   <!-- ========================================================================= -->
-  <section id="section-hot" class="tab-section hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-1">
+  <section id="section-hot" class="tab-section hidden max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 py-5 sm:py-8 w-full flex-1">
     
     <!-- Hero Banner: Installment Finance 0% & In-Store Experience -->
     <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-amber-950/40 via-slate-900 to-slate-950 border border-amber-500/30 p-6 sm:p-8 shadow-2xl mb-8">
@@ -1454,66 +1457,70 @@
 
   </section>
 
-  <!-- Site Footer -->
-  <footer class="bg-slate-900 border-t border-slate-800 text-slate-400 text-xs py-8 px-4 sm:px-6 lg:px-8 mt-12 mb-16 md:mb-0">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
-      <div>
-        <div class="flex items-center justify-center md:justify-start gap-2">
-          <span class="text-lg font-black text-white">ZIN<span class="text-amber-400">.ZONE</span></span>
-          <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold">100% NGUYÊN ZIN</span>
-          <span class="text-[10px] px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-500/30 font-bold">🎮 12+ HỌC THUẬT</span>
-        </div>
-        <p class="text-[11px] text-slate-400 mt-1 max-w-md">
-          Chuyên cung cấp điện thoại nguyên bản chuẩn xịn cho công nhân KCN Bắc Ninh, Bắc Giang, Bình Dương. Tặng kèm độc quyền bộ giáo trình 21 Ngày Thăng Chức.
-        </p>
-        <div class="flex flex-wrap items-center justify-center md:justify-start gap-3 mt-3 text-[11px]">
-          <button onclick="openPrivacyModal()" class="text-slate-400 hover:text-amber-400 underline transition">
-            Chính Sách Bảo Mật (NĐ 13/2023/NĐ-CP)
-          </button>
-          <span>•</span>
-          <button onclick="openTermsModal()" class="text-slate-400 hover:text-amber-400 underline transition">
-            Điều Khoản Sử Dụng (NĐ 72/2013/NĐ-CP)
-          </button>
-          <span>•</span>
-          <span class="text-slate-500">Tỷ lệ Rương: SSR 10%, SR 25%, R 35%, N 30%</span>
-        </div>
-      </div>
-
-      <div class="flex flex-col sm:flex-row items-center gap-4 text-xs">
-        <div class="px-4 py-2.5 rounded-xl bg-slate-800/90 border border-slate-700 text-slate-200 font-bold flex items-center gap-3 shadow-md text-left">
-          <span class="text-2xl">🏪</span>
-          <div>
-            <div class="text-white text-xs font-bold">Phân Phối Độc Quyền Qua Hệ Thống Cửa Hàng Ủy Quyền</div>
-            <div class="text-[10px] text-slate-400 mt-0.5">Bảo hành phần cứng & đổi máy vui lòng liên hệ cửa hàng nơi mua máy</div>
+  <!-- Site Footer (Rounded Card) -->
+  <footer class="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 mt-10 mb-28 md:mb-10 w-full">
+    <div class="rounded-2xl sm:rounded-3xl bg-slate-900/90 border border-slate-800 text-slate-400 text-xs p-5 sm:p-8 shadow-xl">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+        <div>
+          <div class="flex items-center justify-center md:justify-start gap-2">
+            <span class="text-lg font-black text-white">ZIN<span class="text-amber-400">.ZONE</span></span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold">100% NGUYÊN ZIN</span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-blue-500/20 text-blue-300 border border-blue-500/30 font-bold">🎮 12+ HỌC THUẬT</span>
+          </div>
+          <p class="text-[11px] text-slate-400 mt-1 max-w-md">
+            Chuyên cung cấp điện thoại nguyên bản chuẩn xịn cho công nhân KCN Bắc Ninh, Bắc Giang, Bình Dương. Tặng kèm độc quyền bộ giáo trình 21 Ngày Thăng Chức.
+          </p>
+          <div class="flex flex-wrap items-center justify-center md:justify-start gap-3 mt-3 text-[11px]">
+            <button onclick="openPrivacyModal()" class="text-slate-400 hover:text-amber-400 underline transition">
+              Chính Sách Bảo Mật (NĐ 13/2023/NĐ-CP)
+            </button>
+            <span>•</span>
+            <button onclick="openTermsModal()" class="text-slate-400 hover:text-amber-400 underline transition">
+              Điều Khoản Sử Dụng (NĐ 72/2013/NĐ-CP)
+            </button>
+            <span>•</span>
+            <span class="text-slate-500">Tỷ lệ Rương: SSR 10%, SR 25%, R 35%, N 30%</span>
           </div>
         </div>
-        <div class="text-slate-400 text-[11px] space-y-0.5 text-center md:text-left">
-          <div>📍 Phân phối trực tiếp tại các cửa hàng điện thoại khu vực KCN</div>
-          <div>💵 Nhận 200k tiền mặt tại cửa hàng khi giới thiệu đồng nghiệp mua máy</div>
-          <div class="text-emerald-400 font-medium">🛡️ Cam kết 100% Free-to-Play, không nạp thẻ cờ bạc</div>
+
+        <div class="flex flex-col sm:flex-row items-center gap-4 text-xs">
+          <div class="px-4 py-2.5 rounded-xl bg-slate-800/90 border border-slate-700 text-slate-200 font-bold flex items-center gap-3 shadow-md text-left">
+            <span class="text-2xl">🏪</span>
+            <div>
+              <div class="text-white text-xs font-bold">Phân Phối Độc Quyền Qua Hệ Thống Cửa Hàng Ủy Quyền</div>
+              <div class="text-[10px] text-slate-400 mt-0.5">Bảo hành phần cứng & đổi máy vui lòng liên hệ cửa hàng nơi mua máy</div>
+            </div>
+          </div>
+          <div class="text-slate-400 text-[11px] space-y-0.5 text-center md:text-left">
+            <div>📍 Phân phối trực tiếp tại các cửa hàng điện thoại khu vực KCN</div>
+            <div>💵 Nhận 200k tiền mặt tại cửa hàng khi giới thiệu đồng nghiệp mua máy</div>
+            <div class="text-emerald-400 font-medium">🛡️ Cam kết 100% Free-to-Play, không nạp thẻ cờ bạc</div>
+          </div>
         </div>
       </div>
     </div>
   </footer>
 
-  <!-- Mobile Bottom Floating Navigation Bar -->
-  <div class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-slate-950/95 backdrop-blur border-t border-slate-800 px-2 py-2 flex items-center justify-around text-xs safe-bottom">
-    <button onclick="switchMainTab('learn')" id="mNav-learn" class="flex flex-col items-center text-amber-400 font-bold">
-      <span class="text-base">🎓</span>
-      <span class="text-[10px]">Tu Tiên 21N</span>
-    </button>
-    <button onclick="switchMainTab('hot')" id="mNav-hot" class="flex flex-col items-center text-slate-400 hover:text-white">
-      <span class="text-base">🔥</span>
-      <span class="text-[10px]">Trả Góp 0%</span>
-    </button>
-    <button onclick="switchMainTab('share')" id="mNav-share" class="flex flex-col items-center text-emerald-400 font-black animate-pulse">
-      <span class="text-base">💵</span>
-      <span class="text-[10px]">Nhận 200k</span>
-    </button>
-    <button onclick="switchMainTab('jobs')" id="mNav-jobs" class="flex flex-col items-center text-slate-400 hover:text-white">
-      <span class="text-base">💼</span>
-      <span class="text-[10px]">Việc Làm</span>
-    </button>
+  <!-- Mobile Bottom Floating Navigation Bar (Floating Rounded Island Dock) -->
+  <div class="md:hidden fixed bottom-3 inset-x-3 z-40 pointer-events-none safe-bottom">
+    <nav class="pointer-events-auto max-w-md mx-auto bg-slate-900/95 backdrop-blur-xl border border-amber-500/30 rounded-2xl px-2 py-1.5 flex items-center justify-around text-xs shadow-2xl shadow-black/90">
+      <button onclick="switchMainTab('learn')" id="mNav-learn" class="flex flex-col items-center text-amber-400 font-bold transition px-2 py-1">
+        <span class="text-base">🎓</span>
+        <span class="text-[10px]">Tu Tiên 21N</span>
+      </button>
+      <button onclick="switchMainTab('hot')" id="mNav-hot" class="flex flex-col items-center text-slate-400 hover:text-white transition px-2 py-1">
+        <span class="text-base">🔥</span>
+        <span class="text-[10px]">Trả Góp 0%</span>
+      </button>
+      <button onclick="switchMainTab('share')" id="mNav-share" class="flex flex-col items-center text-emerald-400 font-black animate-pulse transition px-2 py-1">
+        <span class="text-base">💵</span>
+        <span class="text-[10px]">Nhận 200k</span>
+      </button>
+      <button onclick="switchMainTab('jobs')" id="mNav-jobs" class="flex flex-col items-center text-slate-400 hover:text-white transition px-2 py-1">
+        <span class="text-base">💼</span>
+        <span class="text-[10px]">Việc Làm</span>
+      </button>
+    </nav>
   </div>
 
   <!-- Toast Notification Container -->
@@ -1809,7 +1816,7 @@
         badge.innerHTML = `
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
           <span class="hidden sm:inline">${name} • Đã Kích Hoạt</span>
-          <span class="sm:hidden text-[11px]">${name} • Đã Kích Hoạt</span>
+          <span class="sm:hidden text-[11px] max-w-[120px] truncate">${name}</span>
         `;
       }
     }
@@ -3134,9 +3141,11 @@
         const mBtn = document.getElementById(`mNav-${t}`);
         if (mBtn) {
           if (t === tabId) {
-            mBtn.className = "flex flex-col items-center text-amber-400 font-bold";
+            mBtn.className = "flex flex-col items-center text-amber-400 font-bold transition px-2 py-1";
+          } else if (t === 'share') {
+            mBtn.className = "flex flex-col items-center text-emerald-400 font-black animate-pulse transition px-2 py-1";
           } else {
-            mBtn.className = "flex flex-col items-center text-slate-400 hover:text-white";
+            mBtn.className = "flex flex-col items-center text-slate-400 hover:text-white transition px-2 py-1";
           }
         }
       });
