@@ -161,322 +161,366 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-amber-500 selection:text-black overflow-x-hidden w-full max-w-full pb-24 md:pb-8">
 
-  <!-- Instant Full-Screen 3-Screen Startup Awakening Splash (Network-First, 3s per screen layer-by-layer charging) -->
-  <div id="appStartupSplash" class="fixed inset-0 z-[999998] flex flex-col items-center justify-center p-3 sm:p-5 select-none transition-all duration-400" style="background: radial-gradient(circle at 50% 25%, #172554 0%, #090d16 60%, #030712 100%);">
+    <!-- ========================================== -->
+  <!-- ZIN ZONE 3-SCREEN INTERACTIVE STARTUP SPLASH -->
+  <!-- Manual Navigation • Layer-by-Layer Energy Charge • Network-First Fallback -->
+  <!-- ========================================== -->
+  <div id="appStartupSplash" style="position:fixed; inset:0; z-index:999998; background:radial-gradient(ellipse at 50% 12%, #1e1b4b 0%, #090d16 55%, #030712 100%); display:flex; flex-direction:column; align-items:center; justify-content:center; padding:max(16px, env(safe-area-inset-top, 16px)) 16px max(16px, env(safe-area-inset-bottom, 16px)); pointer-events:auto; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; overflow-y:auto; transition:opacity 0.35s ease-out, transform 0.35s ease-out;">
     
-    <!-- Ambient Animated Glows behind the card -->
-    <div class="absolute w-72 h-72 rounded-full bg-amber-500/10 blur-3xl pointer-events-none top-1/4 -left-12 animate-pulse"></div>
-    <div class="absolute w-72 h-72 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none bottom-1/4 -right-12 animate-pulse"></div>
-
-    <!-- Centered Floating Rounded Rectangle Card (Avoiding any edge cutoffs on all mobile screens) -->
-    <div class="relative w-full max-w-md mx-auto my-auto rounded-3xl bg-slate-900/95 border-2 border-amber-500/40 p-4 sm:p-6 shadow-[0_0_50px_rgba(0,0,0,0.85)] backdrop-blur-2xl flex flex-col justify-between overflow-hidden" style="max-height: calc(100vh - max(32px, env(safe-area-inset-top) + env(safe-area-inset-bottom)));">
+    <!-- Floating Rounded Card Container -->
+    <div class="w-full max-w-md mx-auto my-auto bg-slate-900/95 border border-amber-500/40 rounded-3xl p-4 sm:p-6 shadow-2xl backdrop-blur-2xl flex flex-col justify-between relative overflow-hidden text-center gold-pulse-box min-h-[540px]">
       
-      <!-- Card Top: Brand Header & Skip Button -->
-      <div class="w-full flex items-center justify-between gap-2 pb-3 border-b border-slate-800/80 shrink-0">
-        <div class="flex items-center gap-2">
-          <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center font-black text-slate-950 text-xs shadow-md">
-            Z
-          </div>
-          <div>
-            <div class="flex items-center gap-1.5">
-              <span class="text-sm font-black text-white tracking-tight">ZIN<span class="text-amber-400">.ZONE</span></span>
-              <span class="text-[9px] font-extrabold uppercase px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30">VIP</span>
-            </div>
-          </div>
+      <!-- Ambient Glow Blobs -->
+      <div class="absolute -right-20 -top-20 w-52 h-52 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -left-20 -bottom-20 w-52 h-52 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <!-- Top Header: VIP Badge & Energy Meter -->
+      <div class="w-full shrink-0 mb-3 sm:mb-4">
+        <!-- Top VIP Badge -->
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/40 text-amber-300 text-[11px] font-black tracking-wider uppercase shadow-sm mb-3">
+          <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
+          <span>✨ ZIN ZONE • THẦN NGỮ TU TIÊN</span>
         </div>
 
-        <button type="button" onclick="completeStartupSplash()" class="text-xs font-bold text-slate-400 hover:text-amber-300 px-2.5 py-1 rounded-full bg-slate-800/90 hover:bg-slate-700/80 border border-slate-700 text-slate-300 transition-all flex items-center gap-1 active:scale-95 cursor-pointer shadow">
-          <span>Bỏ qua</span>
-          <span class="text-amber-400 text-xs font-black">›</span>
-        </button>
-      </div>
-
-      <!-- Energy Charging Status & Segmented Bars (3s per screen layer-by-layer) -->
-      <div class="w-full pt-3 pb-2 shrink-0">
-        <div class="flex items-center justify-between text-xs mb-1.5">
-          <span id="splashEnergyStageText" class="font-bold text-amber-300 flex items-center gap-1.5">
+        <!-- Energy Meter Info Row -->
+        <div class="flex items-center justify-between text-xs font-bold px-1 mb-1.5">
+          <span id="splashStageBadge" class="text-amber-400 font-extrabold flex items-center gap-1">
             <span class="inline-block w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
-            <span>TẦNG 1: HUYẾT MẠCH NGUYÊN BẢN</span>
+            <span>TẦNG 1: HUYẾT MẠCH THỨC TỈNH</span>
           </span>
-          <span id="splashEnergyPercent" class="font-black text-amber-400 font-mono text-sm tracking-wider">0%</span>
+          <span id="splashEnergyNumber" class="text-amber-300 font-black tracking-wider">70% THIÊN PHÚ</span>
         </div>
 
-        <!-- 3-Segment Charging Progress Bars -->
-        <div class="grid grid-cols-3 gap-1.5 w-full bg-slate-950 p-1 rounded-full border border-slate-800">
-          <!-- Segment 1 (Slide 1: 0 -> 70%) -->
-          <div class="h-2 rounded-full bg-slate-800 overflow-hidden relative">
-            <div id="splashSegmentBar_1" class="h-full bg-gradient-to-r from-amber-500 to-yellow-400 transition-all duration-100 ease-linear rounded-full" style="width: 0%;"></div>
+        <!-- 3-Segment Energy Bar (Layer-by-Layer Charging: 70% -> 85% -> 100%) -->
+        <div class="w-full h-3 bg-slate-950/80 rounded-full p-0.5 border border-slate-700/80 flex gap-1 overflow-hidden shadow-inner">
+          <div class="flex-1 h-full rounded-full bg-slate-800/80 overflow-hidden">
+            <div id="splashSegment1" class="h-full bg-gradient-to-r from-amber-500 to-yellow-400 rounded-full transition-all duration-500 ease-out" style="width: 100%;"></div>
           </div>
-          <!-- Segment 2 (Slide 2: 70 -> 85%) -->
-          <div class="h-2 rounded-full bg-slate-800 overflow-hidden relative">
-            <div id="splashSegmentBar_2" class="h-full bg-gradient-to-r from-cyan-400 to-emerald-400 transition-all duration-100 ease-linear rounded-full" style="width: 0%;"></div>
+          <div class="flex-1 h-full rounded-full bg-slate-800/80 overflow-hidden">
+            <div id="splashSegment2" class="h-full bg-gradient-to-r from-cyan-500 to-blue-400 rounded-full transition-all duration-500 ease-out" style="width: 0%;"></div>
           </div>
-          <!-- Segment 3 (Slide 3: 85 -> 100%) -->
-          <div class="h-2 rounded-full bg-slate-800 overflow-hidden relative">
-            <div id="splashSegmentBar_3" class="h-full bg-gradient-to-r from-emerald-400 to-amber-400 transition-all duration-100 ease-linear rounded-full" style="width: 0%;"></div>
+          <div class="flex-1 h-full rounded-full bg-slate-800/80 overflow-hidden">
+            <div id="splashSegment3" class="h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full transition-all duration-500 ease-out" style="width: 0%;"></div>
           </div>
-        </div>
-
-        <div class="flex items-center justify-between text-[10px] text-slate-400 font-medium px-1 mt-1">
-          <span>Tích tụ: <strong id="splashStepTimer" class="text-amber-400">3s</strong></span>
-          <span class="text-slate-500">Mục tiêu: Đột phá 70% thiên phú</span>
         </div>
       </div>
 
-      <!-- Slide Viewport (Smooth Carousel) -->
-      <div class="relative w-full flex-1 flex flex-col justify-center items-center my-2 py-2 overflow-hidden">
+      <!-- Slide Carousel Container -->
+      <div id="splashSlidesContainer" class="w-full flex-1 flex flex-col justify-center my-auto min-h-[320px]">
         
-        <!-- Slide 1: 【第一屏：血脉觉醒】 -->
-        <div id="splashSlide_1" class="w-full flex flex-col items-center justify-center text-center transition-all duration-300">
-          <div class="relative w-24 h-24 sm:w-28 sm:h-28 mb-3 flex items-center justify-center">
-            <div class="absolute inset-0 rounded-3xl bg-amber-500/20 animate-ping opacity-40"></div>
-            <div class="w-full h-full rounded-3xl bg-gradient-to-br from-amber-500/25 via-slate-800 to-amber-950/60 border-2 border-amber-400/70 flex flex-col items-center justify-center shadow-[0_0_35px_rgba(245,158,11,0.45)] relative">
-              <span class="text-3xl sm:text-4xl filter drop-shadow-[0_0_12px_rgba(245,158,11,0.9)] animate-pulse">🧬</span>
-              <span class="text-[10px] font-black text-amber-300 tracking-wider mt-1 uppercase">70% Hán Cổ</span>
+        <!-- ================= SLIDE 1: HUYẾT MẠCH THỨC TỈNH ================= -->
+        <div id="splashSlide_1" class="w-full flex flex-col items-center animate-fadeIn">
+          <!-- Artwork 1: Bloodline Ancient Han-Viet Resonance & Acoustic Bridge -->
+          <div class="w-full py-3 px-4 rounded-2xl bg-gradient-to-b from-amber-950/30 to-slate-950/60 border border-amber-500/30 mb-3.5 relative overflow-hidden shadow-inner">
+            <div class="flex items-center justify-center gap-4 text-2xl py-1">
+              <span class="p-2.5 rounded-2xl bg-amber-500/20 border border-amber-400/40 text-amber-300 shadow">🧬</span>
+              <span class="text-amber-500/60 text-lg font-black animate-pulse">➔➔➔</span>
+              <span class="p-2.5 rounded-2xl bg-yellow-500/20 border border-yellow-400/40 text-yellow-300 shadow">🗣️</span>
+            </div>
+            <!-- Acoustic bridge phonetic examples -->
+            <div class="grid grid-cols-3 gap-1.5 mt-2 text-[11px] font-semibold">
+              <div class="p-1 rounded-lg bg-slate-900/90 border border-amber-500/20 text-slate-300">
+                <span class="block text-amber-400 font-bold">Phát Âm</span>
+                <span class="text-[10px] text-slate-400 font-mono">Fā Yīn</span>
+              </div>
+              <div class="p-1 rounded-lg bg-slate-900/90 border border-amber-500/20 text-slate-300">
+                <span class="block text-amber-400 font-bold">Quản Lý</span>
+                <span class="text-[10px] text-slate-400 font-mono">Guǎn Lǐ</span>
+              </div>
+              <div class="p-1 rounded-lg bg-slate-900/90 border border-amber-500/20 text-slate-300">
+                <span class="block text-amber-400 font-bold">Tổ Trưởng</span>
+                <span class="text-[10px] text-slate-400 font-mono">Zǔ Zhǎng</span>
+              </div>
             </div>
           </div>
 
-          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/40 mb-2">
-            <span>✨ HUYẾT MẠCH THIÊN PHÚ</span>
-          </div>
-
-          <h2 class="text-base sm:text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-100 via-amber-300 to-yellow-400 text-center leading-snug px-1">
-            Người Việt mới giữ trọn tinh hoa Hán ngữ cổ!
+          <!-- Main Vietnamese Text 1 (Exact User Copy) -->
+          <h2 class="text-amber-400 font-black text-base sm:text-lg leading-snug mb-2 px-1">
+            Người Việt mới giữ trọn tinh hoa Hán ngữ cổ! Không cần học, bạn đã biết nói sẵn 70% tiếng Trung.
           </h2>
-
-          <div class="w-full mt-2 bg-slate-950/70 p-3 rounded-2xl border border-amber-500/25">
-            <p class="text-xs sm:text-sm font-semibold text-slate-200 text-center leading-relaxed">
-              Không cần học, bạn đã biết nói sẵn <span class="text-amber-400 font-black underline decoration-amber-400/60">70% tiếng Trung</span>.
-            </p>
-            <div class="mt-2 pt-2 border-t border-slate-800/80 flex items-center justify-center gap-1.5 text-[11px] text-amber-300/90 font-medium">
-              <span class="text-amber-400">🔥 Trùng âm 95%:</span>
-              <span class="text-slate-300">Công Ty • Hạnh Phúc • Thời Gian</span>
-            </div>
+          <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-3 px-2">
+            Hơn 70% từ vựng tiếng Việt có gốc Hán-Việt cổ đại chuẩn xác nhất. Bạn không phải học ngoại ngữ từ đầu, bạn chỉ đang đánh thức kho báu ngôn ngữ sẵn có trong máu mình!
+          </p>
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold">
+            <span>⚡ Huyết Mạch Đồng Âm</span> • <span>Đọc Lên Là Hiểu Ngay</span>
           </div>
         </div>
 
-        <!-- Slide 2: 【第二屏：扔掉纸笔】 -->
-        <div id="splashSlide_2" class="w-full flex flex-col items-center justify-center text-center transition-all duration-300 hidden">
-          <div class="relative w-24 h-24 sm:w-28 sm:h-28 mb-3 flex items-center justify-center">
-            <div class="absolute inset-0 rounded-3xl bg-cyan-500/20 animate-ping opacity-40"></div>
-            <div class="w-full h-full rounded-3xl bg-gradient-to-br from-cyan-500/25 via-slate-800 to-blue-950/60 border-2 border-cyan-400/70 flex flex-col items-center justify-center shadow-[0_0_35px_rgba(34,211,238,0.45)] relative">
-              <span class="text-3xl sm:text-4xl filter drop-shadow-[0_0_12px_rgba(34,211,238,0.9)] animate-pulse">🎙️⚡</span>
-              <span class="text-[10px] font-black text-cyan-300 tracking-wider mt-1 uppercase">Chỉ Cần Nói</span>
+        <!-- ================= SLIDE 2: VỨT BÚT ĐI ================= -->
+        <div id="splashSlide_2" class="w-full flex flex-col items-center hidden animate-fadeIn">
+          <!-- Artwork 2: Calligraphy Brush Snapped & Studio Microphone -->
+          <div class="w-full py-3 px-4 rounded-2xl bg-gradient-to-b from-cyan-950/30 to-slate-950/60 border border-cyan-500/30 mb-3.5 relative overflow-hidden shadow-inner">
+            <div class="flex items-center justify-center gap-4 text-2xl py-1">
+              <span class="p-2.5 rounded-2xl bg-rose-500/20 border border-rose-400/40 text-rose-300 shadow line-through opacity-80" title="Bỏ bút viết chữ">🖌️</span>
+              <span class="text-cyan-400 text-lg font-black animate-bounce">⚡⚡⚡</span>
+              <span class="p-2.5 rounded-2xl bg-cyan-500/20 border border-cyan-400/40 text-cyan-300 shadow" title="Mở miệng nói sõi">🎙️</span>
+            </div>
+            <!-- Factory Reality Contrast -->
+            <div class="grid grid-cols-2 gap-2 mt-2 text-[11px] font-semibold">
+              <div class="p-1.5 rounded-lg bg-slate-900/90 border border-rose-500/30 text-rose-300">
+                <span class="block font-bold">✍️ Viết tay đẹp</span>
+                <span class="text-[10px] text-slate-400">Lương 7 triệu (0 ai trả thêm)</span>
+              </div>
+              <div class="p-1.5 rounded-lg bg-slate-900/90 border border-emerald-500/40 text-emerald-300">
+                <span class="block font-bold">🗣️ Khẩu ngữ lưu loát</span>
+                <span class="text-[10px] text-amber-300 font-bold">Lương 15 triệu (Tổ Trưởng)</span>
+              </div>
             </div>
           </div>
 
-          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 mb-2">
-            <span>⚡ ĐẬP TAN GIẤY BÚT</span>
-          </div>
-
-          <h2 class="text-base sm:text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-100 via-cyan-300 to-emerald-400 text-center leading-snug px-1">
-            Vứt bút đi, chỉ cần biết NÓI!
+          <!-- Main Vietnamese Text 2 (Exact User Copy) -->
+          <h2 class="text-cyan-400 font-black text-base sm:text-lg leading-snug mb-2 px-1">
+            Vứt bút đi, chỉ cần biết NÓI! 80% sinh viên Trung Quốc cũng không tự viết nổi 100 chữ Hán thông dụng.
           </h2>
-
-          <div class="w-full mt-2 bg-slate-950/70 p-3 rounded-2xl border border-cyan-500/25">
-            <p class="text-xs sm:text-sm font-semibold text-slate-200 text-center leading-relaxed">
-              80% sinh viên Trung Quốc cũng không tự viết nổi 100 chữ Hán thông dụng.
-            </p>
-            <div class="mt-2 pt-2 border-t border-slate-800/80 flex items-center justify-center gap-1.5 text-[11px] text-cyan-300/90 font-medium">
-              <span class="text-cyan-400">💵 Lương 15 Triệu:</span>
-              <span class="text-slate-300">Tổ Trưởng ăn tiền ở miệng nói, không ai thi chữ đẹp!</span>
-            </div>
+          <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-3 px-2">
+            Thời đại gõ phím: 80% sinh viên Trung Quốc cũng quên cách viết tay! Trong nhà xưởng, người ta trả lương 15 triệu cho cái miệng biết nói của Tổ trưởng, không ai bắt bạn thi viết chữ đẹp!
+          </p>
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-bold">
+            <span>🎙️ 100% Tập Trung Khẩu Ngữ</span> • <span>Nói Sõi Là Thăng Chức</span>
           </div>
         </div>
 
-        <!-- Slide 3: 【第三屏：成瘾通关】 -->
-        <div id="splashSlide_3" class="w-full flex flex-col items-center justify-center text-center transition-all duration-300 hidden">
-          <div class="relative w-24 h-24 sm:w-28 sm:h-28 mb-3 flex items-center justify-center">
-            <div class="absolute inset-0 rounded-3xl bg-emerald-500/20 animate-ping opacity-40"></div>
-            <div class="w-full h-full rounded-3xl bg-gradient-to-br from-emerald-500/25 via-slate-800 to-amber-950/60 border-2 border-emerald-400/70 flex flex-col items-center justify-center shadow-[0_0_35px_rgba(52,211,153,0.45)] relative">
-              <span class="text-3xl sm:text-4xl filter drop-shadow-[0_0_12px_rgba(52,211,153,0.9)] animate-pulse">🥤🎮</span>
-              <span class="text-[10px] font-black text-emerald-300 tracking-wider mt-1 uppercase">3.000 Từ Vựng</span>
+        <!-- ================= SLIDE 3: THÀNH NGHIỆN THÔNG QUAN ================= -->
+        <div id="splashSlide_3" class="w-full flex flex-col items-center hidden animate-fadeIn">
+          <!-- Artwork 3: 21 Days Drinking Water + Supervisor Crown -->
+          <div class="w-full py-3 px-4 rounded-2xl bg-gradient-to-b from-emerald-950/30 to-slate-950/60 border border-emerald-500/30 mb-3.5 relative overflow-hidden shadow-inner">
+            <div class="flex items-center justify-center gap-3 text-2xl py-1">
+              <span class="p-2.5 rounded-2xl bg-blue-500/20 border border-blue-400/40 text-blue-300 shadow" title="Dễ như uống nước">🥤</span>
+              <span class="text-emerald-400 text-sm font-black tracking-widest uppercase">21 NGÀY ➔</span>
+              <span class="p-2.5 rounded-2xl bg-amber-500/20 border border-amber-400/40 text-amber-300 shadow" title="Thăng chức Tổ Trưởng">👑</span>
+            </div>
+            <!-- 3 Water Station Routine -->
+            <div class="grid grid-cols-3 gap-1.5 mt-2 text-[11px] font-semibold">
+              <div class="p-1 rounded-lg bg-slate-900/90 border border-emerald-500/30 text-slate-300">
+                <span class="block text-emerald-400 font-bold">Sáng 5p</span>
+                <span class="text-[10px] text-slate-400">1 cốc nước = 20 từ</span>
+              </div>
+              <div class="p-1 rounded-lg bg-slate-900/90 border border-emerald-500/30 text-slate-300">
+                <span class="block text-emerald-400 font-bold">Trưa 5p</span>
+                <span class="text-[10px] text-slate-400">Cơm xưởng = 20 từ</span>
+              </div>
+              <div class="p-1 rounded-lg bg-slate-900/90 border border-emerald-500/30 text-slate-300">
+                <span class="block text-amber-300 font-bold">21 Ngày</span>
+                <span class="text-[10px] text-emerald-400 font-bold">3.000 từ vựng</span>
+              </div>
             </div>
           </div>
 
-          <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 mb-2">
-            <span>🚀 CỰC TỐC THĂNG CẤP</span>
-          </div>
-
-          <h2 class="text-base sm:text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-100 via-emerald-300 to-amber-400 text-center leading-snug px-1">
-            21 ngày nạp thẳng 3.000 từ dễ như uống nước.
+          <!-- Main Vietnamese Text 3 (Exact User Copy) -->
+          <h2 class="text-emerald-400 font-black text-base sm:text-lg leading-snug mb-2 px-1">
+            21 ngày nạp thẳng 3.000 từ dễ như uống nước. Học tiếng Trung gây nghiện như chơi Game!
           </h2>
-
-          <div class="w-full mt-2 bg-slate-950/70 p-3 rounded-2xl border border-emerald-500/25">
-            <p class="text-xs sm:text-sm font-semibold text-slate-200 text-center leading-relaxed">
-              Học tiếng Trung gây nghiện như chơi Game!
-            </p>
-            <div class="mt-2 pt-2 border-t border-slate-800/80 flex items-center justify-center gap-1.5 text-[11px] text-emerald-300/90 font-medium">
-              <span class="text-emerald-400">⚡ 3 Trạm Nước / Ngày:</span>
-              <span class="text-slate-300">Phản xạ 3 lần không trễ • 21 ngày đắc đạo!</span>
-            </div>
+          <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-3 px-2">
+            Phản xạ âm thanh ba chiều cực tốc, combo liên hoàn, nuốt trọn 3.000 từ vựng cốt lõi nhà xưởng tự nhiên như uống 3 cốc nước mỗi ngày. Đắc đạo Tổ trưởng nhẹ tênh!
+          </p>
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-bold">
+            <span>🏆 Game Hóa Cực Cuốn</span> • <span>3.000 Từ Cốt Lõi Nhà Xưởng</span>
           </div>
         </div>
 
       </div>
 
-      <!-- Slide Dots & Manual Nav -->
-      <div class="w-full flex items-center justify-center gap-2 py-2 shrink-0">
-        <button type="button" onclick="switchStartupSlide(1)" id="splashDot_1" class="w-7 h-2 rounded-full bg-amber-400 transition-all cursor-pointer" title="Tầng 1"></button>
-        <button type="button" onclick="switchStartupSlide(2)" id="splashDot_2" class="w-2.5 h-2 rounded-full bg-slate-700 hover:bg-slate-500 transition-all cursor-pointer" title="Tầng 2"></button>
-        <button type="button" onclick="switchStartupSlide(3)" id="splashDot_3" class="w-2.5 h-2 rounded-full bg-slate-700 hover:bg-slate-500 transition-all cursor-pointer" title="Tầng 3"></button>
-      </div>
-
-      <!-- Bottom Activation Button (Verbatim) -->
-      <div class="w-full pt-1 shrink-0">
-        <button type="button" onclick="completeStartupSplash()" id="btnStartupActivate" class="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 hover:from-amber-400 hover:to-yellow-300 text-slate-950 font-black text-sm sm:text-base tracking-wide uppercase shadow-[0_0_30px_rgba(245,158,11,0.6)] flex items-center justify-center gap-2 transform active:scale-95 transition-all cursor-pointer">
-          <span class="text-lg animate-bounce">⚡</span>
-          <span>KÍCH HOẠT 70% THIÊN PHÚ NGAY</span>
-          <span class="text-lg">🚀</span>
-        </button>
-        <div class="text-center text-[10px] text-slate-500 font-semibold mt-2">
-          Đồng hành cùng công nhân & kỹ thuật viên KCN • ZIN ZONE VIP
+      <!-- Footer Navigation Controls (Manual Only - No Auto-Switch) -->
+      <div class="w-full shrink-0 pt-2 border-t border-slate-800/80">
+        
+        <!-- Pagination Dot Indicators (Clickable) -->
+        <div class="flex items-center justify-center gap-2 mb-3">
+          <button onclick="setStartupSlide(1)" id="splashDot_1" class="w-8 h-2.5 rounded-full bg-amber-400 transition-all cursor-pointer shadow-sm" title="Bước 1: Huyết Mạch"></button>
+          <button onclick="setStartupSlide(2)" id="splashDot_2" class="w-2.5 h-2.5 rounded-full bg-slate-700 hover:bg-slate-500 transition-all cursor-pointer" title="Bước 2: Bỏ Bút"></button>
+          <button onclick="setStartupSlide(3)" id="splashDot_3" class="w-2.5 h-2.5 rounded-full bg-slate-700 hover:bg-slate-500 transition-all cursor-pointer" title="Bước 3: Thành Nghiện"></button>
         </div>
+
+        <!-- Controls for Slide 1 -->
+        <div id="splashControls_1" class="w-full flex flex-col items-center">
+          <button onclick="setStartupSlide(2)" class="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-slate-950 font-black text-sm tracking-wide shadow-lg shadow-amber-500/25 active:scale-[0.98] transition flex items-center justify-center gap-2 cursor-pointer">
+            <span>TIẾP THEO: VỨT BÚT ĐI</span>
+            <span>➔</span>
+          </button>
+          <button onclick="launchAppFromSplash()" class="mt-2.5 text-xs text-slate-400 hover:text-amber-300 transition underline underline-offset-4 cursor-pointer">
+            KÍCH HOẠT 70% THIÊN PHÚ NGAY ⚡
+          </button>
+        </div>
+
+        <!-- Controls for Slide 2 -->
+        <div id="splashControls_2" class="w-full flex flex-col items-center hidden">
+          <div class="flex items-center gap-2 w-full">
+            <button onclick="setStartupSlide(1)" class="w-1/3 py-3.5 px-3 rounded-2xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs sm:text-sm transition flex items-center justify-center gap-1 cursor-pointer">
+              <span>⬅ Quay lại</span>
+            </button>
+            <button onclick="setStartupSlide(3)" class="w-2/3 py-3.5 px-4 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-400 hover:to-blue-400 text-slate-950 font-black text-xs sm:text-sm tracking-wide shadow-lg shadow-cyan-500/25 active:scale-[0.98] transition flex items-center justify-center gap-1.5 cursor-pointer">
+              <span>TIẾP THEO: THÀNH NGHIỆN</span>
+              <span>➔</span>
+            </button>
+          </div>
+          <button onclick="launchAppFromSplash()" class="mt-2.5 text-xs text-slate-400 hover:text-cyan-300 transition underline underline-offset-4 cursor-pointer">
+            KÍCH HOẠT 70% THIÊN PHÚ NGAY ⚡
+          </button>
+        </div>
+
+        <!-- Controls for Slide 3 (Climax Launch Action - Exact User Copy) -->
+        <div id="splashControls_3" class="w-full flex flex-col items-center hidden">
+          <button onclick="launchAppFromSplash()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-amber-500 via-yellow-400 to-emerald-400 hover:from-amber-400 hover:via-yellow-300 hover:to-emerald-300 text-slate-950 font-black text-sm sm:text-base tracking-wider shadow-xl shadow-amber-500/30 active:scale-[0.98] transition flex items-center justify-center gap-2 gold-pulse-box cursor-pointer">
+            <span class="text-base sm:text-lg">⚡</span>
+            <span>KÍCH HOẠT 70% THIÊN PHÚ NGAY</span>
+            <span class="text-base sm:text-lg">➔</span>
+          </button>
+          <button onclick="setStartupSlide(2)" class="mt-2.5 text-xs text-slate-400 hover:text-slate-200 transition cursor-pointer">
+            ⬅ Quay lại xem bước trước
+          </button>
+        </div>
+
       </div>
 
     </div>
   </div>
-
-  <!-- Startup Splash Screen Controller Script (Layer-by-Layer 3s per screen) -->
   <script>
     (function() {
-      let currentSlide = 1;
+      let currentSplashSlide = 1;
       const totalSlides = 3;
-      const slideDuration = 3000; // 3 seconds per screen
-      let slideStartTime = Date.now();
-      let splashCompleted = false;
-      let tickTimer = null;
 
-      function updateSplashUI() {
-        if (splashCompleted) return;
-
-        // Toggle slides
-        for (let i = 1; i <= totalSlides; i++) {
-          const s = document.getElementById('splashSlide_' + i);
-          const d = document.getElementById('splashDot_' + i);
-          if (s) {
-            if (i === currentSlide) {
-              s.classList.remove('hidden');
-            } else {
-              s.classList.add('hidden');
-            }
+      function playChime(freq1, freq2) {
+        try {
+          const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+          if (AudioContextClass) {
+            const ctx = new AudioContextClass();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(freq1, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(freq2, ctx.currentTime + 0.22);
+            gain.gain.setValueAtTime(0.09, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.25);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+            osc.stop(ctx.currentTime + 0.25);
           }
-          if (d) {
-            if (i === currentSlide) {
-              d.className = 'w-7 h-2 rounded-full bg-amber-400 transition-all cursor-pointer';
-            } else if (i < currentSlide) {
-              d.className = 'w-2.5 h-2 rounded-full bg-emerald-400 transition-all cursor-pointer';
-            } else {
-              d.className = 'w-2.5 h-2 rounded-full bg-slate-700 hover:bg-slate-500 transition-all cursor-pointer';
-            }
-          }
-        }
-
-        // Stage Title Text
-        const stageText = document.getElementById('splashEnergyStageText');
-        if (stageText) {
-          if (currentSlide === 1) {
-            stageText.innerHTML = '<span class="inline-block w-2 h-2 rounded-full bg-amber-400 animate-ping"></span><span>TẦNG 1: HUYẾT MẠCH NGUYÊN BẢN</span>';
-          } else if (currentSlide === 2) {
-            stageText.innerHTML = '<span class="inline-block w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span><span>TẦNG 2: PHẢN XẠ NÓI CỰC TỐC</span>';
-          } else {
-            stageText.innerHTML = '<span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span><span>TẦNG 3: ĐỘT PHÁ CẢNH GIỚI</span>';
-          }
-        }
+        } catch (e) {}
       }
 
-      function onTick() {
-        if (splashCompleted) return;
-        const now = Date.now();
-        const elapsed = now - slideStartTime;
-        const ratio = Math.min(1, Math.max(0, elapsed / slideDuration));
-        const remainingSeconds = Math.max(1, Math.ceil((slideDuration - elapsed) / 1000));
+      window.setStartupSlide = function(slideIndex) {
+        if (slideIndex < 1 || slideIndex > totalSlides) return;
+        currentSplashSlide = slideIndex;
 
-        // Update timer display
-        const timerEl = document.getElementById('splashStepTimer');
-        if (timerEl) timerEl.textContent = remainingSeconds + 's';
+        // Feedback sound & haptic
+        if (currentSplashSlide === 1) {
+          playChime(330, 440);
+        } else if (currentSplashSlide === 2) {
+          playChime(440, 587);
+          navigator.vibrate?.([30, 40]);
+        } else if (currentSplashSlide === 3) {
+          playChime(587, 880);
+          navigator.vibrate?.([40, 60, 80]);
+        }
 
-        // Calculate progress percentage and segment bar widths
-        const seg1 = document.getElementById('splashSegmentBar_1');
-        const seg2 = document.getElementById('splashSegmentBar_2');
-        const seg3 = document.getElementById('splashSegmentBar_3');
-        const percentEl = document.getElementById('splashEnergyPercent');
+        // Toggle slides & controls
+        for (let i = 1; i <= totalSlides; i++) {
+          const slideEl = document.getElementById('splashSlide_' + i);
+          const controlsEl = document.getElementById('splashControls_' + i);
+          const dotEl = document.getElementById('splashDot_' + i);
 
-        let totalPercent = 0;
-        if (currentSlide === 1) {
-          if (seg1) seg1.style.width = (ratio * 100) + '%';
+          if (slideEl) {
+            if (i === currentSplashSlide) {
+              slideEl.classList.remove('hidden');
+            } else {
+              slideEl.classList.add('hidden');
+            }
+          }
+          if (controlsEl) {
+            if (i === currentSplashSlide) {
+              controlsEl.classList.remove('hidden');
+            } else {
+              controlsEl.classList.add('hidden');
+            }
+          }
+          if (dotEl) {
+            if (i === currentSplashSlide) {
+              dotEl.className = 'w-8 h-2.5 rounded-full bg-amber-400 transition-all cursor-pointer shadow-sm';
+            } else {
+              dotEl.className = 'w-2.5 h-2.5 rounded-full bg-slate-700 hover:bg-slate-500 transition-all cursor-pointer';
+            }
+          }
+        }
+
+        // Update Energy HUD
+        const badgeEl = document.getElementById('splashStageBadge');
+        const numberEl = document.getElementById('splashEnergyNumber');
+        const seg1 = document.getElementById('splashSegment1');
+        const seg2 = document.getElementById('splashSegment2');
+        const seg3 = document.getElementById('splashSegment3');
+
+        if (currentSplashSlide === 1) {
+          if (badgeEl) badgeEl.innerHTML = '<span class="inline-block w-2 h-2 rounded-full bg-amber-400 animate-ping"></span><span>TẦNG 1: HUYẾT MẠCH THỨC TỈNH</span>';
+          if (numberEl) { numberEl.textContent = '70% THIÊN PHÚ'; numberEl.className = 'text-amber-400 font-black tracking-wider'; }
+          if (seg1) seg1.style.width = '100%';
           if (seg2) seg2.style.width = '0%';
           if (seg3) seg3.style.width = '0%';
-          totalPercent = Math.round(ratio * 70); // Screen 1 surges to 70%
-        } else if (currentSlide === 2) {
-          if (seg1) seg1.style.width = '100%';
-          if (seg2) seg2.style.width = (ratio * 100) + '%';
-          if (seg3) seg3.style.width = '0%';
-          totalPercent = Math.round(70 + ratio * 15); // Screen 2: 70% -> 85%
-        } else if (currentSlide === 3) {
+        } else if (currentSplashSlide === 2) {
+          if (badgeEl) badgeEl.innerHTML = '<span class="inline-block w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span><span>TẦNG 2: GIẢI PHÓNG KHẨU NGỮ</span>';
+          if (numberEl) { numberEl.textContent = '85% NĂNG LƯỢNG'; numberEl.className = 'text-cyan-400 font-black tracking-wider'; }
           if (seg1) seg1.style.width = '100%';
           if (seg2) seg2.style.width = '100%';
-          if (seg3) seg3.style.width = (ratio * 100) + '%';
-          totalPercent = Math.round(85 + ratio * 15); // Screen 3: 85% -> 100%
+          if (seg3) seg3.style.width = '0%';
+        } else if (currentSplashSlide === 3) {
+          if (badgeEl) badgeEl.innerHTML = '<span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span><span>TẦNG 3: ĐỘT PHÁ CẢNH GIỚI</span>';
+          if (numberEl) { numberEl.textContent = '100% ĐẮC ĐẠO'; numberEl.className = 'text-emerald-400 font-black tracking-wider'; }
+          if (seg1) seg1.style.width = '100%';
+          if (seg2) seg2.style.width = '100%';
+          if (seg3) seg3.style.width = '100%';
         }
-
-        if (percentEl) percentEl.textContent = totalPercent + '%';
-
-        // If current slide duration reached:
-        if (elapsed >= slideDuration) {
-          if (currentSlide < totalSlides) {
-            currentSlide++;
-            slideStartTime = Date.now();
-            updateSplashUI();
-            // Audio surge & phone vibration when entering Slide 2 or 3
-            try {
-              if (navigator.vibrate) navigator.vibrate([40, 60, 80]);
-              const AudioContextClass = window.AudioContext || window.webkitAudioContext;
-              if (AudioContextClass) {
-                const audioCtx = new AudioContextClass();
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.type = 'triangle';
-                osc.frequency.setValueAtTime(260 * currentSlide, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(520 * currentSlide, audioCtx.currentTime + 0.25);
-                gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.3);
-              }
-            } catch (e) {}
-          } else {
-            // Slide 3 completed: automatically activate app
-            window.completeStartupSplash();
-            return;
-          }
-        }
-
-        tickTimer = requestAnimationFrame(onTick);
-      }
-
-      window.switchStartupSlide = function(targetSlide) {
-        if (splashCompleted) return;
-        currentSlide = targetSlide;
-        slideStartTime = Date.now();
-        updateSplashUI();
       };
 
-      window.completeStartupSplash = function() {
-        if (splashCompleted) return;
-        splashCompleted = true;
-        if (tickTimer) cancelAnimationFrame(tickTimer);
+      // Swipe Gesture Listeners (Touch Navigation for Mobile)
+      let touchStartX = 0;
+      let touchStartY = 0;
+      const splashBox = document.getElementById('appStartupSplash');
+      if (splashBox) {
+        splashBox.addEventListener('touchstart', function(e) {
+          if (e.touches && e.touches[0]) {
+            touchStartX = e.touches[0].clientX;
+            touchStartY = e.touches[0].clientY;
+          }
+        }, { passive: true });
+
+        splashBox.addEventListener('touchend', function(e) {
+          if (e.changedTouches && e.changedTouches[0]) {
+            const deltaX = e.changedTouches[0].clientX - touchStartX;
+            const deltaY = e.changedTouches[0].clientY - touchStartY;
+            // Only trigger if horizontal swipe is dominant and exceeds 45px
+            if (Math.abs(deltaX) > 45 && Math.abs(deltaX) > Math.abs(deltaY) * 1.5) {
+              if (deltaX < 0) {
+                // Swipe Left -> Next
+                if (currentSplashSlide < totalSlides) {
+                  setStartupSlide(currentSplashSlide + 1);
+                }
+              } else {
+                // Swipe Right -> Prev
+                if (currentSplashSlide > 1) {
+                  setStartupSlide(currentSplashSlide - 1);
+                }
+              }
+            }
+          }
+        }, { passive: true });
+      }
+
+      // Climax Action: KÍCH HOẠT 70% THIÊN PHÚ NGAY
+      let hasLaunched = false;
+      window.launchAppFromSplash = function() {
+        if (hasLaunched) return;
+        hasLaunched = true;
 
         // Sound effect and particle burst
         try {
           if (window.soundFX && window.soundFX.playSuccess) {
             window.soundFX.playSuccess();
+          } else {
+            playChime(523, 1046);
           }
           if (window.particleEngine) {
             window.particleEngine.burst(window.innerWidth / 2, window.innerHeight / 2, 50);
           }
+          navigator.vibrate?.([50, 70, 120]);
         } catch (e) {}
 
         const splash = document.getElementById('appStartupSplash');
@@ -488,14 +532,16 @@
             if (splash && splash.parentNode) splash.parentNode.removeChild(splash);
           }, 380);
         }
-      };
 
-      // Start tick animation
-      updateSplashUI();
-      tickTimer = requestAnimationFrame(onTick);
+        // Prevent redundant onboarding modal popup immediately on launch
+        try {
+          if (window.safeStorage) {
+            window.safeStorage.setItem('zin_onboarding_completed', 'true');
+          }
+        } catch (e) {}
+      };
     })();
   </script>
-
   <!-- Interactive Particle Canvas for Coins & Stars Burst -->
   <canvas id="particleCanvas" class="fixed inset-0 pointer-events-none z-[9999]"></canvas>
 
@@ -2592,6 +2638,7 @@
       }
     }
     const soundFX = new GameSoundFX();
+    window.soundFX = soundFX;
 
     function toggleGameSound() {
       soundFX.toggle();
@@ -4987,10 +5034,9 @@
         const btnInstall = document.getElementById('btnInstallApp');
         if (btnInstall) btnInstall.style.display = 'none';
       }
-
     });
 
-    // --- PWA Service Worker Registration & Offline Cache (Network-First) ---
+    // --- PWA Service Worker Registration & Offline Cache ---
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js?v=20261017_v36').then((reg) => {
