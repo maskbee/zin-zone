@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="vi" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zin Zone • Bộ Tạo & Quản Lý Mã Kích Hoạt VIP (License Key Generator)</title>
+  <link rel="icon" type="image/png" href="../icons/icon-192.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              gold: '#fbbf24',
+              amber: '#f59e0b',
+              dark: '#020617',
+              card: '#0f172a'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;900&family=JetBrains+Mono:wght@600;800&display=swap');
+    body { font-family: 'Space Grotesk', system-ui, sans-serif; }
+    code, pre, .font-mono { font-family: 'JetBrains Mono', monospace; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen p-3 sm:p-6 lg:p-8">
+  <div class="max-w-5xl mx-auto space-y-6">
+
+    <!-- Top Header -->
+    <header class="bg-slate-900/90 border border-amber-500/30 rounded-3xl p-5 sm:p-7 shadow-2xl relative overflow-hidden">
+      <div class="absolute -right-16 -top-16 w-56 h-56 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-bold mb-2">
+            <span>🛡️ HỆ THỐNG QUẢN TRỊ BẢN QUYỀN NỘI BỘ</span>
+            <span>•</span>
+            <span class="text-emerald-400">ZIN.ZONE V2.6</span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight flex items-center gap-2">
+            <span>🔑</span>
+            <span>Bộ Tạo Mã Kích Hoạt VIP</span>
+          </h1>
+          <p class="text-xs sm:text-sm text-slate-400 mt-1 max-w-2xl">
+            Sinh mã bản quyền trọn đời cho kênh bán lẻ ZaloPay (D2C) và các đại lý điện thoại đối tác (Quế Võ, Yên Phong, Tiên Sơn). Tương thích 100% thuật toán bảo mật của hệ thống.
+          </p>
+        </div>
+        <div class="flex items-center gap-2 shrink-0">
+          <a href="../index.html" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition flex items-center gap-1.5 border border-slate-700">
+            <span>➔</span>
+            <span>Mở Web Zin.Zone</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Generator Form Card -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+      <!-- Configuration Column (1 Col) -->
+      <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 space-y-5 shadow-xl">
+        <h2 class="text-base font-black text-white flex items-center gap-2 border-b border-slate-800 pb-3">
+          <span>⚙️</span>
+          <span>Cấu Hình Sinh Mã</span>
+        </h2>
+
+        <!-- Channel Selection -->
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1.5">
+            Kênh Phân Phối / Nguồn Cấp:
+          </label>
+          <select id="selectChannel" onchange="handleChannelChange()" class="w-full bg-slate-950 border border-slate-700 focus:border-amber-400 rounded-xl px-3 py-2.5 text-xs text-white font-medium outline-none transition">
+            <option value="VIP">💳 Khách Mua Lẻ Qua ZaloPay (ZZ-VIP-XXXX-YYYY)</option>
+            <option value="QUEVO">📱 Đại Lý Quế Võ - Đối Tác (ZZ-QUEVO-XXXX-YYYY)</option>
+            <option value="YENPHONG">📱 Đại Lý Yên Phong - Đối Tác (ZZ-YENPHONG-XXXX-YYYY)</option>
+            <option value="TIENSON">📱 Đại Lý Tiên Sơn - Đối Tác (ZZ-TIENSON-XXXX-YYYY)</option>
+            <option value="STORE">🏪 Đại Lý Bán Lẻ Khác (ZZ-STORE-XXXX-YYYY)</option>
+            <option value="CUSTOM">✏️ Tự Đặt Ký Hiệu Riêng...</option>
+          </select>
+        </div>
+
+        <!-- Custom Prefix (Hidden by default) -->
+        <div id="customPrefixBox" class="hidden">
+          <label class="block text-xs font-bold text-slate-300 mb-1.5">
+            Tiền Tố Tùy Chỉnh (A-Z, 0-9):
+          </label>
+          <input id="inputCustomPrefix" type="text" placeholder="Ví dụ: FOXCONN hoặc TIKTOK" maxlength="12" class="w-full bg-slate-950 border border-amber-500/40 rounded-xl px-3 py-2 text-xs text-amber-300 font-mono font-bold uppercase outline-none">
+        </div>
+
+        <!-- Quantity Selection -->
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1.5">
+            Số Lượng Mã Cần Sinh:
+          </label>
+          <div class="grid grid-cols-4 gap-2">
+            <button type="button" onclick="setCount(1)" id="btnCount1" class="py-2 rounded-xl text-xs font-bold bg-amber-500 text-slate-950 transition">1 Mã</button>
+            <button type="button" onclick="setCount(10)" id="btnCount10" class="py-2 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:text-white transition">10 Mã</button>
+            <button type="button" onclick="setCount(50)" id="btnCount50" class="py-2 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:text-white transition">50 Mã</button>
+            <button type="button" onclick="setCount(100)" id="btnCount100" class="py-2 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:text-white transition">100 Mã</button>
+          </div>
+          <div class="mt-2 flex items-center gap-2">
+            <span class="text-[11px] text-slate-400">Hoặc tự nhập:</span>
+            <input id="inputCustomCount" type="number" min="1" max="1000" placeholder="1-1000" class="w-24 bg-slate-950 border border-slate-700 rounded-lg px-2 py-1 text-xs text-white font-mono text-center outline-none">
+          </div>
+        </div>
+
+        <!-- Price / Notes -->
+        <div>
+          <label class="block text-xs font-bold text-slate-300 mb-1.5">
+            Ghi Chú Đơn Hàng / Tên Khách Hàng:
+          </label>
+          <input id="inputBatchNote" type="text" placeholder="Ví dụ: Khách Zalo 0988... / Lô 50 máy K60" class="w-full bg-slate-950 border border-slate-700 focus:border-amber-400 rounded-xl px-3 py-2 text-xs text-slate-200 outline-none">
+        </div>
+
+        <!-- Generate Button -->
+        <button onclick="generateBatchCodes()" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 hover:brightness-110 active:scale-98 text-slate-950 font-black text-sm shadow-xl shadow-amber-500/20 transition flex items-center justify-center gap-2">
+          <span>⚡</span>
+          <span>SINH MÃ KÍCH HOẠT NGAY</span>
+        </button>
+
+        <!-- Fast Code Tester Tool -->
+        <div class="pt-4 border-t border-slate-800 space-y-2">
+          <label class="block text-xs font-bold text-slate-400">
+            🔍 Kiểm Tra Nhanh Mã Bất Kỳ:
+          </label>
+          <div class="flex gap-1.5">
+            <input id="inputVerifyTest" type="text" placeholder="Nhập mã..." class="flex-1 bg-slate-950 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs text-amber-300 font-mono uppercase outline-none">
+            <button onclick="testVerifyCode()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-200">Kiểm tra</button>
+          </div>
+          <p id="testResultMsg" class="hidden text-[11px] font-bold mt-1"></p>
+        </div>
+
+      </div>
+
+      <!-- Results Column (2 Cols) -->
+      <div class="lg:col-span-2 bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 space-y-4 shadow-xl flex flex-col">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-3">
+          <div>
+            <h2 class="text-base font-black text-white flex items-center gap-2">
+              <span>📋</span>
+              <span>Danh Sách Mã Vừa Sinh</span>
+              <span id="badgeResultCount" class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 text-xs font-bold border border-emerald-500/40">0 mã</span>
+            </h2>
+            <p class="text-[11px] text-slate-400 mt-0.5">Click vào mã để sao chép nhanh hoặc xuất file gửi cho khách hàng/cửa hàng.</p>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <button onclick="copyAllCodes()" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold border border-slate-700 flex items-center gap-1 transition">
+              <span>📋</span>
+              <span>Chép Toàn Bộ</span>
+            </button>
+            <button onclick="exportCSV()" class="px-3 py-1.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 text-xs font-bold border border-amber-500/40 flex items-center gap-1 transition">
+              <span>💾</span>
+              <span>Xuất CSV</span>
+            </button>
+            <button onclick="exportTXT()" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold border border-slate-700 flex items-center gap-1 transition">
+              <span>📄</span>
+              <span>Xuất TXT</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Table Container -->
+        <div class="flex-1 overflow-x-auto max-h-[520px] rounded-2xl border border-slate-800/80 bg-slate-950">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-slate-900/90 text-slate-400 font-bold sticky top-0 z-10 border-b border-slate-800">
+              <tr>
+                <th class="p-3 w-12 text-center">STT</th>
+                <th class="p-3">Mã Kích Hoạt VIP</th>
+                <th class="p-3">Kênh Phân Phối</th>
+                <th class="p-3">Link Kích Hoạt Tự Động (1 Chạm)</th>
+                <th class="p-3 text-center w-28">Thao Tác</th>
+              </tr>
+            </thead>
+            <tbody id="tableBodyCodes" class="divide-y divide-slate-800/60 font-mono">
+              <tr>
+                <td colspan="5" class="p-8 text-center text-slate-500 font-sans italic">
+                  Chưa có mã nào được sinh. Bấm "SINH MÃ KÍCH HOẠT NGAY" ở cột bên trái để bắt đầu!
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Bottom Guidance Card -->
+        <div class="p-3.5 rounded-2xl bg-slate-950 border border-slate-800 text-[11px] text-slate-400 space-y-1">
+          <div class="font-bold text-amber-400 flex items-center gap-1">
+            <span>💡</span>
+            <span>HƯỚNG DẪN BÀN GIAO CHO KHÁCH & ĐẠI LÝ:</span>
+          </div>
+          <p>
+            • <strong>Khách ZaloPay:</strong> Sao chép mã (ví dụ: <code class="text-amber-300">ZZ-VIP-8F4A-3C2B</code>) gửi qua tin nhắn Zalo, hướng dẫn khách mở web `zin.zone` vào mục <em>Nhập Mã Đã Có</em> để kích hoạt.
+          </p>
+          <p>
+            • <strong>Đại lý bán điện thoại:</strong> Gửi kèm link tự động (ví dụ: <code class="text-emerald-400">https://zin.zone?token=ZZ-QUEVO-...</code>). Khách chỉ cần mở link là máy tự kích hoạt trọn đời 0₫ mà không cần gõ phím!
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    let currentSelectedCount = 1;
+    let generatedList = [];
+
+    function handleChannelChange() {
+      const select = document.getElementById('selectChannel');
+      const customBox = document.getElementById('customPrefixBox');
+      if (select.value === 'CUSTOM') {
+        customBox.classList.remove('hidden');
+      } else {
+        customBox.classList.add('hidden');
+      }
+    }
+
+    function setCount(num) {
+      currentSelectedCount = num;
+      document.getElementById('inputCustomCount').value = '';
+      [1, 10, 50, 100].forEach(n => {
+        const btn = document.getElementById('btnCount' + n);
+        if (btn) {
+          if (n === num) {
+            btn.className = 'py-2 rounded-xl text-xs font-bold bg-amber-500 text-slate-950 transition';
+          } else {
+            btn.className = 'py-2 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:text-white transition';
+          }
+        }
+      });
+    }
+
+    document.getElementById('inputCustomCount')?.addEventListener('input', (e) => {
+      const val = parseInt(e.target.value);
+      if (val > 0 && val <= 1000) {
+        currentSelectedCount = val;
+        [1, 10, 50, 100].forEach(n => {
+          const btn = document.getElementById('btnCount' + n);
+          if (btn) btn.className = 'py-2 rounded-xl text-xs font-bold bg-slate-800 text-slate-300 hover:text-white transition';
+        });
+      }
+    });
+
+    function randomHex(length = 4) {
+      const chars = '0123456789ABCDEF';
+      let res = '';
+      for (let i = 0; i < length; i++) {
+        res += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return res;
+    }
+
+    function generateSingleCode(channelPrefix) {
+      const seg1 = randomHex(4);
+      const seg2 = randomHex(4);
+      // Format: ZZ-[CHANNEL]-[4HEX]-[4HEX]
+      // Complies with isValidLicenseToken regex: /^ZZ-[A-Z0-9_\-]+-[A-F0-9]{4,16}$/i
+      return `ZZ-${channelPrefix}-${seg1}-${seg2}`;
+    }
+
+    function generateBatchCodes() {
+      const channelSelect = document.getElementById('selectChannel').value;
+      let channelTag = channelSelect;
+      if (channelSelect === 'CUSTOM') {
+        const custom = document.getElementById('inputCustomPrefix').value.trim().toUpperCase();
+        channelTag = custom ? custom.replace(/[^A-Z0-9]/g, '') : 'VIP';
+      }
+
+      const note = document.getElementById('inputBatchNote').value.trim() || 'Chuẩn ZIN ZONE';
+      const count = currentSelectedCount;
+      const now = new Date();
+      const dateStr = now.toLocaleDateString('vi-VN') + ' ' + now.toLocaleTimeString('vi-VN');
+
+      generatedList = [];
+      const tbody = document.getElementById('tableBodyCodes');
+      tbody.innerHTML = '';
+
+      for (let i = 1; i <= count; i++) {
+        const code = generateSingleCode(channelTag);
+        const url = `https://zin.zone?token=${code}`;
+        const item = {
+          index: i,
+          code: code,
+          channel: channelTag,
+          note: note,
+          date: dateStr,
+          url: url
+        };
+        generatedList.push(item);
+
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-slate-900/60 transition';
+        tr.innerHTML = `
+          <td class="p-3 text-center text-slate-500">${i}</td>
+          <td class="p-3">
+            <button onclick="copySingleText('${code}', 'Đã sao chép mã ${code}!')" class="text-amber-300 hover:text-amber-200 font-bold hover:underline text-left">
+              ${code}
+            </button>
+          </td>
+          <td class="p-3 font-sans text-slate-300">
+            <span class="px-2 py-0.5 rounded-full bg-slate-800 text-[10px] font-bold text-slate-300 border border-slate-700">
+              ${channelTag}
+            </span>
+          </td>
+          <td class="p-3 text-[11px] text-emerald-400 truncate max-w-xs font-sans">
+            <a href="${url}" target="_blank" class="hover:underline">${url}</a>
+          </td>
+          <td class="p-3 text-center font-sans">
+            <button onclick="copySingleText('${code}', 'Đã sao chép mã: ${code}!')" class="px-2.5 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 font-bold text-[11px] border border-amber-500/40 transition">
+              Chép Mã
+            </button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      }
+
+      document.getElementById('badgeResultCount').textContent = `${count} mã`;
+    }
+
+    function copySingleText(text, toastMsg) {
+      navigator.clipboard.writeText(text).then(() => {
+        alert(toastMsg);
+      }).catch(() => {
+        prompt('Sao chép thủ công:', text);
+      });
+    }
+
+    function copyAllCodes() {
+      if (generatedList.length === 0) {
+        alert('Chưa có mã nào để sao chép!');
+        return;
+      }
+      const allText = generatedList.map(item => item.code).join('\n');
+      navigator.clipboard.writeText(allText).then(() => {
+        alert(`Đã sao chép thành công toàn bộ ${generatedList.length} mã vào bộ nhớ đệm!`);
+      }).catch(() => {
+        prompt('Sao chép toàn bộ mã:', allText);
+      });
+    }
+
+    function exportTXT() {
+      if (generatedList.length === 0) {
+        alert('Chưa có mã nào để xuất!');
+        return;
+      }
+      let content = `DANH SÁCH MÃ BẢN QUYỀN VIP ZIN ZONE\nNgày sinh: ${new Date().toLocaleString()}\nTổng số: ${generatedList.length} mã\n=========================================\n\n`;
+      generatedList.forEach(item => {
+        content += `${item.index}. Mã: ${item.code} | Kênh: ${item.channel} | Link: ${item.url}\n`;
+      });
+
+      downloadFile(content, `ZinZone_Licenses_${Date.now()}.txt`, 'text/plain');
+    }
+
+    function exportCSV() {
+      if (generatedList.length === 0) {
+        alert('Chưa có mã nào để xuất!');
+        return;
+      }
+      let csv = 'STT,Ma_Kich_Hoat,Kenh_Phan_Phoi,Ghi_Chu,Ngay_Sinh,Link_Kich_Hoat\n';
+      generatedList.forEach(item => {
+        csv += `"${item.index}","${item.code}","${item.channel}","${item.note}","${item.date}","${item.url}"\n`;
+      });
+
+      downloadFile('\uFEFF' + csv, `ZinZone_Licenses_${Date.now()}.csv`, 'text/csv;charset=utf-8;');
+    }
+
+    function downloadFile(content, fileName, mimeType) {
+      const blob = new Blob([content], { type: mimeType });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+
+    // Exact verification logic from index.html
+    const VALID_MASTER_KEYS = ['88888888', 'ADMIN888', 'ZZ-ADMIN-2026', 'ZZ-VIP-2026', 'ZZ-MASTER-DEV'];
+    function isValidLicenseToken(token) {
+      if (!token) return false;
+      const clean = token.trim().toUpperCase();
+      if (VALID_MASTER_KEYS.includes(clean)) return true;
+      if (/^ZZ-IPHONE-[A-Z0-9_\-]+$/i.test(clean)) return true;
+      if (/^ZZ-APP-[A-Z0-9_\-]+$/i.test(clean)) return true;
+      if (/^ZZ-[A-Z0-9_\-]+-[A-F0-9]{4,16}$/i.test(clean)) return true;
+      if (/^ZZ-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/i.test(clean)) return true;
+      return false;
+    }
+
+    function testVerifyCode() {
+      const input = document.getElementById('inputVerifyTest');
+      const msg = document.getElementById('testResultMsg');
+      if (!input || !msg) return;
+      const key = input.value.trim().toUpperCase();
+      if (!key) {
+        msg.textContent = '⚠️ Vui lòng nhập mã để kiểm tra.';
+        msg.className = 'text-[11px] font-bold text-amber-400 mt-1';
+        msg.classList.remove('hidden');
+        return;
+      }
+
+      if (isValidLicenseToken(key)) {
+        msg.textContent = `✓ HỢP LỆ 100%: Mã [${key}] đạt tiêu chuẩn bảo mật Zin Zone!`;
+        msg.className = 'text-[11px] font-bold text-emerald-400 mt-1';
+      } else {
+        msg.textContent = `✕ KHÔNG HỢP LỆ: Mã [${key}] sai định dạng hoặc không có trong hệ sinh thái Zin Zone.`;
+        msg.className = 'text-[11px] font-bold text-rose-400 mt-1';
+      }
+      msg.classList.remove('hidden');
+    }
+
+    // Auto-generate 1 sample code on load
+    window.addEventListener('DOMContentLoaded', () => {
+      generateBatchCodes();
+    });
+  </script>
+</body>
+</html>

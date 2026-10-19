@@ -2,8 +2,8 @@
 window.CURRICULUM_DATA = {
   "titleZh": "神语仙途·21天工厂升职记",
   "titleVi": "Thần Ngữ Tu Chân Ký - 21 Ngày Đột Phá Thăng Chức Tổ Trưởng",
-  "subtitleZh": "无需死记硬背，唤醒血脉中70%汉越底蕴，21天得道晋升管理层！",
-  "subtitleVi": "Không học vẹt từ số 0 — Đánh thức 70% Hán-Việt trong máu, 21 ngày đắc đạo làm Tổ trưởng!",
+  "subtitleZh": "邪修超级记忆法（夸张、联想、本能刺激），一次记住终身不忘，21天得道晋升管理层！",
+  "subtitleVi": "Tà Tu Hán Ngữ & Siêu Trí Nhớ (Liên tưởng quái chiêu, kích thích bản năng) — Nghe 1 lần nhớ trọn đời, 21 ngày đắc đạo Tổ trưởng!",
   "totalDays": 21,
   "phases": [
     {
