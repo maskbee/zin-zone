@@ -2531,6 +2531,26 @@
     }
     const snParam = urlParams.get('sn') || '';
 
+    // Global Authorization Revocation Barrier: Automatically revoke all test licenses across all devices
+    const GLOBAL_REVOCATION_VERSION = 'v20261019_global_reset_all_devices';
+    if (safeStorage.getItem('zin_revocation_checkpoint') !== GLOBAL_REVOCATION_VERSION) {
+      safeStorage.removeItem('zin_device_license');
+      safeStorage.removeItem('zin_my_referral_code');
+      safeStorage.setItem('zin_revocation_checkpoint', GLOBAL_REVOCATION_VERSION);
+      console.log('[ZinZone Security] All previous test licenses revoked. Ready for paid conversion verification.');
+    }
+
+    // Manual Reset via URL parameter (?reset_license=1 or ?clear_auth=1)
+    if (urlParams.get('reset_license') === '1' || urlParams.get('clear_license') === '1' || urlParams.get('clear_auth') === '1') {
+      safeStorage.removeItem('zin_device_license');
+      safeStorage.removeItem('zin_my_referral_code');
+      try {
+        window.history.replaceState({}, document.title, window.location.pathname);
+      } catch (e) {}
+    }
+
+
+
     // --- VIP GIFT LICENSE & DEVICE GATEKEEPER SYSTEM (BẢN QUYỀN QUÀ TẶNG KÈM MÁY CHÍNH HÃNG) ---
     const VALID_MASTER_KEYS = [
       '88888888',
@@ -2756,34 +2776,11 @@
       const params = new URLSearchParams(window.location.search);
       const tokenFromUrl = params.get('token') || params.get('license') || params.get('activate');
 
-      // 0. Official Native APK / Bundled App Container Auto-Activation
-      // When running inside the official Zin Zone Android App (zone.zin.app), auto-activate
-      const isNativeApp = navigator.userAgent.indexOf('ZinZoneApp') !== -1 ||
-                          params.get('mode') === 'app' ||
-                          params.get('mode') === 'native_app';
-      if (isNativeApp) {
-        let appToken = safeStorage.getItem('zin_device_license');
-        if (!appToken || !isValidLicenseToken(appToken)) {
-          let modelTag = 'OFFICIAL-APP';
-          const uaMatch = navigator.userAgent.match(/Android[^;]+;\s*([^;)]+)/i);
-          if (uaMatch && uaMatch[1]) {
-            modelTag = uaMatch[1].replace(/[^a-zA-Z0-9]/g, '').substring(0, 16).toUpperCase() || 'OFFICIAL-APP';
-          }
-          appToken = `ZZ-APP-${modelTag}-2026`;
-          safeStorage.setItem('zin_device_license', appToken);
-        }
-        let myRef = safeStorage.getItem('zin_my_referral_code');
-        if (!myRef || myRef === 'ZIN-8899') {
-          myRef = params.get('my_ref') || deriveReferralCodeFromToken(appToken);
-          safeStorage.setItem('zin_my_referral_code', myRef);
-        }
-        if (modal) {
-          modal.style.display = 'none';
-        }
-        document.body.style.overflow = '';
-        updateLicenseBadge(appToken);
-        updateReferralCodeDisplay();
-        return true;
+      // 0. Explicit license reset trigger via URL parameter
+      if (params.get('reset_license') === '1' || params.get('clear_auth') === '1') {
+        safeStorage.removeItem('zin_device_license');
+        safeStorage.removeItem('zin_my_referral_code');
+        showToast('🛡️ Đã hủy toàn bộ bản quyền trên máy này!', 'info');
       }
 
       // 1. URL Token parameter auto-activation
@@ -2877,8 +2874,16 @@
     }
 
     function promptAdminKey() {
-      const code = prompt('🔑 Nhập mã kích hoạt quản trị viên / kỹ thuật viên:');
+      const code = prompt('🔑 Nhập mã kích hoạt quản trị viên (hoặc gõ "RESET" để hủy toàn bộ bản quyền thiết bị):');
       if (code) {
+        const clean = code.trim().toUpperCase();
+        if (clean === 'RESET' || clean === 'CLEAR') {
+          safeStorage.removeItem('zin_device_license');
+          safeStorage.removeItem('zin_my_referral_code');
+          showToast('🛡️ Đã hủy toàn bộ bản quyền thiết bị! Đang làm mới...', 'info');
+          setTimeout(() => window.location.reload(true), 700);
+          return;
+        }
         const input = document.getElementById('inputLicenseKey');
         if (input) input.value = code;
         handleActivateLicense();
@@ -2927,7 +2932,14 @@
           const name = formatDeviceDisplayName(token);
           const shortName = name.replace(/^(Máy\s+|Điện\s+thoại\s+)/i, '');
           badge.className = 'h-7 sm:h-auto px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg sm:rounded-xl bg-slate-950/80 border border-emerald-500/40 text-emerald-400 font-bold text-xs flex items-center gap-1.5 shadow-sm shrink-0 cursor-pointer';
-          badge.onclick = () => showToast(`Thiết bị chính hãng đã kích hoạt: ${name}`, 'success');
+          badge.onclick = () => {
+            if (confirm(`Thiết bị đang có bản quyền: ${name}.\n\nBạn có muốn HỦY BẢN QUYỀN trên máy này để quay về trạng thái DÙNG THỬ (xác minh trang thanh toán 299k) không?`)) {
+              safeStorage.removeItem('zin_device_license');
+              safeStorage.removeItem('zin_my_referral_code');
+              showToast('🛡️ Đã hủy bản quyền thiết bị!', 'info');
+              setTimeout(() => window.location.reload(true), 600);
+            }
+          };
           badge.innerHTML = `
             <span class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
             <span class="hidden sm:inline">${name} • Đã Kích Hoạt</span>
