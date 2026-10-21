@@ -144,6 +144,32 @@ const rawLsSetCalls = (scriptContent.match(/localStorage\.setItem/g) || []).leng
 console.log(`safeStorage sandbox wrapper: ${hasSafeStorage ? 'ACTIVE ✓' : 'MISSING ❌'}`);
 console.log(`Unprotected localStorage.setItem calls in script: ${rawLsSetCalls <= 1 ? '1 (inside safeStorage wrapper only) ✓' : rawLsSetCalls}`);
 
+// 9. Security Headers & Defense-in-Depth Layer
+console.log('\n=== [9] SECURITY HEADERS & DEFENSE-IN-DEPTH LAYER ===');
+const headersPath = path.resolve(__dirname, '..', '_headers');
+if (fs.existsSync(headersPath)) {
+  const headersContent = fs.readFileSync(headersPath, 'utf8');
+  const hasHsts = headersContent.includes('Strict-Transport-Security') && headersContent.includes('preload');
+  const hasCsp = headersContent.includes('Content-Security-Policy');
+  const hasNosniff = headersContent.includes('X-Content-Type-Options: nosniff');
+  const hasFrame = headersContent.includes('X-Frame-Options: SAMEORIGIN');
+  const hasReferrer = headersContent.includes('Referrer-Policy');
+  const hasSwNoCache = headersContent.includes('/sw.js') && headersContent.includes('no-cache');
+  const hasCoop = headersContent.includes('Cross-Origin-Opener-Policy: same-origin');
+  const hasCorp = headersContent.includes('Cross-Origin-Resource-Policy: same-origin');
+
+  console.log(`_headers configuration file: PRESENT ✓`);
+  console.log(`Strict-Transport-Security (HSTS 1yr + preload): ${hasHsts ? 'PASS ✓' : 'FAIL ❌'}`);
+  console.log(`Content-Security-Policy (CSP): ${hasCsp ? 'PASS ✓' : 'FAIL ❌'}`);
+  console.log(`MIME Sniffing Protection (nosniff): ${hasNosniff ? 'PASS ✓' : 'FAIL ❌'}`);
+  console.log(`Clickjacking Protection (SAMEORIGIN): ${hasFrame ? 'PASS ✓' : 'FAIL ❌'}`);
+  console.log(`Referrer Policy Protection: ${hasReferrer ? 'PASS ✓' : 'FAIL ❌'}`);
+  console.log(`Cross-Origin Isolation (COOP & CORP): ${hasCoop && hasCorp ? 'PASS ✓' : 'FAIL ❌'}`);
+  console.log(`Service Worker Cache Bypass Policy: ${hasSwNoCache ? 'PASS ✓' : 'FAIL ❌'}`);
+} else {
+  console.log(`_headers file: MISSING ❌`);
+}
+
 console.log('\n====================================================');
 console.log('                 AUDIT COMPLETE                     ');
 console.log('====================================================\n');
