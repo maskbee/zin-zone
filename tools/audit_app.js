@@ -12,18 +12,24 @@ console.log('====================================================');
 console.log('   ZIN.ZONE PRE-LAUNCH SYSTEM HARDENING AUDIT       ');
 console.log('====================================================');
 
-// Extract ALL inline script contents
+// Extract all script contents (both inline and src-referenced local scripts)
 const inlineScripts = Array.from(html.matchAll(/<script(?![^>]*src=)[^>]*>([\s\S]*?)<\/script>/gi)).map(m => m[1]);
-const scriptContent = inlineScripts.join('\n;\n');
+const srcScripts = Array.from(html.matchAll(/<script[^>]*src=["']([^"']+)["'][^>]*>/gi))
+  .map(m => m[1].replace(/\?.*$/, ''))
+  .filter(src => !src.startsWith('http') && fs.existsSync(path.resolve(__dirname, '..', src)))
+  .map(src => fs.readFileSync(path.resolve(__dirname, '..', src), 'utf8'));
+
+const allScripts = [...srcScripts, ...inlineScripts];
+const scriptContent = allScripts.join('\n;\n');
 
 // 1. Script Syntax Validation
-console.log('\n=== [1] SYNTAX VALIDATION: INLINE SCRIPT & DATA ===');
-inlineScripts.forEach((sc, idx) => {
+console.log('\n=== [1] SYNTAX VALIDATION: INLINE & MODULAR SCRIPTS ===');
+allScripts.forEach((sc, idx) => {
   try {
     new Function(sc);
-    console.log(`PASS: index.html inline <script #${idx + 1}> syntax 100% valid! ✓`);
+    console.log(`PASS: script #${idx + 1} syntax 100% valid! ✓`);
   } catch (e) {
-    console.error(`FAIL: index.html script #${idx + 1} syntax error:`, e.message);
+    console.error(`FAIL: script #${idx + 1} syntax error:`, e.message);
   }
 });
 

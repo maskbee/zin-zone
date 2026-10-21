@@ -14,3 +14,5 @@ test_sentence.mp3
 apk_extracted/
 screen_test*.png
 splash_preview.png
+screenshot_*.png
+test_*.png

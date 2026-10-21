@@ -1,11 +1,17 @@
 // Service Worker for Zin.Zone Offline App & OTA Updates
 // Caching Strategy: Network-First with Cache Fallback (Ưu tiên mạng trực tuyến, không có mạng mới dùng bộ nhớ đệm)
-const CACHE_NAME = 'zin-zone-v37-ios-hardened';
+const CACHE_NAME = 'zin-zone-v39-modular-css';
 const STATIC_ASSETS = [
   './',
   './index.html',
+  './css/app.css',
   './data/curriculum.js',
   './data/audio_manifest.js',
+  './js/app-license.js',
+  './js/app-audio.js',
+  './js/app-gamification.js',
+  './js/app-curriculum.js',
+  './js/app-ui.js',
   './pocket-cards.html',
   './manifest.json',
   './icon-192.png',
