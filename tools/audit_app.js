@@ -170,6 +170,18 @@ if (fs.existsSync(headersPath)) {
   console.log(`_headers file: MISSING ❌`);
 }
 
+// 10. Accessibility (A11y) & Mobile Scaling Layer
+console.log('\n=== [10] ACCESSIBILITY (A11Y) & MOBILE SCALING LAYER ===');
+const hasScalableViewport = !html.includes('user-scalable=no') && html.includes('viewport-fit=cover');
+const hasFocusVisible = html.includes(':focus-visible');
+const hasToastAria = html.includes('id="toastNotification" role="status" aria-live="polite"');
+const modalDialogsCount = (html.match(/role="dialog"\s+aria-modal="true"/g) || []).length;
+
+console.log(`Pinch-to-zoom accessible viewport (WCAG 1.4.4): ${hasScalableViewport ? 'PASS ✓' : 'FAIL ❌'}`);
+console.log(`Keyboard focus ring (:focus-visible WCAG 2.4.7): ${hasFocusVisible ? 'PASS ✓' : 'FAIL ❌'}`);
+console.log(`Toast live region (aria-live="polite"): ${hasToastAria ? 'PASS ✓' : 'FAIL ❌'}`);
+console.log(`Accessible modal dialogs (role="dialog" aria-modal="true"): ${modalDialogsCount >= 10 ? 'PASS (' + modalDialogsCount + ') ✓' : 'FAIL ❌'}`);
+
 console.log('\n====================================================');
 console.log('                 AUDIT COMPLETE                     ');
 console.log('====================================================\n');

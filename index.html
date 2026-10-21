@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="referrer" content="no-referrer">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>ZIN.ZONE | Thần Ngữ Tu Chân Ký & Thăng Chức Công Xưởng</title>
   <meta name="description" content="ZIN.ZONE • Thần Ngữ Tu Chân Ký: Ứng dụng luyện khẩu ngữ tiếng Trung công xưởng cho công nhân KCN. 21 ngày làm chủ 3.000 từ cốt lõi, thăng tiến tổ trưởng.">
   <link rel="canonical" href="https://zin.zone/">
@@ -286,6 +286,15 @@
       user-select: none;
       -webkit-tap-highlight-color: transparent;
       text-rendering: optimizeLegibility;
+    }
+    
+    /* Keyboard Focus Visibility for WCAG 2.4.7 */
+    :focus-visible {
+      outline: 2px solid #fbbf24 !important;
+      outline-offset: 2px !important;
+    }
+    :focus:not(:focus-visible) {
+      outline: none !important;
     }
     /* iOS Safari Clean Custom Select Dropdowns */
     select {
@@ -1355,11 +1364,11 @@
               <span class="hidden sm:inline">Luyện Nghe Cả Bài</span>
               <span class="sm:hidden">Cả Bài</span>
             </button>
-            <select id="audioRepeatMode" onchange="safeStorage.setItem('zin_audio_repeat_mode', this.value)" class="bg-slate-800 border border-slate-700 text-amber-300 rounded px-1.5 text-xs py-1 font-bold" title="Chế độ phát âm từ">
+            <select id="audioRepeatMode" aria-label="Chế độ lặp âm thanh" onchange="safeStorage.setItem('zin_audio_repeat_mode', this.value)" class="bg-slate-800 border border-slate-700 text-amber-300 rounded px-1.5 text-xs py-1 font-bold" title="Chế độ phát âm từ">
               <option value="3" selected>🔁 Lặp 3x (Ma âm)</option>
               <option value="1">▶️ Lặp 1x (Chuẩn)</option>
             </select>
-            <select id="speechRateSelect" class="bg-slate-800 border border-slate-700 text-slate-200 rounded px-1.5 text-xs py-1 font-mono">
+            <select id="speechRateSelect" aria-label="Tốc độ phát âm" class="bg-slate-800 border border-slate-700 text-slate-200 rounded px-1.5 text-xs py-1 font-mono">
               <option value="0.75">0.75x</option>
               <option value="0.9" selected>0.9x</option>
               <option value="1.0">1.0x</option>
@@ -1546,14 +1555,14 @@
 
         <div class="mb-3">
           <label class="block text-xs text-slate-400 mb-1 font-semibold">Chọn Khung Câu:</label>
-          <select id="frameworkSelect" class="w-full bg-slate-800 border border-slate-700 text-slate-100 rounded-xl px-3 py-2 text-xs focus:ring-2 focus:ring-amber-500 outline-none">
+          <select id="frameworkSelect" aria-label="Chọn mẫu câu công xưởng" class="w-full bg-slate-800 border border-slate-700 text-slate-100 rounded-xl px-3 py-2 text-xs focus:ring-2 focus:ring-amber-500 outline-none">
             <!-- Populated by JS -->
           </select>
         </div>
 
         <div class="mb-4">
           <label class="block text-xs text-slate-400 mb-1 font-semibold">Chọn Từ Lắp Ghép:</label>
-          <select id="slotWordSelect" class="w-full bg-slate-800 border border-slate-700 text-slate-100 rounded-xl px-3 py-2 text-xs focus:ring-2 focus:ring-amber-500 outline-none">
+          <select id="slotWordSelect" aria-label="Chọn từ vựng thay thế" class="w-full bg-slate-800 border border-slate-700 text-slate-100 rounded-xl px-3 py-2 text-xs focus:ring-2 focus:ring-amber-500 outline-none">
             <!-- Populated by JS -->
           </select>
         </div>
@@ -1651,7 +1660,7 @@
               <span>Số bạn bè giới thiệu:</span>
               <span id="sliderValueText" class="text-amber-400 font-black">5 Người</span>
             </div>
-            <input type="range" id="referralSlider" min="1" max="20" value="5" oninput="updateBonusCalculator(this.value)" class="w-full accent-emerald-500 cursor-pointer">
+            <input type="range" id="referralSlider" aria-label="Số người giới thiệu ước tính" min="1" max="20" value="5" oninput="updateBonusCalculator(this.value)" class="w-full accent-emerald-500 cursor-pointer">
           </div>
 
           <div class="grid grid-cols-2 gap-2 text-left text-[11px] bg-slate-900 p-3 rounded-xl border border-slate-800 mb-4">
@@ -1783,7 +1792,7 @@
 
         <div class="flex items-center gap-2 text-xs shrink-0">
           <span class="text-slate-400 whitespace-nowrap">Khu vực:</span>
-          <select id="jobRegionSelect" onchange="filterJobsByRegion()" class="bg-slate-950 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none cursor-pointer max-w-[240px] sm:max-w-none">
+          <select id="jobRegionSelect" aria-label="Lọc việc làm theo khu vực KCN" onchange="filterJobsByRegion()" class="bg-slate-950 border border-slate-700 text-white rounded-xl px-3 py-2 text-xs outline-none cursor-pointer max-w-[240px] sm:max-w-none">
             <option value="all">Tất cả khu vực (Bắc Ninh, Bắc Giang, Bình Dương)</option>
             <option value="bg">Bắc Giang (Vân Trung, Quang Châu, Đình Trám)</option>
             <option value="bn">Bắc Ninh (Quế Võ, VSIP, Yên Phong)</option>
@@ -1805,9 +1814,9 @@
     <div id="jobsGridContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
 
     <!-- Job Application Modal -->
-    <div id="jobModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden items-center justify-center p-4" style="display: none;" onclick="if(event.target === this) closeJobModal();">
+    <div id="jobModal" role="dialog" aria-modal="true" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden items-center justify-center p-4" style="display: none;" onclick="if(event.target === this) closeJobModal();">
       <div class="bg-slate-900 border border-amber-500/40 rounded-3xl max-w-lg w-full p-6 shadow-2xl relative max-h-[85dvh] max-h-[calc(100dvh-2.5rem)] overflow-y-auto">
-        <button onclick="closeJobModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">✕</button>
+        <button onclick="closeJobModal()" aria-label="Đóng cửa sổ" title="Đóng" class="absolute top-3 right-3 text-slate-400 hover:text-white text-lg min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full hover:bg-slate-800 transition active:scale-95">✕</button>
         
         <div class="flex items-center gap-2 mb-2">
           <span class="px-2.5 py-0.5 rounded text-[10px] font-black bg-amber-500/20 text-amber-400 border border-amber-500/30">VIP TUYỂN DỤNG</span>
@@ -1836,15 +1845,15 @@
             </div>
             <div>
               <label class="block text-[11px] text-slate-400 mb-1">Họ và tên của bạn:</label>
-              <input id="inputApplicantName" type="text" placeholder="Ví dụ: Nguyễn Văn Nam" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-amber-500">
+              <input id="inputApplicantName" aria-label="Họ và tên ứng viên" type="text" placeholder="Ví dụ: Nguyễn Văn Nam" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-amber-500">
             </div>
             <div>
               <label class="block text-[11px] text-slate-400 mb-1">Số điện thoại / Zalo:</label>
-              <input id="inputApplicantPhone" type="text" placeholder="Ví dụ: 0988xxxxxx" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-amber-500">
+              <input id="inputApplicantPhone" aria-label="Số điện thoại hoặc Zalo ứng viên" type="text" placeholder="Ví dụ: 0988xxxxxx" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-amber-500">
             </div>
             <div>
               <label class="block text-[11px] text-slate-400 mb-1">Tiến độ học tiếng Trung tại Zin Zone:</label>
-              <select id="selectApplicantProgress" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-amber-500 cursor-pointer">
+              <select id="selectApplicantProgress" aria-label="Tiến độ học tiếng Trung hiện tại" class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-xs text-white outline-none focus:border-amber-500 cursor-pointer">
                 <option>Đã hoàn thành trọn bộ 21 Ngày Thăng Chức</option>
                 <option>Đang học Tuần 2 (Tự tin giao tiếp và báo cáo)</option>
                 <option>Vừa bắt đầu Tuần 1 (Đã nắm vững khẩu lệnh xưởng)</option>
@@ -2232,7 +2241,7 @@
 
         <!-- Digital Verification Input Box -->
         <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-2 max-w-md mx-auto">
-          <input type="text" id="inputDeviceVerifyCode" placeholder="Nhập mã máy (VD: ZIN-4B9E)..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-center sm:text-left text-white placeholder-slate-500 font-mono uppercase focus:outline-none focus:ring-2 focus:ring-amber-500">
+          <input type="text" id="inputDeviceVerifyCode" aria-label="Mã định danh hoặc kích hoạt máy" placeholder="Nhập mã máy (VD: ZIN-4B9E)..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-xs text-center sm:text-left text-white placeholder-slate-500 font-mono uppercase focus:outline-none focus:ring-2 focus:ring-amber-500">
           <button onclick="verifyZinDeviceOnline()" class="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs shadow-lg transition whitespace-nowrap flex items-center justify-center gap-1.5">
             <span>🛡️</span>
             <span>Kiểm Tra Ngay</span>
@@ -2344,7 +2353,7 @@
   </div>
 
   <!-- Toast Notification Container -->
-  <div id="toastNotification" style="bottom: max(72px, calc(env(safe-area-inset-bottom, 0px) + 68px));" class="fixed right-4 sm:right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none bg-slate-800 border border-slate-700 text-white text-xs px-4 py-2.5 rounded-xl shadow-2xl flex items-center gap-2">
+  <div id="toastNotification" role="status" aria-live="polite" style="bottom: max(72px, calc(env(safe-area-inset-bottom, 0px) + 68px));" class="fixed right-4 sm:right-6 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none bg-slate-800 border border-slate-700 text-white text-xs px-4 py-2.5 rounded-xl shadow-2xl flex items-center gap-2">
     <span id="toastIcon">📢</span>
     <span id="toastMessage">Thông báo</span>
   </div>
@@ -2364,9 +2373,9 @@
   <script defer src="js/app-ui.js?v=20261021_v1"></script>
 
   <!-- Modal: Step-by-Step Install Guide (For iOS Safari or Android fallback) -->
-  <div id="modalInstallGuide" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md hidden items-center justify-center p-4" style="display: none;" onclick="if(event.target === this) closeInstallGuide();">
+  <div id="modalInstallGuide" role="dialog" aria-modal="true" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md hidden items-center justify-center p-4" style="display: none;" onclick="if(event.target === this) closeInstallGuide();">
     <div class="bg-slate-900 border-2 border-amber-500/40 rounded-3xl max-w-md w-full p-6 shadow-2xl relative text-center max-h-[85dvh] max-h-[calc(100dvh-2.5rem)] overflow-y-auto">
-      <button onclick="closeInstallGuide()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">✕</button>
+      <button onclick="closeInstallGuide()" aria-label="Đóng cửa sổ" title="Đóng" class="absolute top-3 right-3 text-slate-400 hover:text-white text-lg min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full hover:bg-slate-800 transition active:scale-95">✕</button>
 
       <img src="icons/icon-192.png?v=6" alt="Zin Zone App" class="w-20 h-20 rounded-2xl mx-auto shadow-2xl border-2 border-amber-400/80 object-cover mb-4">
       <h3 class="text-xl font-black text-white">Cài Zin Zone Lên Màn Hình</h3>
@@ -2483,9 +2492,9 @@
   </div>
 
   <!-- Modal: Daily Mystery Chest (Gacha Opening) -->
-  <div id="modalMysteryChest" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden items-center justify-center p-4" style="display: none;" onclick="if(event.target === this) closeMysteryChestModal();">
+  <div id="modalMysteryChest" role="dialog" aria-modal="true" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden items-center justify-center p-4" style="display: none;" onclick="if(event.target === this) closeMysteryChestModal();">
     <div class="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-amber-500/50 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative text-center max-h-[85dvh] max-h-[calc(100dvh-2.5rem)] overflow-y-auto">
-      <button onclick="closeMysteryChestModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">✕</button>
+      <button onclick="closeMysteryChestModal()" aria-label="Đóng cửa sổ" title="Đóng" class="absolute top-3 right-3 text-slate-400 hover:text-white text-lg min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full hover:bg-slate-800 transition active:scale-95">✕</button>
 
       <!-- Ambient Glow Behind Chest -->
       <div class="absolute -top-12 left-1/2 -translate-x-1/2 w-48 h-48 bg-amber-500/20 rounded-full blur-3xl pointer-events-none"></div>
@@ -2541,9 +2550,9 @@
   </div>
 
   <!-- Modal: Faction Wars (Đại Chiến 3 Đại Quân Đoàn KCN) -->
-  <div id="modalFactionWars" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden items-center justify-center p-4" style="display: none;" onclick="if(event.target === this) closeFactionModal();">
+  <div id="modalFactionWars" role="dialog" aria-modal="true" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden items-center justify-center p-4" style="display: none;" onclick="if(event.target === this) closeFactionModal();">
     <div class="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-cyan-500/40 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[85dvh] max-h-[calc(100dvh-2.5rem)] overflow-y-auto">
-      <button onclick="closeFactionModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">✕</button>
+      <button onclick="closeFactionModal()" aria-label="Đóng cửa sổ" title="Đóng" class="absolute top-3 right-3 text-slate-400 hover:text-white text-lg min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full hover:bg-slate-800 transition active:scale-95">✕</button>
 
       <div class="text-center mb-6">
         <span class="px-2.5 py-1 rounded-full text-[10px] font-black bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">
@@ -2617,9 +2626,9 @@
   </div>
 
   <!-- Modal: Player Profile & Inventory (Hồ Sơ Nhân Vật & Túi Đồ) -->
-  <div id="modalPlayerProfile" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden items-center justify-center p-4" style="display: none;" onclick="if(event.target === this) closePlayerProfileModal();">
+  <div id="modalPlayerProfile" role="dialog" aria-modal="true" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden items-center justify-center p-4" style="display: none;" onclick="if(event.target === this) closePlayerProfileModal();">
     <div class="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-amber-500/40 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[85dvh] max-h-[calc(100dvh-2.5rem)] overflow-y-auto">
-      <button onclick="closePlayerProfileModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">✕</button>
+      <button onclick="closePlayerProfileModal()" aria-label="Đóng cửa sổ" title="Đóng" class="absolute top-3 right-3 text-slate-400 hover:text-white text-lg min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full hover:bg-slate-800 transition active:scale-95">✕</button>
 
       <!-- Player Header Card -->
       <div class="flex items-center gap-4 pb-5 border-b border-slate-800">
@@ -2703,9 +2712,9 @@
   </div>
 
   <!-- Modal: Privacy Policy (Nghị định 13/2023/NĐ-CP) -->
-  <div id="modalPrivacyPolicy" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden items-center justify-center p-4" style="display: none;" onclick="if(event.target === this) closePrivacyModal();">
+  <div id="modalPrivacyPolicy" role="dialog" aria-modal="true" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden items-center justify-center p-4" style="display: none;" onclick="if(event.target === this) closePrivacyModal();">
     <div class="bg-gradient-to-b from-slate-900 to-slate-950 border border-slate-700 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[85dvh] max-h-[calc(100dvh-2.5rem)] flex flex-col">
-      <button onclick="closePrivacyModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">✕</button>
+      <button onclick="closePrivacyModal()" aria-label="Đóng cửa sổ" title="Đóng" class="absolute top-3 right-3 text-slate-400 hover:text-white text-lg min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full hover:bg-slate-800 transition active:scale-95">✕</button>
       
       <div class="flex items-center gap-2 mb-3">
         <span class="text-2xl">🛡️</span>
@@ -2732,9 +2741,9 @@
   </div>
 
   <!-- Modal: Terms of Service (Nghị định 72/2013/NĐ-CP & 27/2018/NĐ-CP) -->
-  <div id="modalTermsOfService" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden items-center justify-center p-4" style="display: none;" onclick="if(event.target === this) closeTermsModal();">
+  <div id="modalTermsOfService" role="dialog" aria-modal="true" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-md hidden items-center justify-center p-4" style="display: none;" onclick="if(event.target === this) closeTermsModal();">
     <div class="bg-gradient-to-b from-slate-900 to-slate-950 border border-slate-700 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[85dvh] max-h-[calc(100dvh-2.5rem)] flex flex-col">
-      <button onclick="closeTermsModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">✕</button>
+      <button onclick="closeTermsModal()" aria-label="Đóng cửa sổ" title="Đóng" class="absolute top-3 right-3 text-slate-400 hover:text-white text-lg min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full hover:bg-slate-800 transition active:scale-95">✕</button>
       
       <div class="flex items-center gap-2 mb-3">
         <span class="text-2xl">📜</span>
@@ -2763,7 +2772,7 @@
   <!-- Modal: Hướng Dẫn Liên Hệ Cửa Hàng Điện Thoại Ủy Quyền -->
   <div id="storeNoticeModal" class="fixed inset-0 z-[100001] bg-slate-950/85 backdrop-blur-md hidden items-center justify-center p-4" style="display: none;" onclick="if(event.target === this) closeStoreNoticeModal();">
     <div class="bg-slate-900 border border-amber-500/40 rounded-3xl max-w-md w-full p-6 shadow-2xl relative text-center">
-      <button onclick="closeStoreNoticeModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">✕</button>
+      <button onclick="closeStoreNoticeModal()" aria-label="Đóng cửa sổ" title="Đóng" class="absolute top-3 right-3 text-slate-400 hover:text-white text-lg min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full hover:bg-slate-800 transition active:scale-95">✕</button>
       <div class="w-14 h-14 rounded-2xl bg-amber-500/20 text-amber-400 border border-amber-500/40 flex items-center justify-center text-2xl mx-auto mb-3">
         🏪
       </div>
@@ -2777,7 +2786,7 @@
   </div>
 
   <!-- Modal: Khóa Bản Quyền Quà Tặng Kèm Máy Chính Hãng (VIP Gift License Gate) -->
-  <div id="gatekeeperModal" class="fixed inset-0 z-[99999] bg-slate-950/95 backdrop-blur-xl hidden items-center justify-center p-2.5 sm:p-4 overflow-y-auto" style="display: none;" onclick="if(event.target === this) closeGatekeeperModal();">
+  <div id="gatekeeperModal" role="dialog" aria-modal="true" class="fixed inset-0 z-[99999] bg-slate-950/95 backdrop-blur-xl hidden items-center justify-center p-2.5 sm:p-4 overflow-y-auto" style="display: none;" onclick="if(event.target === this) closeGatekeeperModal();">
     <div class="bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 border-2 border-amber-500/50 rounded-3xl max-w-xl w-full p-4 sm:p-7 shadow-2xl relative text-center m-auto max-h-[calc(100dvh-1.5rem)] overflow-y-auto no-scrollbar">
       
       <!-- Close Button -->
@@ -2984,7 +2993,7 @@
             🔑 Mã Kích Hoạt Bản Quyền VIP:
           </label>
           <div class="relative">
-            <input id="inputLicenseKey" type="text" placeholder="Ví dụ: ZZ-VIP-8888 hoặc nhập mã..." 
+            <input id="inputLicenseKey" aria-label="Mã kích hoạt Zin Zone" type="text" placeholder="Ví dụ: ZZ-VIP-8888 hoặc nhập mã..." 
                    class="w-full bg-slate-900 border border-amber-500/40 focus:border-amber-400 rounded-xl pl-4 pr-28 py-3 text-sm text-amber-300 font-mono font-bold placeholder-slate-600 outline-none transition uppercase shadow-inner"
                    onkeydown="if(event.key === 'Enter') handleActivateLicense();">
             <button onclick="handleActivateLicense()" class="absolute right-1.5 top-1.5 bottom-1.5 px-4 rounded-lg bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-slate-950 font-black text-xs transition shadow flex items-center gap-1">
@@ -3039,9 +3048,9 @@
   </div>
 
   <!-- Modal: Kết Quả Tra Cứu Bản Quyền Điện Tử & Tải Tài Liệu VIP (100% Digital Lean Verification) -->
-  <div id="modalDeviceVerificationResult" class="fixed inset-0 z-[100002] bg-slate-950/90 backdrop-blur-md hidden items-center justify-center p-4 overflow-y-auto" style="display: none;" onclick="if(event.target === this) closeDeviceVerificationModal();">
+  <div id="modalDeviceVerificationResult" role="dialog" aria-modal="true" class="fixed inset-0 z-[100002] bg-slate-950/90 backdrop-blur-md hidden items-center justify-center p-4 overflow-y-auto" style="display: none;" onclick="if(event.target === this) closeDeviceVerificationModal();">
     <div class="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-emerald-500/50 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative text-center m-auto">
-      <button onclick="closeDeviceVerificationModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">✕</button>
+      <button onclick="closeDeviceVerificationModal()" aria-label="Đóng cửa sổ" title="Đóng" class="absolute top-3 right-3 text-slate-400 hover:text-white text-lg min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full hover:bg-slate-800 transition active:scale-95">✕</button>
 
       <div class="w-16 h-16 rounded-2xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center text-3xl mx-auto mb-3 shadow-lg">
         🛡️
@@ -3109,9 +3118,9 @@
   </div>
 
   <!-- Modal: Hợp Tác Đại Lý Ủy Quyền B2B (Dành Cho Chủ Quán Điện Thoại KCN) -->
-  <div id="modalDealerPartner" class="fixed inset-0 z-[100002] bg-slate-950/90 backdrop-blur-md hidden items-center justify-center p-4 overflow-y-auto" style="display: none;" onclick="if(event.target === this) closeDealerPartnerModal();">
+  <div id="modalDealerPartner" role="dialog" aria-modal="true" class="fixed inset-0 z-[100002] bg-slate-950/90 backdrop-blur-md hidden items-center justify-center p-4 overflow-y-auto" style="display: none;" onclick="if(event.target === this) closeDealerPartnerModal();">
     <div class="bg-gradient-to-b from-slate-900 to-slate-950 border-2 border-amber-500/50 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative text-left m-auto">
-      <button onclick="closeDealerPartnerModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-lg w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">✕</button>
+      <button onclick="closeDealerPartnerModal()" aria-label="Đóng cửa sổ" title="Đóng" class="absolute top-3 right-3 text-slate-400 hover:text-white text-lg min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full hover:bg-slate-800 transition active:scale-95">✕</button>
 
       <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-amber-400 text-xs font-black mb-3">
         <span>🤝</span>
@@ -3179,7 +3188,7 @@
   </div>
 
   <!-- Modal: Dopamine Onboarding Splash Flow (4-Screen Dark-Gold Awakening) -->
-  <div id="modalOnboardingFlow" class="fixed inset-0 z-[100005] bg-slate-950/95 backdrop-blur-xl hidden items-center justify-center p-3 sm:p-4 overflow-y-auto" style="display: none;">
+  <div id="modalOnboardingFlow" role="dialog" aria-modal="true" class="fixed inset-0 z-[100005] bg-slate-950/95 backdrop-blur-xl hidden items-center justify-center p-3 sm:p-4 overflow-y-auto" style="display: none;">
     <div class="bg-gradient-to-b from-slate-900 via-slate-950 to-slate-950 border-2 border-amber-500/40 rounded-3xl max-w-lg w-full p-5 sm:p-7 shadow-2xl relative text-left m-auto overflow-hidden">
       <!-- Glow effect -->
       <div class="absolute -right-16 -top-16 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
@@ -3195,7 +3204,7 @@
             <p class="text-[10px] text-amber-400 font-bold uppercase tracking-wider">Huyết Mạch Thần Ngữ 70%</p>
           </div>
         </div>
-        <button onclick="closeOnboardingFlowModal()" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center text-sm font-bold transition">✕</button>
+        <button onclick="closeOnboardingFlowModal()" aria-label="Đóng cửa sổ" title="Đóng" class="min-w-[44px] min-h-[44px] rounded-full bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center text-sm font-bold transition active:scale-95">✕</button>
       </div>
 
       <!-- Energy Progress Surge Bar (0% -> 70% Surge!) -->
@@ -3342,10 +3351,10 @@
       <!-- Dot Indicators & Step Selector -->
       <div class="mt-4 pt-3 border-t border-slate-800 flex items-center justify-between">
         <div class="flex items-center gap-1.5" id="onboardingDots">
-          <button onclick="setOnboardingStep(1)" id="onboardingDot_1" class="w-6 h-2 rounded-full bg-amber-400 transition-all"></button>
-          <button onclick="setOnboardingStep(2)" id="onboardingDot_2" class="w-2 h-2 rounded-full bg-slate-700 transition-all"></button>
-          <button onclick="setOnboardingStep(3)" id="onboardingDot_3" class="w-2 h-2 rounded-full bg-slate-700 transition-all"></button>
-          <button onclick="setOnboardingStep(4)" id="onboardingDot_4" class="w-2 h-2 rounded-full bg-slate-700 transition-all"></button>
+          <button onclick="setOnboardingStep(1)" id="onboardingDot_1" aria-label="Bước 1" class="w-6 h-2 rounded-full bg-amber-400 transition-all"></button>
+          <button onclick="setOnboardingStep(2)" id="onboardingDot_2" aria-label="Bước 2" class="w-2 h-2 rounded-full bg-slate-700 transition-all"></button>
+          <button onclick="setOnboardingStep(3)" id="onboardingDot_3" aria-label="Bước 3" class="w-2 h-2 rounded-full bg-slate-700 transition-all"></button>
+          <button onclick="setOnboardingStep(4)" id="onboardingDot_4" aria-label="Bước 4" class="w-2 h-2 rounded-full bg-slate-700 transition-all"></button>
         </div>
         <button onclick="closeOnboardingFlowModal()" class="text-[11px] text-slate-400 hover:text-slate-200 underline">Bỏ qua hướng dẫn</button>
       </div>
