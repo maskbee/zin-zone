@@ -114,7 +114,7 @@
           <label class="block text-xs font-bold text-slate-300 mb-1.5">
             Ghi Chú Đơn Hàng / Tên Khách Hàng:
           </label>
-          <input id="inputBatchNote" type="text" placeholder="Ví dụ: Khách Zalo 0988... / Lô 50 máy K60" class="w-full bg-slate-950 border border-slate-700 focus:border-amber-400 rounded-xl px-3 py-2 text-xs text-slate-200 outline-none">
+          <input id="inputBatchNote" type="text" placeholder="Ví dụ: Khách Zalo 0822262695 / Lô 50 máy K60" class="w-full bg-slate-950 border border-slate-700 focus:border-amber-400 rounded-xl px-3 py-2 text-xs text-slate-200 outline-none">
         </div>
 
         <!-- Generate Button -->
@@ -380,11 +380,9 @@
     }
 
     // Exact verification logic from index.html
-    const VALID_MASTER_KEYS = ['88888888', 'ADMIN888', 'ZZ-ADMIN-2026', 'ZZ-VIP-2026', 'ZZ-MASTER-DEV'];
     function isValidLicenseToken(token) {
       if (!token) return false;
       const clean = token.trim().toUpperCase();
-      if (VALID_MASTER_KEYS.includes(clean)) return true;
       if (/^ZZ-IPHONE-[A-Z0-9_\-]+$/i.test(clean)) return true;
       if (/^ZZ-APP-[A-Z0-9_\-]+$/i.test(clean)) return true;
       if (/^ZZ-[A-Z0-9_\-]+-[A-F0-9]{4,16}$/i.test(clean)) return true;
