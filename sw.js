@@ -117,6 +117,9 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
   if (url.origin !== self.location.origin) return;
 
+  // CRITICAL SECURITY: Never intercept or cache API endpoints (/api/*) - must always reach live server
+  if (url.pathname.startsWith('/api/')) return;
+
   // Let APK file downloads pass through directly without caching
   if (url.pathname.endsWith('.apk')) return;
 

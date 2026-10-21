@@ -2649,9 +2649,49 @@ function isValidLicenseToken(token) {
       return 'Máy Chính Hãng';
     }
 
+    function getOrCreateDeviceId() {
+      let devId = safeStorage.getItem('zin_device_id');
+      if (!devId) {
+        devId = 'dev_' + Math.random().toString(36).substring(2, 10) + '_' + Date.now().toString(36);
+        safeStorage.setItem('zin_device_id', devId);
+      }
+      return devId;
+    }
+
     function isDeviceLicensed() {
+      const savedToken = safeStorage.getItem('zin_license_token');
       const savedLicense = safeStorage.getItem('zin_device_license');
-      return !!(savedLicense && isValidLicenseToken(savedLicense));
+      return !!(savedToken && savedLicense);
+    }
+
+    async function verifyLicenseWithServer() {
+      const token = safeStorage.getItem('zin_license_token');
+      const deviceId = getOrCreateDeviceId();
+      if (!token) return false;
+
+      // Graceful offline fallback: factory dorm or workshop with no internet
+      if (typeof navigator !== 'undefined' && navigator.onLine === false) {
+        return true;
+      }
+
+      try {
+        const res = await fetch(`/api/verify?token=${encodeURIComponent(token)}&device_id=${encodeURIComponent(deviceId)}`, {
+          cache: 'no-store'
+        });
+        const data = await res.json();
+        if (!data || !data.valid) {
+          // Server revoked license or device mismatch detected!
+          safeStorage.removeItem('zin_license_token');
+          safeStorage.removeItem('zin_device_license');
+          updateLicenseBadge(null);
+          updateTrialBannerState(false);
+          return false;
+        }
+        return true;
+      } catch (err) {
+        // Network unreachable: allow offline study with valid signed token
+        return true;
+      }
     }
 
     function openGatekeeperModal(tab = 'online') {
@@ -2759,46 +2799,59 @@ function isValidLicenseToken(token) {
 
       // 0. Explicit license reset trigger via URL parameter
       if (params.get('reset_license') === '1' || params.get('clear_auth') === '1') {
+        safeStorage.removeItem('zin_license_token');
         safeStorage.removeItem('zin_device_license');
         safeStorage.removeItem('zin_my_referral_code');
         showToast('🛡️ Đã hủy toàn bộ bản quyền trên máy này!', 'info');
       }
 
-      // 1. URL Token parameter auto-activation
-      if (tokenFromUrl && isValidLicenseToken(tokenFromUrl)) {
-        safeStorage.setItem('zin_device_license', tokenFromUrl.trim().toUpperCase());
-        const myRef = params.get('my_ref') || deriveReferralCodeFromToken(tokenFromUrl);
-        safeStorage.setItem('zin_my_referral_code', myRef);
-
+      // 1. URL Token parameter auto-activation via server API
+      if (tokenFromUrl) {
+        const cleanKey = tokenFromUrl.trim().toUpperCase();
+        const deviceId = getOrCreateDeviceId();
         try {
           window.history.replaceState({}, document.title, window.location.pathname);
         } catch (e) {}
-        if (modal) {
-          modal.style.display = 'none';
-        }
-        document.body.style.overflow = '';
-        setTimeout(() => {
-          showToast(`🎉 Kích hoạt máy thành công! Mã giới thiệu: [${myRef}]`, 'success');
-          updateLicenseBadge(tokenFromUrl);
-          updateReferralCodeDisplay();
-        }, 500);
+
+        fetch('/api/activate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code: cleanKey, device_id: deviceId })
+        }).then(res => res.json()).then(data => {
+          if (data && data.success) {
+            safeStorage.setItem('zin_license_token', data.token);
+            safeStorage.setItem('zin_device_license', data.code);
+            safeStorage.setItem('zin_device_id', deviceId);
+            const myRef = deriveReferralCodeFromToken(data.code);
+            safeStorage.setItem('zin_my_referral_code', myRef);
+            if (modal) modal.style.display = 'none';
+            document.body.style.overflow = '';
+            showToast(`🎉 Kích hoạt máy thành công qua liên kết đối tác!`, 'success');
+            updateLicenseBadge(data.code);
+            updateReferralCodeDisplay();
+          } else {
+            showToast('⚠️ Liên kết kích hoạt không hợp lệ hoặc đã dùng trên máy khác.', 'error');
+          }
+        }).catch(() => {});
         return true;
       }
 
-      // 2. LocalStorage verification
+      // 2. Local storage check + server verification
+      const savedToken = safeStorage.getItem('zin_license_token');
       const savedLicense = safeStorage.getItem('zin_device_license');
-      if (savedLicense && isValidLicenseToken(savedLicense)) {
+      if (savedToken && savedLicense) {
         let myRef = safeStorage.getItem('zin_my_referral_code');
         if (!myRef) {
           myRef = deriveReferralCodeFromToken(savedLicense);
           safeStorage.setItem('zin_my_referral_code', myRef);
         }
-        if (modal) {
-          modal.style.display = 'none';
-        }
+        if (modal) modal.style.display = 'none';
         document.body.style.overflow = '';
         updateLicenseBadge(savedLicense);
         updateReferralCodeDisplay();
+
+        // Asynchronously verify with server
+        verifyLicenseWithServer();
         return true;
       }
 
@@ -2814,7 +2867,7 @@ function isValidLicenseToken(token) {
       return false;
     }
 
-    function handleActivateLicense() {
+    async function handleActivateLicense() {
       const input = document.getElementById('inputLicenseKey');
       const errorMsg = document.getElementById('licenseErrorMsg');
       if (!input) return;
@@ -2828,26 +2881,53 @@ function isValidLicenseToken(token) {
         return;
       }
 
-      if (isValidLicenseToken(key)) {
-        safeStorage.setItem('zin_device_license', key);
-        const myRef = deriveReferralCodeFromToken(key);
-        safeStorage.setItem('zin_my_referral_code', myRef);
-        if (errorMsg) errorMsg.classList.add('hidden');
-        const modal = document.getElementById('gatekeeperModal');
-        if (modal) modal.style.display = 'none';
-        document.body.style.overflow = '';
-        
-        if (typeof soundFX !== 'undefined' && soundFX.playVictory) soundFX.playVictory();
-        if (typeof particleEngine !== 'undefined' && particleEngine.burst) {
-          particleEngine.burst(window.innerWidth / 2, window.innerHeight / 2, 'gold', 50);
+      const deviceId = getOrCreateDeviceId();
+      if (errorMsg) {
+        errorMsg.textContent = '⏳ Đang kết nối máy chủ xác thực...';
+        errorMsg.className = 'text-xs text-amber-300 font-bold mt-2 text-center';
+        errorMsg.classList.remove('hidden');
+      }
+
+      try {
+        const res = await fetch('/api/activate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code: key, device_id: deviceId })
+        });
+        const data = await res.json();
+
+        if (res.ok && data.success && data.token) {
+          safeStorage.setItem('zin_license_token', data.token);
+          safeStorage.setItem('zin_device_license', data.code);
+          safeStorage.setItem('zin_device_id', deviceId);
+          const myRef = deriveReferralCodeFromToken(data.code);
+          safeStorage.setItem('zin_my_referral_code', myRef);
+
+          if (errorMsg) errorMsg.classList.add('hidden');
+          const modal = document.getElementById('gatekeeperModal');
+          if (modal) modal.style.display = 'none';
+          document.body.style.overflow = '';
+          
+          if (typeof soundFX !== 'undefined' && soundFX.playVictory) soundFX.playVictory();
+          if (typeof particleEngine !== 'undefined' && particleEngine.burst) {
+            particleEngine.burst(window.innerWidth / 2, window.innerHeight / 2, 'gold', 50);
+          }
+          
+          showToast(`🎉 KÍCH HOẠT THÀNH CÔNG! Bản quyền đã liên kết với máy này.`, 'success');
+          updateLicenseBadge(data.code);
+          updateReferralCodeDisplay();
+        } else {
+          if (errorMsg) {
+            errorMsg.textContent = '❌ ' + (data.error || 'Mã không hợp lệ hoặc đã được sử dụng trên máy khác.');
+            errorMsg.className = 'text-xs text-rose-400 font-bold mt-2 text-center';
+            errorMsg.classList.remove('hidden');
+          }
+          if (typeof soundFX !== 'undefined' && soundFX.playWrong) soundFX.playWrong();
         }
-        
-        showToast(`🎉 KÍCH HOẠT THÀNH CÔNG! Mã giới thiệu của máy: [${myRef}]`, 'success');
-        updateLicenseBadge(key);
-        updateReferralCodeDisplay();
-      } else {
+      } catch (err) {
         if (errorMsg) {
-          errorMsg.textContent = '❌ Mã kích hoạt không hợp lệ. Vui lòng kiểm tra lại phiếu quà tặng hoặc liên hệ cửa hàng mua máy.';
+          errorMsg.textContent = '⚠️ Không thể kết nối tới máy chủ kích hoạt. Vui lòng kiểm tra kết nối mạng.';
+          errorMsg.className = 'text-xs text-rose-400 font-bold mt-2 text-center';
           errorMsg.classList.remove('hidden');
         }
         if (typeof soundFX !== 'undefined' && soundFX.playWrong) soundFX.playWrong();
