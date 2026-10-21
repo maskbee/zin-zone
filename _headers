@@ -1,0 +1,39 @@
+# Cloudflare Pages HTTP Security & Caching Headers
+
+# Global Security Baseline for All Routes
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(self), geolocation=()
+
+# Service Worker - Zero Cache to Guarantee Instant OTA Updates
+/sw.js
+  Cache-Control: no-cache, no-store, must-revalidate
+  Content-Type: application/javascript; charset=utf-8
+
+# HTML Pages - Always Revalidate HTML for Instant Asset Version Refresh
+/
+  Cache-Control: public, max-age=0, must-revalidate
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+/pocket-cards.html
+  Cache-Control: public, max-age=0, must-revalidate
+/404.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Static Versioned Assets - 7-day Cache with Graceful Stale-While-Revalidate
+/css/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+/js/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+/data/*
+  Cache-Control: public, max-age=604800, stale-while-revalidate=86400
+/icons/*
+  Cache-Control: public, max-age=2592000, immutable
+/icon-192.png
+  Cache-Control: public, max-age=2592000, immutable
+/icon-512.png
+  Cache-Control: public, max-age=2592000, immutable
+/favicon.ico
+  Cache-Control: public, max-age=2592000, immutable

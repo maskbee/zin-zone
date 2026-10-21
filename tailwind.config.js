@@ -3,6 +3,7 @@ module.exports = {
   content: [
     "./index.html",
     "./pocket-cards.html",
+    "./404.html",
     "./js/**/*.js"
   ],
   darkMode: 'class',

@@ -563,7 +563,7 @@ function updateBonusCalculator(val) {
     // --- PWA Service Worker Registration & Offline Cache ---
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js?v=20261021_v39').then((reg) => {
+        navigator.serviceWorker.register('./sw.js?v=20261021_v40').then((reg) => {
           reg.update();
         }).catch((err) => {
         });
