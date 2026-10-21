@@ -13,7 +13,7 @@
       { vi: 'Công xưởng', zh: '工厂', pinyin: 'gōng chǎng', desc: 'Đấu trường tu luyện của hàng vạn công nhân.' },
       { vi: 'Sản phẩm', zh: '产品', pinyin: 'chǎn pǐn', desc: 'Sản phẩm nguyên bản chuẩn chỉ từng milimet.' },
       { vi: 'Tổ trưởng', zh: '组长', pinyin: 'zǔ zhǎng', desc: 'Mục tiêu tối thượng sau 21 ngày đắc đạo!' },
-      { vi: 'Giám đốc', zh: '总监', pinyin: 'zǒng jiān', desc: 'Lãnh đạo cấp cao nhà máy Hoa Kiều.' }
+      { vi: 'Tổng giám (Giám đốc)', zh: '总监', pinyin: 'zǒng jiān', desc: 'Lãnh đạo cấp cao nhà máy Hoa Kiều.' }
     ];
 
     const AWAKENING_TONE_PAIRS = [
